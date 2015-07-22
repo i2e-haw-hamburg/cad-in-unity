@@ -7,7 +7,7 @@
     <OutputType>Library</OutputType>
     <RootNamespace>STPLoader</RootNamespace>
     <AssemblyName>STPLoader</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -36,6 +36,14 @@
     <Compile Include="Interface\ILoader.cs" />
     <Compile Include="Implementation\Loader\FileLoader.cs" />
     <Compile Include="Implementation\Loader\StreamLoader.cs" />
+    <Compile Include="Interface\IValidator.cs" />
+    <Compile Include="Interface\ValidationResult.cs" />
+    <Compile Include="Implementation\Validator\STPValidator.cs" />
+    <Compile Include="Interface\IParser.cs" />
+    <Compile Include="Implementation\Parser\STPParser.cs" />
+    <Compile Include="Implementation\Model\STPModel.cs" />
+    <Compile Include="Interface\ISTPModel.cs" />
+    <Compile Include="Implementation\Parser\ParsingException.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -43,5 +51,7 @@
     <Folder Include="Implementation\" />
     <Folder Include="Implementation\Model\" />
     <Folder Include="Implementation\Loader\" />
+    <Folder Include="Implementation\Validator\" />
+    <Folder Include="Implementation\Parser\" />
   </ItemGroup>
 </Project>
