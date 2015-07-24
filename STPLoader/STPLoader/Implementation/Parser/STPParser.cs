@@ -1,26 +1,28 @@
 ﻿using System;
+using System.IO;
 
-namespace STPLoader
+namespace STPLoader.Implementation.Parser
 {
 	/// <summary>
 	/// STP parser.
 	/// </summary>
 	class STPParser : IParser
-	{
-		/// <summary>
-		/// Initializes a new instance of the <see cref="STPLoader.STPParser"/> class.
-		/// </summary>
-		public STPParser ()
-		{
-		}
-
-
+	{			
 		#region IParser implementation
-		public ISTPModel Parse (System.IO.Stream stream)
+		public ISTPModel Parse (Stream stream)
 		{
 			throw new NotImplementedException ();
 		}
 		#endregion
+	
+	
+		private STPFile ParseStructure(Stream stream) {
+			var stpFile = new STPFile ();
+			stpFile.Header = ParseHeader (FindHeader(stream));
+			stpFile.Data = ParseData (FindData (Stream));
+
+			return stpFile;
+		}
 	}
 }
 

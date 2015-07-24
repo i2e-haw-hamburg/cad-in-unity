@@ -40,10 +40,11 @@
     <Compile Include="Interface\ValidationResult.cs" />
     <Compile Include="Implementation\Validator\STPValidator.cs" />
     <Compile Include="Interface\IParser.cs" />
-    <Compile Include="Implementation\Parser\STPParser.cs" />
     <Compile Include="Implementation\Model\STPModel.cs" />
     <Compile Include="Interface\ISTPModel.cs" />
     <Compile Include="Implementation\Parser\ParsingException.cs" />
+    <Compile Include="Interface\ValidatorFactory.cs" />
+    <Compile Include="Implementation\Parser\STPFile.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -53,5 +54,10 @@
     <Folder Include="Implementation\Loader\" />
     <Folder Include="Implementation\Validator\" />
     <Folder Include="Implementation\Parser\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Implementation\Parser\STPParser.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 </Project>

@@ -1,8 +1,8 @@
 using System;
 
-namespace STPLoader
+namespace STPLoader.Implementation.Parser
 {
-	public class ParsingException : Exception
+	class ParsingException : Exception
 	{
 	}
 

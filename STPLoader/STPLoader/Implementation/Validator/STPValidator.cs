@@ -1,24 +1,28 @@
 ﻿using System;
+using STPLoader.Implementation.Parser;
 
-namespace STPLoader
+namespace STPLoader.Implementation.Validator
 {
 	/// <summary>
 	/// STP validator.
 	/// </summary>
-	public class STPValidator : IValidator
+	class STPValidator : IValidator
 	{
+		private IParser _parser;
+
 		/// <summary>
 		/// Initializes a new instance of the <see cref="STPLoader.STPValidator"/> class.
 		/// </summary>
-		public STPValidator ()
+		public STPValidator (IParser parser)
 		{
+			_parser = parser;
 		}
 
 		#region IValidator implementation
-		public ValidationResult Validate (IParser parser, System.IO.Stream stream)
+		public ValidationResult Validate (System.IO.Stream stream)
 		{
 			try {
-				parser.Parse(stream);
+				_parser.Parse(stream);
 				return new ValidationResult(true);
 			} catch(ParsingException ex) {
 				return new ValidationResult(false, ex.Message);

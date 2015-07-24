@@ -41,4 +41,9 @@
       <Name>STPLoader</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Gehaeuserumpf.stp">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
 </Project>

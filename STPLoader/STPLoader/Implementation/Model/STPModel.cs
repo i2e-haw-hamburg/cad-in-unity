@@ -2,7 +2,7 @@ using System;
 using System.IO;
 using System.Collections.Generic;
 
-namespace STPLoader
+namespace STPLoader.Implementation.Model
 {
 	/// <summary>
 	/// STP model.
