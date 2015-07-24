@@ -1,5 +1,6 @@
 using System;
 using System.IO;
+using System.Collections.Generic;
 
 namespace STPLoader
 {
@@ -8,6 +9,13 @@ namespace STPLoader
 	/// </summary>
 	class STPModel : ISTPModel
 	{
+		#region ISTPModel implementation
+		public IList<ISTPModel> Parts {
+			get {
+				throw new NotImplementedException ();
+			}
+		}
+		#endregion
 		
 	}
 
