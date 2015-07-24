@@ -6,14 +6,14 @@ namespace STPLoader.Implementation.Validator
 	/// <summary>
 	/// STP validator.
 	/// </summary>
-	class STPValidator : IValidator
+	class StpValidator : IValidator
 	{
 		private IParser _parser;
 
 		/// <summary>
-		/// Initializes a new instance of the <see cref="STPLoader.STPValidator"/> class.
+		/// Initializes a new instance of the <see cref="StpValidator"/> class.
 		/// </summary>
-		public STPValidator (IParser parser)
+		public StpValidator (IParser parser)
 		{
 			_parser = parser;
 		}

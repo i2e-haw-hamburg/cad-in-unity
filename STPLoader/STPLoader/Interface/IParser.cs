@@ -12,7 +12,7 @@ namespace STPLoader
 		/// Parse the specified stream.
 		/// </summary>
 		/// <param name="stream">Stream.</param>
-		ISTPModel Parse(Stream stream);
+		IStpModel Parse(Stream stream);
 	}
 }
 

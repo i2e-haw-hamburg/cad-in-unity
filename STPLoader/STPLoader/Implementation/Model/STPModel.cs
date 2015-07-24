@@ -7,10 +7,10 @@ namespace STPLoader.Implementation.Model
 	/// <summary>
 	/// STP model.
 	/// </summary>
-	class STPModel : ISTPModel
+	class STPModel : IStpModel
 	{
 		#region ISTPModel implementation
-		public IList<ISTPModel> Parts {
+		public IList<IStpModel> Parts {
 			get {
 				throw new NotImplementedException ();
 			}

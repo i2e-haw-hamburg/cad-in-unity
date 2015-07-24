@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -31,6 +31,12 @@
     <Reference Include="System" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Implementation\Model\FileDescription.cs" />
+    <Compile Include="Implementation\Model\FileName.cs" />
+    <Compile Include="Implementation\Model\FileSchema.cs" />
+    <Compile Include="Implementation\Model\StpData.cs" />
+    <Compile Include="Implementation\Model\StpHeader.cs" />
+    <Compile Include="Implementation\Parser\STPParser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Interface\LoaderFactory.cs" />
     <Compile Include="Interface\ILoader.cs" />
@@ -44,20 +50,8 @@
     <Compile Include="Interface\ISTPModel.cs" />
     <Compile Include="Implementation\Parser\ParsingException.cs" />
     <Compile Include="Interface\ValidatorFactory.cs" />
-    <Compile Include="Implementation\Parser\STPFile.cs" />
+    <Compile Include="Implementation\Model\STPFile.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
-  <ItemGroup>
-    <Folder Include="Interface\" />
-    <Folder Include="Implementation\" />
-    <Folder Include="Implementation\Model\" />
-    <Folder Include="Implementation\Loader\" />
-    <Folder Include="Implementation\Validator\" />
-    <Folder Include="Implementation\Parser\" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Implementation\Parser\STPParser.cs">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
+  <ItemGroup />
 </Project>
