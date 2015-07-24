@@ -51,6 +51,7 @@
     <Compile Include="Implementation\Parser\ParsingException.cs" />
     <Compile Include="Interface\ValidatorFactory.cs" />
     <Compile Include="Implementation\Model\STPFile.cs" />
+    <Compile Include="Implementation\Parser\ParseHelper.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup />

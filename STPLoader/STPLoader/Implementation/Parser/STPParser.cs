@@ -40,7 +40,7 @@ namespace STPLoader.Implementation.Parser
             var start = "DATA;";
             var end = "ENDSEC";
 
-            return FindSection(stream, start, end);
+			return ParseHelper.FindSection(stream, start, end);
         }
 
         /// <summary>
@@ -53,44 +53,7 @@ namespace STPLoader.Implementation.Parser
             var start = "HEADER;";
             var end = "ENDSEC";
 
-            return FindSection(stream, start, end);
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="stream"></param>
-        /// <param name="start"></param>
-        /// <param name="end"></param>
-        /// <returns></returns>
-        private Stream FindSection(Stream stream, string start, string end)
-        {
-            var ms = new MemoryStream();
-            var sw = new StreamWriter(ms);
-            var reader = new StreamReader(stream);
-            string line;
-            var inSection = false;
-            
-            while ((line = reader.ReadLine()) != null)
-            {
-                if (line.Equals(start))
-                {
-                    inSection = true;
-                    continue;
-                }
-                if (line.Equals(end))
-                {
-                    inSection = false;
-                    continue;
-                }
-                if (inSection)
-                {
-                    sw.WriteLine(line);
-                }
-            }
-            sw.Flush();
-
-            return ms;
+			return ParseHelper.FindSection(stream, start, end);
         }
 
         /// <summary>
