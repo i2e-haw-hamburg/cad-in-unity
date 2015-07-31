@@ -63,7 +63,9 @@ namespace STPLoader.Implementation.Parser
         /// <returns></returns>
         private StpData ParseData(Stream dataStream)
         {
-            throw new System.NotImplementedException();
+			var data = new StpData ();
+
+			return data;
         }
 
         /// <summary>
@@ -73,7 +75,9 @@ namespace STPLoader.Implementation.Parser
         /// <returns></returns>
         private StpHeader ParseHeader(Stream headerStream)
         {
-            throw new System.NotImplementedException();
+			var header = new StpHeader ();
+
+			return header;
         }
     }
 
