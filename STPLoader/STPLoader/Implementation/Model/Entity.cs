@@ -8,24 +8,24 @@ namespace STPLoader.Implementation.Model
     /// <summary>
     /// 
     /// </summary>
-    public class FileSchema
+    public class Entity
     {
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="schemaList"></param>
-        public FileSchema(IList<string> schemaList)
-        {
-            Schemas = schemaList;
-        }
+        public long Id { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        IList<string> Schemas { get; set; }
+        public string Type { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public IList<string> Data { get; set; }
 
         public override string ToString()
         {
-            return String.Format("<FileSchema({0})>", Schemas);
+            return String.Format("<Entity({0}, {1}, {2})>", Id, Type, String.Join(", ", Data.ToArray()));
         }
     }
 }

@@ -19,10 +19,15 @@ namespace STPLoader.Implementation.Validator
 		}
 
 		#region IValidator implementation
-		public ValidationResult Validate (System.IO.Stream stream)
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="stream"></param>
+		/// <returns></returns>
+        public ValidationResult Validate (System.IO.Stream stream)
 		{
 			try {
-				_parser.Parse(stream);
+                Console.WriteLine(_parser.Parse(stream));
 				return new ValidationResult(true);
 			} catch(ParsingException ex) {
 				return new ValidationResult(false, ex.Message);

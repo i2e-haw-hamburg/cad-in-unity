@@ -31,6 +31,7 @@
     <Reference Include="System" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Implementation\Model\Entity.cs" />
     <Compile Include="Implementation\Model\FileDescription.cs" />
     <Compile Include="Implementation\Model\FileName.cs" />
     <Compile Include="Implementation\Model\FileSchema.cs" />
@@ -46,7 +47,6 @@
     <Compile Include="Interface\ValidationResult.cs" />
     <Compile Include="Implementation\Validator\STPValidator.cs" />
     <Compile Include="Interface\IParser.cs" />
-    <Compile Include="Implementation\Model\STPModel.cs" />
     <Compile Include="Interface\ISTPModel.cs" />
     <Compile Include="Implementation\Parser\ParsingException.cs" />
     <Compile Include="Interface\ValidatorFactory.cs" />

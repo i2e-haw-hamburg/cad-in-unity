@@ -21,7 +21,10 @@ namespace STPLoader.Implementation.Loader
 		}
 
 		#region ILoader implementation
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
 		public Stream Load ()
 		{
 			return _fileStream;

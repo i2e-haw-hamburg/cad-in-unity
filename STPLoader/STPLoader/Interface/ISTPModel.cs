@@ -4,9 +4,12 @@ using System.Collections.Generic;
 
 namespace STPLoader
 {
+    /// <summary>
+    /// 
+    /// </summary>
 	public interface IStpModel
 	{
-		IList<IStpModel> Parts { get;}
+
 	}
 }
 

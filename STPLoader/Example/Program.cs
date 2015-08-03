@@ -14,6 +14,7 @@ namespace Example
 			var result = validator.Validate (data);
 
 			Console.WriteLine (result);
+		    Console.ReadKey();
 		}
 	}
 }

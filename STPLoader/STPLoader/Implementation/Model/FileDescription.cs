@@ -5,9 +5,33 @@ using System.Text;
 
 namespace STPLoader.Implementation.Model
 {
-    class FileDescription
+    /// <summary>
+    /// 
+    /// </summary>
+    public class FileDescription
     {
-        private string Description { get; set; }
-        private string ImplementationLevel { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="description"></param>
+        /// <param name="implementationLevel"></param>
+        public FileDescription(IList<string> description, string implementationLevel)
+        {
+            Description = description;
+            ImplementationLevel = implementationLevel;
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        public IList<string> Description { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public string ImplementationLevel { get; set; }
+
+        public override string ToString()
+        {
+            return String.Format("<FileDescription({0}, {1})>", Description, ImplementationLevel);
+        }
     }
 }
