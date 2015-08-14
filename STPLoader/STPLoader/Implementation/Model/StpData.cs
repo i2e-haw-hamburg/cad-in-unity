@@ -21,11 +21,14 @@ namespace STPLoader.Implementation.Model
             _entities = entities;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <returns></returns>
         public IList<T> All<T>() where T : Entity.Entity
         {
-            throw new NotImplementedException();
-            var type = typeof (T);
-            //return _entities.Values.Where<T>(e => e.GetType() == type).ToList();
+            return _entities.Values.OfType<T>().ToList();
         } 
 
         public override string ToString()

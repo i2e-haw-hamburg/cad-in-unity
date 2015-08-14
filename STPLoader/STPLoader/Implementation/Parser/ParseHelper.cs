@@ -4,7 +4,6 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
-using STPLoader.Implementation.Model;
 using STPLoader.Implementation.Model.Entity;
 
 namespace STPLoader.Implementation.Parser
@@ -18,8 +17,23 @@ namespace STPLoader.Implementation.Parser
         {
             {"CARTESIAN_POINT", typeof(CartesianPoint)},
             {"DIRECTION", typeof(DirectionPoint)},
-            {"VERTEX", typeof(VertexPoint)},
-            {"VECTOR", typeof(VectorPoint)}
+            {"VERTEX_POINT", typeof(VertexPoint)},
+            {"VECTOR", typeof(VectorPoint)},
+            {"AXIS2_PLACEMENT_3D", typeof(Axis2Placement3D)},
+            {"ORIENTED_EDGE", typeof(OrientedEdge)},
+            {"FACE_BOUND", typeof(FaceBound)},
+            {"CLOSED_SHELL", typeof(ClosedShell)},
+            {"ADVANCED_FACE", typeof(AdvancedFace)},
+            {"B_SPLINE_CURVE_WITH_KNOTS", typeof(BSplineCurveWithKnots)},
+            {"CIRCLE", typeof(Circle)},
+            {"CONICAL_SURFACE", typeof(ConicalSurface)},
+            {"CYLINDRICAL_SURFACE", typeof(CylindricalSurface)},
+            {"TOROIDAL_SURFACE", typeof(ToroidalSurface)},
+            {"EDGE_CURVE", typeof(EdgeCurve)},
+            {"EDGE_LOOP", typeof(EdgeLoop)},
+            {"FACE_OUTER_BOUND", typeof(FaceOuterBound)},
+            {"LINE", typeof(Line)},
+            {"PLANE", typeof(Plane)}
         };
 
 		/// <summary>
@@ -177,6 +191,10 @@ namespace STPLoader.Implementation.Parser
         /// <returns></returns>
 	    public static long ParseId(string id)
 	    {
+            if (id == "$" || id == "*")
+            {
+                return 0;
+            }
             return long.Parse(id.Substring(1));
 	    }
 
@@ -190,7 +208,28 @@ namespace STPLoader.Implementation.Parser
             return data.Trim('\'');
         }
 
-    }
+        public static bool ParseBool(string data)
+        {
+            return data == ".T.";
+        }
+
+        public static T Parse<T>(String data)
+        {
+            var type = typeof (T);
+            if (type == typeof (bool))
+            {
+                return (T)Convert.ChangeType(ParseBool(data), typeof(T), CultureInfo.InvariantCulture);
+            }
+            else if (type == typeof (string))
+            {
+                return (T)Convert.ChangeType(ParseString(data), typeof(T), CultureInfo.InvariantCulture);
+            }
+            else
+            {
+                return (T)Convert.ChangeType(data, typeof(T), CultureInfo.InvariantCulture);
+            }
+        }
+	}
 
 }
 

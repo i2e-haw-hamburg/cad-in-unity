@@ -1,0 +1,35 @@
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+using STPLoader.Implementation.Parser;
+
+namespace STPLoader.Implementation.Model.Entity
+{
+    /// <summary>
+    /// 
+    /// </summary>
+    class ClosedShell : Entity
+    {
+        /// <summary>
+        /// 
+        /// </summary>
+        public string Info;
+        /// <summary>
+        /// 
+        /// </summary>
+        public IList<long> PointIds;
+        
+        public override void Init()
+        {
+            Info = ParseHelper.ParseString(Data[0]);
+            PointIds = ParseHelper.ParseList<string>(Data[1]).Select(ParseHelper.ParseId).ToList();
+        }
+
+        public override string ToString()
+        {
+            return String.Format("<ClosedShell({0}, {1})", Info, PointIds);
+        }
+    }
+
+}

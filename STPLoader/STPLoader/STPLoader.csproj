@@ -37,10 +37,25 @@
     <Reference Include="System" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Implementation\Model\Entity\BSplineCurveWithKnots.cs" />
+    <Compile Include="Implementation\Model\Entity\Plane.cs" />
+    <Compile Include="Implementation\Model\Entity\Line.cs" />
+    <Compile Include="Implementation\Model\Entity\FaceOuterBound.cs" />
+    <Compile Include="Implementation\Model\Entity\EdgeLoop.cs" />
+    <Compile Include="Implementation\Model\Entity\EdgeCurve.cs" />
+    <Compile Include="Implementation\Model\Entity\ToroidalSurface.cs" />
+    <Compile Include="Implementation\Model\Entity\ConicalSurface.cs" />
+    <Compile Include="Implementation\Model\Entity\CylindricalSurface.cs" />
+    <Compile Include="Implementation\Model\Entity\ClosedShell.cs" />
+    <Compile Include="Implementation\Model\Entity\Circle.cs" />
+    <Compile Include="Implementation\Model\Entity\FaceBound.cs" />
+    <Compile Include="Implementation\Model\Entity\OrientedEdge.cs" />
     <Compile Include="Implementation\Model\Entity\CartesianPoint.cs" />
     <Compile Include="Implementation\Model\Entity\DirectionPoint.cs" />
     <Compile Include="Implementation\Model\Entity\Entity.cs" />
     <Compile Include="Implementation\Model\Entity\VectorPoint.cs" />
+    <Compile Include="Implementation\Model\Entity\Axis2Placement3D.cs" />
+    <Compile Include="Implementation\Model\Entity\AdvancedFace.cs" />
     <Compile Include="Implementation\Model\Entity\VertexPoint.cs" />
     <Compile Include="Implementation\Model\FileDescription.cs" />
     <Compile Include="Implementation\Model\FileName.cs" />
