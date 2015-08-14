@@ -1,12 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using STPLoader.Implementation.Parser;
 
 namespace STPLoader.Implementation.Model.Entity
 {
-    class VertexPoint : Entity
+    public class VertexPoint : Entity
     {
         public string Info;
         public long PointId;

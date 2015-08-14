@@ -7,7 +7,7 @@ namespace STPLoader.Implementation.Model.Entity
     /// <summary>
     /// 
     /// </summary>
-    class FaceBound : Entity
+    public class FaceBound : Entity
     {
         /// <summary>
         /// 

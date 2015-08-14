@@ -7,7 +7,7 @@ namespace STPLoader.Implementation.Model.Entity
     /// <summary>
     /// 
     /// </summary>
-    class Axis2Placement3D : Entity
+    public class Axis2Placement3D : Entity
     {
         /// <summary>
         /// 

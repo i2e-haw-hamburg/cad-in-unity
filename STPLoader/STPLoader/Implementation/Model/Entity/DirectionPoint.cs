@@ -5,7 +5,7 @@ using System.Text;
 
 namespace STPLoader.Implementation.Model.Entity
 {
-    class DirectionPoint : CartesianPoint
+    public class DirectionPoint : CartesianPoint
     {
 
         public override string ToString()

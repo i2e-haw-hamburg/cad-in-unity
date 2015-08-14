@@ -29,7 +29,17 @@ namespace STPLoader.Implementation.Model
         public IList<T> All<T>() where T : Entity.Entity
         {
             return _entities.Values.OfType<T>().ToList();
-        } 
+        }
+
+        public IDictionary<long, Entity.Entity> All()
+        {
+            return _entities;
+        }
+
+        public Entity.Entity Get(long id)
+        {
+            return _entities[id];
+        }
 
         public override string ToString()
         {

@@ -7,7 +7,7 @@ namespace STPLoader.Implementation.Model.Entity
     /// <summary>
     /// 
     /// </summary>
-    class ConicalSurface : Entity
+    public class ConicalSurface : Entity
     {
         /// <summary>
         /// 

@@ -6,7 +6,7 @@ using STPLoader.Implementation.Parser;
 
 namespace STPLoader.Implementation.Model.Entity
 {
-    class AdvancedFace : Entity
+    public class AdvancedFace : Entity
     {
         public string Info;
         public IList<long> PointIds;

@@ -4,7 +4,7 @@ using STPLoader.Implementation.Parser;
 
 namespace STPLoader.Implementation.Model.Entity
 {
-    class CartesianPoint : Entity
+    public class CartesianPoint : Entity
     {
         public Vector3 Vector;
         public string Info;

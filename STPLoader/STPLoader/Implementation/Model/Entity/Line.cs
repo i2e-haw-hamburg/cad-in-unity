@@ -7,7 +7,7 @@ namespace STPLoader.Implementation.Model.Entity
     /// <summary>
     /// 
     /// </summary>
-    class Line : Entity
+    public class Line : Entity
     {
         /// <summary>
         /// 

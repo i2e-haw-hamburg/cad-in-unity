@@ -6,7 +6,7 @@ using STPLoader.Implementation.Parser;
 
 namespace STPLoader.Implementation.Model.Entity
 {
-    class VectorPoint : Entity
+    public class VectorPoint : Entity
     {
         public string Info;
         public long PointId;

@@ -9,7 +9,7 @@ namespace STPLoader.Implementation.Model.Entity
     /// <summary>
     /// 
     /// </summary>
-    class BSplineCurveWithKnots : Entity
+    public class BSplineCurveWithKnots : Entity
     {
         /// <summary>
         /// 

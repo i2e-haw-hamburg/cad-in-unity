@@ -7,7 +7,7 @@ namespace STPLoader.Implementation.Model.Entity
     /// <summary>
     /// 
     /// </summary>
-    class Circle : Entity
+    public class Circle : Entity
     {
         /// <summary>
         /// 

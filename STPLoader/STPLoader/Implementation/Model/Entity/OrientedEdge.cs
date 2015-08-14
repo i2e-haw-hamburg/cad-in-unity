@@ -7,7 +7,7 @@ namespace STPLoader.Implementation.Model.Entity
     /// <summary>
     /// 
     /// </summary>
-    class OrientedEdge : Entity
+    public class OrientedEdge : Entity
     {
         /// <summary>
         /// 

@@ -7,7 +7,7 @@ namespace STPLoader.Implementation.Model.Entity
     /// <summary>
     /// 
     /// </summary>
-    class CylindricalSurface : Entity
+    public class CylindricalSurface : Entity
     {
         /// <summary>
         /// 

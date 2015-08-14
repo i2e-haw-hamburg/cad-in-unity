@@ -9,7 +9,7 @@ namespace STPLoader.Implementation.Model.Entity
     /// <summary>
     /// 
     /// </summary>
-    class EdgeCurve : Entity
+    public class EdgeCurve : Entity
     {
         /// <summary>
         /// 

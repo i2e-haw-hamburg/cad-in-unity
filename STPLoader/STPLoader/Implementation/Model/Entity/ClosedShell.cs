@@ -9,7 +9,7 @@ namespace STPLoader.Implementation.Model.Entity
     /// <summary>
     /// 
     /// </summary>
-    class ClosedShell : Entity
+    public class ClosedShell : Entity
     {
         /// <summary>
         /// 

@@ -9,7 +9,7 @@ namespace STPLoader.Implementation.Model.Entity
     /// <summary>
     /// 
     /// </summary>
-    class EdgeLoop : Entity
+    public class EdgeLoop : Entity
     {
         /// <summary>
         /// 
