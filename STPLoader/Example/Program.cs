@@ -1,19 +1,23 @@
 ﻿using System;
+using STPConverter;
 using STPLoader;
+using STPLoader.Interface;
 
 namespace Example
 {
 	class MainClass
 	{
+        private static IConverter _converter = ConverterFactory.Create();
+        private static IParser _parser = ParserFactory.Create();
+
 		public static void Main (string[] args)
 		{
 			var loader = LoaderFactory.CreateFileLoader ("Gehaeuserumpf.stp");
-			var data = loader.Load ();
-			var validator = ValidatorFactory.CreateValidator ();
 
-			var result = validator.Validate (data);
+            var model = _parser.Parse(loader.Load());
+            var convertedModel = _converter.Convert(model);
 
-			Console.WriteLine (result);
+            Console.WriteLine(convertedModel);
 		    Console.ReadKey();
 		}
 	}

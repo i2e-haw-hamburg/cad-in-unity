@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 namespace STPLoader.Implementation.Model
 {
@@ -37,6 +38,26 @@ namespace STPLoader.Implementation.Model
         public override string ToString()
         {
             return String.Format("<StpFile({0}, {1})>", Header, Data);
+        }
+
+        public IList<T> All<T>() where T : Entity.Entity
+        {
+            return _data.All<T>();
+        }
+
+        public IDictionary<long, Entity.Entity> All()
+        {
+            return _data.All();
+        }
+
+        public Entity.Entity Get(long id)
+        {
+            return _data.Get(id);
+        }
+
+        public T Get<T>(long id) where T : Entity.Entity
+        {
+            return _data.Get<T>(id);
         }
 	}
 
