@@ -54,6 +54,11 @@ namespace STPLoader.Implementation.Model
         {
             return _data.Get(id);
         }
+
+        public T Get<T>(long id) where T : Entity.Entity
+        {
+            return _data.Get<T>(id);
+        }
 	}
 
 }

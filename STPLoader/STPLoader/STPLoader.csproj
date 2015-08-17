@@ -63,6 +63,7 @@
     <Compile Include="Implementation\Model\StpData.cs" />
     <Compile Include="Implementation\Model\StpHeader.cs" />
     <Compile Include="Implementation\Parser\STPParser.cs" />
+    <Compile Include="Interface\ParserFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Interface\LoaderFactory.cs" />
     <Compile Include="Interface\ILoader.cs" />

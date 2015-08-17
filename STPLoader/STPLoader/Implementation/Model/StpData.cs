@@ -41,6 +41,12 @@ namespace STPLoader.Implementation.Model
             return _entities[id];
         }
 
+        public T Get<T>(long id) where T : Entity.Entity
+        {
+            var entity = _entities[id];
+            return entity as T;
+        }
+
         public override string ToString()
         {
             return String.Format("<StpData({0})>", String.Join(",\n", _entities.Select(pair => String.Format("{0} => {1}", pair.Key, pair.Value)).ToArray()));

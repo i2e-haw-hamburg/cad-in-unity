@@ -13,6 +13,7 @@ namespace STPLoader
         IList<T> All<T>() where T : Entity;
         IDictionary<long, Entity> All();
         Entity Get(long id);
+        T Get<T>(long id) where T : Entity;
     }
 }
 
