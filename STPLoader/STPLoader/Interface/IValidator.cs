@@ -13,7 +13,7 @@ namespace STPLoader
 		/// </summary>
 		/// <param name="stream">Stream.</param>
 		/// <returns></returns>
-		ValidationResult Validate(IParser parser, Stream stream);
+		ValidationResult Validate(Stream stream);
 	}
 }
 

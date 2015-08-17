@@ -1,9 +1,20 @@
 using System;
 
-namespace STPLoader
+namespace STPLoader.Implementation.Parser
 {
-	public class ParsingException : Exception
+    /// <summary>
+    /// 
+    /// </summary>
+	class ParsingException : Exception
 	{
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="message"></param>
+	    public ParsingException(string message) : base(message)
+	    {
+	        
+	    }
 	}
 
 }
