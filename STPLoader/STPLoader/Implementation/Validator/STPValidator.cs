@@ -27,7 +27,7 @@ namespace STPLoader.Implementation.Validator
         public ValidationResult Validate (System.IO.Stream stream)
 		{
 			try {
-                Console.WriteLine(_parser.Parse(stream));
+                _parser.Parse(stream);
 				return new ValidationResult(true);
 			} catch(ParsingException ex) {
 				return new ValidationResult(false, ex.Message);

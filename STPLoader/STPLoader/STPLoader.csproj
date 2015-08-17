@@ -28,10 +28,35 @@
     <ConsolePause>false</ConsolePause>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AForge, Version=2.2.5.0, Culture=neutral, PublicKeyToken=c1db6ff4eaa06aeb, processorArchitecture=MSIL">
+      <HintPath>..\packages\AForge.2.2.5\lib\AForge.dll</HintPath>
+    </Reference>
+    <Reference Include="AForge.Math, Version=2.2.5.0, Culture=neutral, PublicKeyToken=abba2e25397ee8c9, processorArchitecture=MSIL">
+      <HintPath>..\packages\AForge.Math.2.2.5\lib\AForge.Math.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Implementation\Model\Entity.cs" />
+    <Compile Include="Implementation\Model\Entity\BSplineCurveWithKnots.cs" />
+    <Compile Include="Implementation\Model\Entity\Plane.cs" />
+    <Compile Include="Implementation\Model\Entity\Line.cs" />
+    <Compile Include="Implementation\Model\Entity\FaceOuterBound.cs" />
+    <Compile Include="Implementation\Model\Entity\EdgeLoop.cs" />
+    <Compile Include="Implementation\Model\Entity\EdgeCurve.cs" />
+    <Compile Include="Implementation\Model\Entity\ToroidalSurface.cs" />
+    <Compile Include="Implementation\Model\Entity\ConicalSurface.cs" />
+    <Compile Include="Implementation\Model\Entity\CylindricalSurface.cs" />
+    <Compile Include="Implementation\Model\Entity\ClosedShell.cs" />
+    <Compile Include="Implementation\Model\Entity\Circle.cs" />
+    <Compile Include="Implementation\Model\Entity\FaceBound.cs" />
+    <Compile Include="Implementation\Model\Entity\OrientedEdge.cs" />
+    <Compile Include="Implementation\Model\Entity\CartesianPoint.cs" />
+    <Compile Include="Implementation\Model\Entity\DirectionPoint.cs" />
+    <Compile Include="Implementation\Model\Entity\Entity.cs" />
+    <Compile Include="Implementation\Model\Entity\VectorPoint.cs" />
+    <Compile Include="Implementation\Model\Entity\Axis2Placement3D.cs" />
+    <Compile Include="Implementation\Model\Entity\AdvancedFace.cs" />
+    <Compile Include="Implementation\Model\Entity\VertexPoint.cs" />
     <Compile Include="Implementation\Model\FileDescription.cs" />
     <Compile Include="Implementation\Model\FileName.cs" />
     <Compile Include="Implementation\Model\FileSchema.cs" />
@@ -53,6 +78,8 @@
     <Compile Include="Implementation\Model\STPFile.cs" />
     <Compile Include="Implementation\Parser\ParseHelper.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
-  <ItemGroup />
 </Project>
