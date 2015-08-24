@@ -44,9 +44,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Implementation\Tuple.cs" />
     <Compile Include="Implementation\Converter.cs" />
     <Compile Include="IConverter.cs" />
     <Compile Include="IFormatConverter.cs" />
+    <Compile Include="Implementation\Entity\ClosedShellConveratable.cs" />
+    <Compile Include="Implementation\Entity\AdvancedFaceConvertable.cs" />
+    <Compile Include="Implementation\Entity\LineConvertable.cs" />
     <Compile Include="Implementation\Entity\CircleConvertable.cs" />
     <Compile Include="Implementation\Entity\IConvertable.cs" />
     <Compile Include="MeshModel.cs" />

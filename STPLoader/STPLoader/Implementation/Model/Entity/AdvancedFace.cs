@@ -9,21 +9,21 @@ namespace STPLoader.Implementation.Model.Entity
     public class AdvancedFace : Entity
     {
         public string Info;
-        public IList<long> PointIds;
-        public long PointId;
+        public IList<long> FaceBoundIds;
+        public long SurfaceId;
         public bool Boo;
 
         public override void Init()
         {
             Info = ParseHelper.Parse<string>(Data[0]);
-            PointIds = ParseHelper.ParseList<string>(Data[1]).Select(ParseHelper.ParseId).ToList();
-            PointId = ParseHelper.ParseId(Data[2]);
+            FaceBoundIds = ParseHelper.ParseList<string>(Data[1]).Select(ParseHelper.ParseId).ToList();
+            SurfaceId = ParseHelper.ParseId(Data[2]);
             Boo = ParseHelper.Parse<bool>(Data[3]);
         }
 
         public override string ToString()
         {
-            return String.Format("<AdvancedFace({0}, {1}, {2}, {3})", Info, PointIds, PointId, Boo);
+            return String.Format("<AdvancedFace({0}, {1}, {2}, {3})", Info, FaceBoundIds, SurfaceId, Boo);
         }
     }
 

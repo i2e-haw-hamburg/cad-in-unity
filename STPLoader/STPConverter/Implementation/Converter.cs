@@ -17,7 +17,7 @@ namespace STPConverter
             var vectors = new List<Vector3>();
             var indices = new List<int>();
 
-            GetValue<Circle>(model, indices, vectors);
+            GetValue<ClosedShell>(model, indices, vectors);
             var mesh = new MeshModel(vectors, indices);
 
             return mesh;
@@ -42,6 +42,18 @@ namespace STPConverter
             if (type == typeof(Circle))
             {
                 return new CircleConvertable(element as Circle, model);
+            }
+            if (type == typeof(Line))
+            {
+                return new LineConvertable(element as Line, model);
+            }
+            if (type == typeof(AdvancedFace))
+            {
+                return new AdvancedFaceConvertable(element as AdvancedFace, model);
+            }
+            if (type == typeof(ClosedShell))
+            {
+                return new ClosedShellConveratable(element as ClosedShell, model);
             }
             throw new Exception("Not supported");
         }
