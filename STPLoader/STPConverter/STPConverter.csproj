@@ -44,6 +44,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Implementation\Entity\BoundConvertable.cs" />
+    <Compile Include="Implementation\Entity\SurfaceConvertable.cs" />
     <Compile Include="Implementation\Tuple.cs" />
     <Compile Include="Implementation\Converter.cs" />
     <Compile Include="IConverter.cs" />

@@ -7,7 +7,7 @@ namespace STPLoader.Implementation.Model.Entity
     /// <summary>
     /// 
     /// </summary>
-    public class ToroidalSurface : Entity
+    public class ToroidalSurface : Surface
     {
         /// <summary>
         /// 

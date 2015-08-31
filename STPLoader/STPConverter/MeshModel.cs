@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using AForge.Math;
 
@@ -25,6 +26,13 @@ namespace STPConverter
         public IList<int> Triangles
         {
             get { return _triangles; }
+        }
+
+        public override string ToString()
+        {
+            return String.Format("<MeshModel({0}, {1})>",
+                String.Join("|", Points.Select(x => x.ToString()).ToArray()),
+                String.Join("|", Triangles.Select(x => x.ToString(CultureInfo.InvariantCulture)).ToArray()));
         }
     }
 }

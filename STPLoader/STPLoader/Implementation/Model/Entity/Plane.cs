@@ -7,7 +7,7 @@ namespace STPLoader.Implementation.Model.Entity
     /// <summary>
     /// 
     /// </summary>
-    public class Plane : Entity
+    public class Plane : Surface
     {
         /// <summary>
         /// 

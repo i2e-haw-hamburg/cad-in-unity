@@ -38,11 +38,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Implementation\Model\Entity\BSplineCurveWithKnots.cs" />
+    <Compile Include="Implementation\Model\Entity\Bound.cs" />
     <Compile Include="Implementation\Model\Entity\Plane.cs" />
     <Compile Include="Implementation\Model\Entity\Line.cs" />
     <Compile Include="Implementation\Model\Entity\FaceOuterBound.cs" />
     <Compile Include="Implementation\Model\Entity\EdgeLoop.cs" />
     <Compile Include="Implementation\Model\Entity\EdgeCurve.cs" />
+    <Compile Include="Implementation\Model\Entity\Surface.cs" />
     <Compile Include="Implementation\Model\Entity\ToroidalSurface.cs" />
     <Compile Include="Implementation\Model\Entity\ConicalSurface.cs" />
     <Compile Include="Implementation\Model\Entity\CylindricalSurface.cs" />

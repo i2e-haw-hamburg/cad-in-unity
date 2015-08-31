@@ -29,15 +29,7 @@ namespace STPConverter.Implementation.Entity
             var convertables = faces.Select(face => new AdvancedFaceConvertable(face, _model)).Select(c => Tuple.New(c.Points, c.Indices));
 
             Points = convertables.Select(c => c.First).SelectMany(p => p).ToList();
-            Indices = convertables.Aggregate(Tuple.New(0, new List<int>()), AggregateIndices).Second;
-        }
-
-        private Tuple<int, List<int>> AggregateIndices(Tuple<int, List<int>> last, Tuple<IList<Vector3>, IList<int>> next)
-        {
-            var offset = last.First;
-            var indices = last.Second;
-            indices.AddRange(next.Second.Select(i => i+offset));
-            return Tuple.New(offset + next.First.Count, indices);
+            Indices = convertables.Aggregate(Tuple.New(0, new List<int>()), Tuple.AggregateIndices).Second;
         }
 
         public IList<Vector3> Points { get; private set; }
