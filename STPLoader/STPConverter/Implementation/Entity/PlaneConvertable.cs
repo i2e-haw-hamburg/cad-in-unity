@@ -8,27 +8,27 @@ using STPLoader.Implementation.Model.Entity;
 
 namespace STPConverter.Implementation.Entity
 {
-    class BoundConvertable : IConvertable
+    class PlaneConvertable : IConvertable
     {
-        public IList<Vector3> Points { get; private set; }
-        public IList<int> Indices { get; private set; }
-
-        private readonly Bound _bound;
+        private readonly Plane _surface;
         private readonly IStpModel _model;
 
-        public BoundConvertable(Bound bound, IStpModel model)
+        public PlaneConvertable(Surface surface, IStpModel model)
         {
-            _bound = bound;
+            _surface = (Plane)surface;
             _model = model;
             Init();
         }
-        
+
         private void Init()
         {
-
-
+            var planeAxis = _model.Get<Axis2Placement3D>(_surface.AxisId);
+            
             Points = new List<Vector3>();
-            Indices = new List<int>();   
+            Indices = new List<int>();
         }
+
+        public IList<Vector3> Points { get; private set; }
+        public IList<int> Indices { get; private set; }
     }
 }
