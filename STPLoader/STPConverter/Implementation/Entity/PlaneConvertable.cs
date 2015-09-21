@@ -22,7 +22,7 @@ namespace STPConverter.Implementation.Entity
 
         private void Init()
         {
-            var planeAxis = _model.Get<Axis2Placement3D>(_surface.AxisId);
+            //var planeAxis = _model.Get<Axis2Placement3D>(_surface.AxisId);
             
             Points = new List<Vector3>();
             Indices = new List<int>();
