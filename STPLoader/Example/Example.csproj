@@ -53,10 +53,4 @@
     </None>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\STPConverter\STPConverter.csproj">
-      <Project>{45862bef-3e60-452e-94ff-f26182a8c6c7}</Project>
-      <Name>STPConverter</Name>
-    </ProjectReference>
-  </ItemGroup>
 </Project>
