@@ -25,6 +25,8 @@ namespace STPConverter.Implementation.Entity
         
         private void Init()
         {
+            //var loop = _model.Get<EdgeLoop>(_bound.EdgeLoopId);
+
             Points = new List<Vector3>();
             Indices = new List<int>();   
         }

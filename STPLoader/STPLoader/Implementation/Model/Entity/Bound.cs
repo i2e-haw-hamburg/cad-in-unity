@@ -16,14 +16,14 @@ namespace STPLoader.Implementation.Model.Entity
         /// <summary>
         /// 
         /// </summary>
-        public long PointId;
+        public long EdgeLoopId;
 
         public bool Boo;
 
         public override void Init()
         {
             Info = ParseHelper.Parse<String>(Data[0]);
-            PointId = ParseHelper.ParseId(Data[1]);
+            EdgeLoopId = ParseHelper.ParseId(Data[1]);
             Boo = ParseHelper.Parse<bool>(Data[2]);
         }
 

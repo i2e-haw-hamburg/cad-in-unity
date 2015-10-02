@@ -59,10 +59,6 @@
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
-    <ProjectReference Include="..\STPConverter\STPConverter.csproj">
-      <Project>{45862BEF-3E60-452E-94FF-F26182A8C6C7}</Project>
-      <Name>STPConverter</Name>
-    </ProjectReference>
     <ProjectReference Include="..\STPLoader\STPLoader.csproj">
       <Project>{342CAE11-F670-4B79-9C98-F691340A4503}</Project>
       <Name>STPLoader</Name>
@@ -73,5 +69,8 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
   </ItemGroup>
 </Project>

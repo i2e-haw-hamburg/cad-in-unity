@@ -1,0 +1,62 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+    <metadata>
+        <id>STPLoader</id>
+        <version>0.2.0</version>
+        <title>STP Loader for .NET</title>
+        <authors>Christian Blank</authors>
+        <licenseUrl>https://github.com/i2e-haw-hamburg/stp-loader/blob/master/LICENSE</licenseUrl>
+        <projectUrl>https://github.com/i2e-haw-hamburg/stp-loader/</projectUrl>
+        <requireLicenseAcceptance>false</requireLicenseAcceptance>
+        <description>Load ISO 10303:21 conform files in .NET</description>
+        <copyright>Copyright 2015</copyright>
+        <tags>STEP STP</tags>
+    </metadata>
+    <files>
+        <file src="Implementation\Loader\FileLoader.cs" target="Implementation\Loader\FileLoader.cs" />
+        <file src="Implementation\Loader\StreamLoader.cs" target="Implementation\Loader\StreamLoader.cs" />
+        <file src="Implementation\Model\Entity\AdvancedFace.cs" target="Implementation\Model\Entity\AdvancedFace.cs" />
+        <file src="Implementation\Model\Entity\Axis2Placement3D.cs" target="Implementation\Model\Entity\Axis2Placement3D.cs" />
+        <file src="Implementation\Model\Entity\Bound.cs" target="Implementation\Model\Entity\Bound.cs" />
+        <file src="Implementation\Model\Entity\BSplineCurveWithKnots.cs" target="Implementation\Model\Entity\BSplineCurveWithKnots.cs" />
+        <file src="Implementation\Model\Entity\CartesianPoint.cs" target="Implementation\Model\Entity\CartesianPoint.cs" />
+        <file src="Implementation\Model\Entity\Circle.cs" target="Implementation\Model\Entity\Circle.cs" />
+        <file src="Implementation\Model\Entity\ClosedShell.cs" target="Implementation\Model\Entity\ClosedShell.cs" />
+        <file src="Implementation\Model\Entity\ConicalSurface.cs" target="Implementation\Model\Entity\ConicalSurface.cs" />
+        <file src="Implementation\Model\Entity\CylindricalSurface.cs" target="Implementation\Model\Entity\CylindricalSurface.cs" />
+        <file src="Implementation\Model\Entity\DirectionPoint.cs" target="Implementation\Model\Entity\DirectionPoint.cs" />
+        <file src="Implementation\Model\Entity\EdgeCurve.cs" target="Implementation\Model\Entity\EdgeCurve.cs" />
+        <file src="Implementation\Model\Entity\EdgeLoop.cs" target="Implementation\Model\Entity\EdgeLoop.cs" />
+        <file src="Implementation\Model\Entity\Entity.cs" target="Implementation\Model\Entity\Entity.cs" />
+        <file src="Implementation\Model\Entity\FaceBound.cs" target="Implementation\Model\Entity\FaceBound.cs" />
+        <file src="Implementation\Model\Entity\FaceOuterBound.cs" target="Implementation\Model\Entity\FaceOuterBound.cs" />
+        <file src="Implementation\Model\Entity\Line.cs" target="Implementation\Model\Entity\Line.cs" />
+        <file src="Implementation\Model\Entity\OrientedEdge.cs" target="Implementation\Model\Entity\OrientedEdge.cs" />
+        <file src="Implementation\Model\Entity\Plane.cs" target="Implementation\Model\Entity\Plane.cs" />
+        <file src="Implementation\Model\Entity\Surface.cs" target="Implementation\Model\Entity\Surface.cs" />
+        <file src="Implementation\Model\Entity\ToroidalSurface.cs" target="Implementation\Model\Entity\ToroidalSurface.cs" />
+        <file src="Implementation\Model\Entity\VectorPoint.cs" target="Implementation\Model\Entity\VectorPoint.cs" />
+        <file src="Implementation\Model\Entity\VertexPoint.cs" target="Implementation\Model\Entity\VertexPoint.cs" />
+        <file src="Implementation\Model\FileDescription.cs" target="Implementation\Model\FileDescription.cs" />
+        <file src="Implementation\Model\FileName.cs" target="Implementation\Model\FileName.cs" />
+        <file src="Implementation\Model\FileSchema.cs" target="Implementation\Model\FileSchema.cs" />
+        <file src="Implementation\Model\StpData.cs" target="Implementation\Model\StpData.cs" />
+        <file src="Implementation\Model\STPFile.cs" target="Implementation\Model\STPFile.cs" />
+        <file src="Implementation\Model\StpHeader.cs" target="Implementation\Model\StpHeader.cs" />
+        <file src="Implementation\Parser\ParseHelper.cs" target="Implementation\Parser\ParseHelper.cs" />
+        <file src="Implementation\Parser\ParsingException.cs" target="Implementation\Parser\ParsingException.cs" />
+        <file src="Implementation\Parser\STPParser.cs" target="Implementation\Parser\STPParser.cs" />
+        <file src="Implementation\Validator\STPValidator.cs" target="Implementation\Validator\STPValidator.cs" />
+        <file src="Interface\ILoader.cs" target="Interface\ILoader.cs" />
+        <file src="Interface\IParser.cs" target="Interface\IParser.cs" />
+        <file src="Interface\ISTPModel.cs" target="Interface\ISTPModel.cs" />
+        <file src="Interface\IValidator.cs" target="Interface\IValidator.cs" />
+        <file src="Interface\LoaderFactory.cs" target="Interface\LoaderFactory.cs" />
+        <file src="Interface\ParserFactory.cs" target="Interface\ParserFactory.cs" />
+        <file src="Interface\ValidationResult.cs" target="Interface\ValidationResult.cs" />
+        <file src="Interface\ValidatorFactory.cs" target="Interface\ValidatorFactory.cs" />
+        <file src="Properties\AssemblyInfo.cs" target="Properties\AssemblyInfo.cs" />
+        <file src="packages.config" target="packages.config" />
+        <file src="STPLoader.csproj" target="STPLoader.csproj" />
+    </files>
+</package>

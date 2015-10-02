@@ -1,15 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.21005.1
+# Visual Studio 14
+VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "STPLoader", "STPLoader\STPLoader.csproj", "{342CAE11-F670-4B79-9C98-F691340A4503}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Example", "Example\Example.csproj", "{B49E723E-D172-441D-BF5C-5850FDD9B4BC}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "STPLoaderTest", "STPLoaderTest\STPLoaderTest.csproj", "{05334EB8-C8D6-41C6-BA09-C001B094A1E9}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "STPConverter", "STPConverter\STPConverter.csproj", "{45862BEF-3E60-452E-94FF-F26182A8C6C7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,10 +27,6 @@ Global
 		{05334EB8-C8D6-41C6-BA09-C001B094A1E9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{05334EB8-C8D6-41C6-BA09-C001B094A1E9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{05334EB8-C8D6-41C6-BA09-C001B094A1E9}.Release|Any CPU.Build.0 = Release|Any CPU
-		{45862BEF-3E60-452E-94FF-F26182A8C6C7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{45862BEF-3E60-452E-94FF-F26182A8C6C7}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{45862BEF-3E60-452E-94FF-F26182A8C6C7}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{45862BEF-3E60-452E-94FF-F26182A8C6C7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

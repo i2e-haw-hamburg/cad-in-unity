@@ -8,20 +8,22 @@ using STPLoader.Implementation.Model.Entity;
 
 namespace STPConverter.Implementation.Entity
 {
-    class SurfaceConvertable : IConvertable
+    class PlaneConvertable : IConvertable
     {
-        private readonly Surface _surface;
+        private readonly Plane _surface;
         private readonly IStpModel _model;
 
-        public SurfaceConvertable(Surface surface, IStpModel model)
+        public PlaneConvertable(Surface surface, IStpModel model)
         {
-            _surface = surface;
+            _surface = (Plane)surface;
             _model = model;
             Init();
         }
 
         private void Init()
         {
+            //var planeAxis = _model.Get<Axis2Placement3D>(_surface.AxisId);
+            
             Points = new List<Vector3>();
             Indices = new List<int>();
         }

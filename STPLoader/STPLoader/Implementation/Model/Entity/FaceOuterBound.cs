@@ -11,7 +11,7 @@ namespace STPLoader.Implementation.Model.Entity
     {
         public override string ToString()
         {
-            return String.Format("<FaceOuterBound({0}, {1}, {2})", Info, PointId, Boo);
+            return String.Format("<FaceOuterBound({0}, {1}, {2})", Info, EdgeLoopId, Boo);
         }
     }
 
