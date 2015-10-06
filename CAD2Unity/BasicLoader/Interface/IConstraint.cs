@@ -2,11 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
-namespace CADLoader
+namespace BasicLoader.Interface
 {
-    public class CADLoader
+    public interface IConstraint
     {
     }
 }

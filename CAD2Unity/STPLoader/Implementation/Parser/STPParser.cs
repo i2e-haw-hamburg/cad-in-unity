@@ -2,6 +2,8 @@
 using System.IO;
 using System.Linq;
 using System.Net.Security;
+using BasicLoader;
+using CADLoader;
 using STPLoader.Implementation.Model;
 
 namespace STPLoader.Implementation.Parser
@@ -47,6 +49,13 @@ namespace STPLoader.Implementation.Parser
 			return ParseHelper.FindSection(stream, start, end);
         }
 
+        IModel IParser.Parse(Stream stream)
+        {
+            throw new NotImplementedException();
+        }
+
+        public CADType CAD => CADType.STP;
+        
         /// <summary>
         /// 
         /// </summary>

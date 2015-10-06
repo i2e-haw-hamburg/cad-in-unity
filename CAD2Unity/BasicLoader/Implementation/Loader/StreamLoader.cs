@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using CADLoader;
 
 namespace STLLoader.Implementation.Loader
 {
@@ -13,7 +14,7 @@ namespace STLLoader.Implementation.Loader
         /// </summary>
 		private Stream _stream;
         /// <summary>
-        /// Initializes a new instance of the <see cref="STPLoader.Implementation.Loader.StreamLoader"/> class.
+        /// Initializes a new instance of the <see cref="StreamLoader"/> class.
         /// </summary>
         /// <param name="stream">Stream.</param>
         public StreamLoader(Stream stream)
@@ -29,6 +30,11 @@ namespace STLLoader.Implementation.Loader
         public Stream Load()
         {
             return _stream;
+        }
+
+        public void Close()
+        {
+            _stream.Close();
         }
         #endregion
     }

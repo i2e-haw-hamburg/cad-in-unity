@@ -2,9 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using CADLoader;
 using STPLoader.Implementation.Parser;
 
-namespace STPLoader.Interface
+namespace STPLoader
 {
     public static class ParserFactory
     {

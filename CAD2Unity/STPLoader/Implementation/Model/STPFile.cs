@@ -1,5 +1,9 @@
 using System;
 using System.Collections.Generic;
+using AForge.Math;
+using BasicLoader.Interface;
+using CADLoader;
+using CADLoader.Implementation.Parser;
 
 namespace STPLoader.Implementation.Model
 {
@@ -59,6 +63,16 @@ namespace STPLoader.Implementation.Model
         {
             return _data.Get<T>(id);
         }
+
+        public IList<IModel> Models { get; }
+        public IConstraint GetConstraint(IModel a, IModel b)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IList<Facet> Facets { get; }
+        public IList<Vector3> Vertices { get; }
+        public IList<int> Triangles { get; }
 	}
 
 }

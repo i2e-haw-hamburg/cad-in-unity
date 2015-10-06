@@ -59,6 +59,10 @@
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
+    <ProjectReference Include="..\BasicLoader\BasicLoader.csproj">
+      <Project>{03158c5f-56f3-4abc-ac2c-3315aae66cd8}</Project>
+      <Name>BasicLoader</Name>
+    </ProjectReference>
     <ProjectReference Include="..\STPLoader\STPLoader.csproj">
       <Project>{342CAE11-F670-4B79-9C98-F691340A4503}</Project>
       <Name>STPLoader</Name>

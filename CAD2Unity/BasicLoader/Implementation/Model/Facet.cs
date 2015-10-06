@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using AForge.Math;
 
-namespace STLLoader.Implementation.Parser
+namespace CADLoader.Implementation.Parser
 {
     public class Facet
     {

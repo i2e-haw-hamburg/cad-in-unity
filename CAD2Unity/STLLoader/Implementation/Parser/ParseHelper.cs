@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
 using AForge.Math;
+using CADLoader.Implementation.Parser;
 
 namespace STLLoader.Implementation.Parser
 {

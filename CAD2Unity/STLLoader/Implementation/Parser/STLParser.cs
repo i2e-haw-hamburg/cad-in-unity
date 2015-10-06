@@ -1,8 +1,8 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
 using System.Linq;
-using System.Runtime.ConstrainedExecution;
-using STLLoader.Implementation.Model;
+using BasicLoader;
+using BasicLoader.Implementation.Model;
+using CADLoader;
 using STLLoader.Implementation.Parser;
 
 namespace STLLoader
@@ -19,5 +19,7 @@ namespace STLLoader
 
             return new Model {Facets = facets.ToList()};
         }
+
+        public CADType CAD => CADType.STL;
     }
 }

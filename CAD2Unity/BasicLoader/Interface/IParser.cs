@@ -1,7 +1,8 @@
 ﻿using System;
 using System.IO;
+using BasicLoader;
 
-namespace STLLoader
+namespace CADLoader
 {
     /// <summary>
     /// I parser.
@@ -13,6 +14,8 @@ namespace STLLoader
         /// </summary>
         /// <param name="stream">Stream.</param>
         IModel Parse(Stream stream);
+
+        CADType CAD { get; }
     }
 }
 

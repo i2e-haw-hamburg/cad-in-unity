@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{22AC4F8C-A54C-468B-B739-C25B72D96F27}</ProjectGuid>
+    <ProjectGuid>{03158C5F-56F3-4ABC-AC2C-3315AAE66CD8}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>CADLoader</RootNamespace>
-    <AssemblyName>CADLoader</AssemblyName>
+    <RootNamespace>BasicLoader</RootNamespace>
+    <AssemblyName>BasicLoader</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
@@ -31,6 +31,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AForge, Version=2.2.5.0, Culture=neutral, PublicKeyToken=c1db6ff4eaa06aeb, processorArchitecture=MSIL">
+      <HintPath>..\packages\AForge.2.2.5\lib\AForge.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="AForge.Math, Version=2.2.5.0, Culture=neutral, PublicKeyToken=abba2e25397ee8c9, processorArchitecture=MSIL">
+      <HintPath>..\packages\AForge.Math.2.2.5\lib\AForge.Math.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -39,27 +47,23 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CADLoader.cs" />
+    <Compile Include="Implementation\Loader\FileLoader.cs" />
+    <Compile Include="Implementation\Loader\StreamLoader.cs" />
+    <Compile Include="Implementation\Model\Constraint\EmptyConstraint.cs" />
+    <Compile Include="Implementation\Model\Facet.cs" />
+    <Compile Include="Implementation\Model\Model.cs" />
+    <Compile Include="Interface\CADType.cs" />
+    <Compile Include="Interface\IConstraint.cs" />
+    <Compile Include="Interface\ILoader.cs" />
+    <Compile Include="Interface\IModel.cs" />
+    <Compile Include="Interface\IParser.cs" />
+    <Compile Include="Interface\LoaderFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\BasicLoader\BasicLoader.csproj">
-      <Project>{03158c5f-56f3-4abc-ac2c-3315aae66cd8}</Project>
-      <Name>BasicLoader</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\STLLoader\STLLoader.csproj">
-      <Project>{40aecd08-568e-413f-bbe3-c8a49edf16c3}</Project>
-      <Name>STLLoader</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\STPLoader\STPLoader.csproj">
-      <Project>{342cae11-f670-4b79-9c98-f691340a4503}</Project>
-      <Name>STPLoader</Name>
-    </ProjectReference>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <PropertyGroup>
-    <PostBuildEvent>xcopy /i /e /s /y /f "$(TargetDir)*" "C:\Users\squad\git\simple_view\Simple View\Assets\Libraries"</PostBuildEvent>
-  </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

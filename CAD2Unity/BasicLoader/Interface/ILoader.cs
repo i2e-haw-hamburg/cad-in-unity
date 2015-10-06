@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
 
-namespace STLLoader
+namespace CADLoader
 {
     /// <summary>
     /// 
@@ -13,6 +13,10 @@ namespace STLLoader
         /// </summary>
         /// <returns></returns>
         Stream Load();
+        /// <summary>
+        /// 
+        /// </summary>
+        void Close();
     }
 }
 

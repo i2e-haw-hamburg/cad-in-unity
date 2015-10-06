@@ -82,14 +82,9 @@
     <Compile Include="Interface\MeshModel.cs" />
     <Compile Include="Interface\ParserFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Interface\LoaderFactory.cs" />
-    <Compile Include="Interface\ILoader.cs" />
-    <Compile Include="Implementation\Loader\FileLoader.cs" />
-    <Compile Include="Implementation\Loader\StreamLoader.cs" />
     <Compile Include="Interface\IValidator.cs" />
     <Compile Include="Interface\ValidationResult.cs" />
     <Compile Include="Implementation\Validator\STPValidator.cs" />
-    <Compile Include="Interface\IParser.cs" />
     <Compile Include="Interface\ISTPModel.cs" />
     <Compile Include="Implementation\Parser\ParsingException.cs" />
     <Compile Include="Interface\ValidatorFactory.cs" />
@@ -98,6 +93,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BasicLoader\BasicLoader.csproj">
+      <Project>{03158c5f-56f3-4abc-ac2c-3315aae66cd8}</Project>
+      <Name>BasicLoader</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

@@ -1,8 +1,9 @@
 ﻿using System;
 using System.IO;
+using CADLoader;
 using Microsoft.Win32.SafeHandles;
 
-namespace STLLoader.Implementation.Loader
+namespace CADLoader.Implementation.Loader
 {
     /// <summary>
     /// File loader.
@@ -12,7 +13,7 @@ namespace STLLoader.Implementation.Loader
         private FileStream _fileStream;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="STPLoader.Implementation.Loader.FileLoader"/> class.
+        /// Initializes a new instance of the <see cref="FileLoader"/> class.
         /// </summary>
         /// <param name="stream">Stream.</param>
         public FileLoader(FileStream stream)
@@ -28,6 +29,11 @@ namespace STLLoader.Implementation.Loader
         public Stream Load()
         {
             return _fileStream;
+        }
+
+        public void Close()
+        {
+            _fileStream.Close();
         }
 
         #endregion

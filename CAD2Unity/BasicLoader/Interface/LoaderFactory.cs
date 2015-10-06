@@ -1,9 +1,10 @@
 ﻿using System;
 using System.IO;
+using CADLoader.Implementation.Loader;
 using Microsoft.Win32.SafeHandles;
-using STPLoader.Implementation.Loader;
+using STLLoader.Implementation.Loader;
 
-namespace STPLoader
+namespace CADLoader
 {
 	/// <summary>
 	/// Loader factory.

@@ -43,22 +43,12 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
-    <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Implementation\Loader\FileLoader.cs" />
-    <Compile Include="Implementation\Loader\StreamLoader.cs" />
-    <Compile Include="Implementation\Model\Model.cs" />
-    <Compile Include="Implementation\Model\Facet.cs" />
     <Compile Include="Implementation\Parser\ParseHelper.cs" />
     <Compile Include="Implementation\Parser\ParsingException.cs" />
-    <Compile Include="Interface\ILoader.cs" />
-    <Compile Include="Interface\IModel.cs" />
-    <Compile Include="Interface\IParser.cs" />
-    <Compile Include="Interface\LoaderFactory.cs" />
     <Compile Include="Interface\ParserFactory.cs" />
     <Compile Include="Implementation\Parser\STLParser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -66,9 +56,16 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BasicLoader\BasicLoader.csproj">
+      <Project>{03158c5f-56f3-4abc-ac2c-3315aae66cd8}</Project>
+      <Name>BasicLoader</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>xcopy /i /e /s /y /f "$(TargetDir)*" "C:\Users\squad\git\simple_view\Simple View\Assets\Libraries"</PostBuildEvent>
+    <PostBuildEvent>
+    </PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
