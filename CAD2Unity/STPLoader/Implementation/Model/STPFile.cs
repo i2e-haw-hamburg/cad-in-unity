@@ -64,6 +64,8 @@ namespace STPLoader.Implementation.Model
             return _data.Get<T>(id);
         }
 
+        public string Name => Header.Name.Name;
+
         public IList<IModel> Models { get; }
         public IConstraint GetConstraint(IModel a, IModel b)
         {
