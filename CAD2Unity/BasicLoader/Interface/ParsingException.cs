@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace STLLoader.Implementation.Parser
+namespace BasicLoader
 {
     /// <summary>
     /// 

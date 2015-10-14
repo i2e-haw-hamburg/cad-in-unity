@@ -4,7 +4,7 @@ using AForge.Math;
 using BasicLoader.Interface;
 using CADLoader.Implementation.Parser;
 
-namespace CADLoader
+namespace BasicLoader
 {
     public interface IModel
     {
@@ -14,5 +14,6 @@ namespace CADLoader
         IList<Facet> Facets { get; }
         IList<Vector3> Vertices { get; }
         IList<int> Triangles { get; }
+        string Name { get; }
     }
 }

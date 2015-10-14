@@ -11,6 +11,7 @@ namespace BasicLoader.Implementation.Model
     public class Model : IModel
     {
         private IList<Facet> _facets;
+        private string _name;
 
         public IList<IModel> Models => new List<IModel> {this};
 
@@ -43,6 +44,11 @@ namespace BasicLoader.Implementation.Model
         {
             return $"Model with {_facets.Count} facets";
         }
-        
+
+        public string Name
+        {
+            get { return _name; }
+            set { _name = value; }
+        }
     }
 }

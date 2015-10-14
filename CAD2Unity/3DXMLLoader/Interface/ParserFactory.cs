@@ -2,16 +2,17 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using BasicLoader;
 using CADLoader;
-using _3DXMLLoader.Implementation.Parser;
+using ThreeDXMLLoader.Implementation.Parser;
 
-namespace _3DXMLParser
+namespace ThreeDXMLLoader
 {
     public static class ParserFactory
     {
         public static IParser Create()
         {
-            return new ThreeDXMLParser();
+            return new ThreeDXMLLoader.Implementation.Parser.ThreeDXMLParser();
         }
     }
 }

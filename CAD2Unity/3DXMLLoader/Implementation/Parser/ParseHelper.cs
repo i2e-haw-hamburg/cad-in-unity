@@ -2,53 +2,29 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
+using System.Xml;
+using System.Xml.Linq;
+using System.Xml.XPath;
 using AForge.Math;
 using CADLoader.Implementation.Parser;
 
-namespace _3DXMLLoader.Implementation.Parser
+namespace ThreeDXMLLoader.Implementation.Parser
 {
     /// <summary>
     /// 
     /// </summary>
 	public static class ParseHelper
     {
-        
+
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="stream"></param>
-        /// <param name="start"></param>
-        /// <param name="end"></param>
+        /// <param name="data"></param>
         /// <returns></returns>
-        public static Stream FindSection(Stream stream, string start, string end)
+        public static string GetName(XDocument data)
         {
-            stream.Position = 0;
-            var ms = new MemoryStream();
-            var sw = new StreamWriter(ms);
-            var reader = new StreamReader(stream);
-            string line;
-            var inSection = false;
-
-            while ((line = reader.ReadLine()) != null)
-            {
-                if (line.Equals(start))
-                {
-                    inSection = true;
-                    continue;
-                }
-                if (line.Equals(end))
-                {
-                    inSection = false;
-                    continue;
-                }
-                if (inSection)
-                {
-                    sw.WriteLine(line);
-                }
-            }
-            sw.Flush();
-
-            return ms;
+            var titleNode = data.XPathSelectElement("Model_3dxml");
+            return titleNode.Value;
         }
         
        

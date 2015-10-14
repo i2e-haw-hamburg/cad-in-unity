@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using AForge.Math;
+using BasicLoader;
 using BasicLoader.Interface;
 using CADLoader;
 using CADLoader.Implementation.Parser;
@@ -73,6 +74,8 @@ namespace STPLoader.Implementation.Model
         public IList<Facet> Facets { get; }
         public IList<Vector3> Vertices { get; }
         public IList<int> Triangles { get; }
+
+        public string Name => Header.Name.Name;
 	}
 
 }

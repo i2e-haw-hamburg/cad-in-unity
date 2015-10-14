@@ -1,22 +1,30 @@
 ﻿using System.IO;
 using System.Linq;
+using System.Xml;
+using System.Xml.Linq;
 using BasicLoader;
 using BasicLoader.Implementation.Model;
 using CADLoader;
 
-namespace _3DXMLLoader.Implementation.Parser
+namespace ThreeDXMLLoader.Implementation.Parser
 {
     internal class ThreeDXMLParser : IParser
     {
         public IModel Parse(Stream stream)
         {
-            // check format
-            // if ascii continue
-            var body = ParseHelper.FindSection(stream, "solid CATIA STL", "endsolid CATIA STL");
-            var facets = ParseHelper.Facets(stream);
+            var reader = XmlReader.Create(stream);
+            reader.MoveToContent();
+            var xml = XDocument.Load(reader);
+            
+            var name = ParseHelper.GetName(xml);
+            //var facets = ParseHelper.Facets(stream);
 
 
-            return new Model {Facets = facets.ToList()};
+            return new Model
+            {
+                //Facets = facets.ToList(),
+                Name = name
+            };
         }
 
         public CADType CAD => CADType.ThreeDXML;

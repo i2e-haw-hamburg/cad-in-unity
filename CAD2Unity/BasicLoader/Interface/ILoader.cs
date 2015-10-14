@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
 
-namespace CADLoader
+namespace BasicLoader
 {
     /// <summary>
     /// 

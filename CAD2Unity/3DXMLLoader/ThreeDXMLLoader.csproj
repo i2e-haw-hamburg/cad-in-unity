@@ -7,10 +7,11 @@
     <ProjectGuid>{EF6D97A4-60BC-4E28-8999-0F38B08CFD1F}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>_3DXMLLoader</RootNamespace>
-    <AssemblyName>3DXMLLoader</AssemblyName>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <RootNamespace>ThreeDXMLLoader</RootNamespace>
+    <AssemblyName>ThreeDXMLLoader</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>

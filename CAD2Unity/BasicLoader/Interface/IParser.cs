@@ -2,7 +2,7 @@
 using System.IO;
 using BasicLoader;
 
-namespace CADLoader
+namespace BasicLoader
 {
     /// <summary>
     /// I parser.
