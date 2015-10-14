@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CADLoader", "CADLoader\CADL
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BasicLoader", "BasicLoader\BasicLoader.csproj", "{03158C5F-56F3-4ABC-AC2C-3315AAE66CD8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "3DXMLLoader", "3DXMLLoader\3DXMLLoader.csproj", "{EF6D97A4-60BC-4E28-8999-0F38B08CFD1F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{03158C5F-56F3-4ABC-AC2C-3315AAE66CD8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{03158C5F-56F3-4ABC-AC2C-3315AAE66CD8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{03158C5F-56F3-4ABC-AC2C-3315AAE66CD8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EF6D97A4-60BC-4E28-8999-0F38B08CFD1F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EF6D97A4-60BC-4E28-8999-0F38B08CFD1F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EF6D97A4-60BC-4E28-8999-0F38B08CFD1F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EF6D97A4-60BC-4E28-8999-0F38B08CFD1F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -8,7 +8,8 @@ namespace BasicLoader
     public enum CADType
     {
         STL,
-        STP
+        STP,
+        ThreeDXML
     }
 
     public static class CADTypeUtils
@@ -16,7 +17,8 @@ namespace BasicLoader
         private static IDictionary<string, CADType> map = new Dictionary<string, CADType>
         {
             {"stl", CADType.STL},
-            {"stp", CADType.STP}
+            {"stp", CADType.STP},
+            {"3dxml", CADType.ThreeDXML}
         };
 
         public static CADType FromFileExtension(string fileName)

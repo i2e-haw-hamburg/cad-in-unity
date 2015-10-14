@@ -4,14 +4,13 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{03158C5F-56F3-4ABC-AC2C-3315AAE66CD8}</ProjectGuid>
+    <ProjectGuid>{EF6D97A4-60BC-4E28-8999-0F38B08CFD1F}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>BasicLoader</RootNamespace>
-    <AssemblyName>BasicLoader</AssemblyName>
-    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <RootNamespace>_3DXMLLoader</RootNamespace>
+    <AssemblyName>3DXMLLoader</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -43,23 +42,22 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Implementation\Loader\FileLoader.cs" />
-    <Compile Include="Implementation\Loader\StreamLoader.cs" />
-    <Compile Include="Implementation\Model\Constraint\EmptyConstraint.cs" />
-    <Compile Include="Implementation\Model\Facet.cs" />
-    <Compile Include="Implementation\Model\Model.cs" />
-    <Compile Include="Interface\CADType.cs" />
-    <Compile Include="Interface\IConstraint.cs" />
-    <Compile Include="Interface\ILoader.cs" />
-    <Compile Include="Interface\IModel.cs" />
-    <Compile Include="Interface\IParser.cs" />
-    <Compile Include="Interface\LoaderFactory.cs" />
-    <Compile Include="Interface\ParsingException.cs" />
+    <Compile Include="Implementation\Parser\ParseHelper.cs" />
+    <Compile Include="Implementation\Parser\ThreeDXMLParser.cs" />
+    <Compile Include="Interface\ParserFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BasicLoader\BasicLoader.csproj">
+      <Project>{03158C5F-56F3-4ABC-AC2C-3315AAE66CD8}</Project>
+      <Name>BasicLoader</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
