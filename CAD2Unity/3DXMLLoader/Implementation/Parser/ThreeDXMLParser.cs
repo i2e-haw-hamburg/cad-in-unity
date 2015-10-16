@@ -19,12 +19,15 @@ namespace ThreeDXMLLoader.Implementation.Parser
             var reader = XmlReader.Create(stream);
             reader.MoveToContent();
             var xml = XDocument.Load(reader);
-            var internalModel = new ThreeDXML(ParseHelper.GetHeader(xml));
+            var internalModel = new ThreeDXMLImplementation(ParseHelper.GetHeader(xml));
             //var facets = ParseHelper.Facets(stream);
 
             return internalModel.ToModel();
         }
 
-        public CADType CAD => CADType.ThreeDXML;
+        public CADType CAD
+        {
+            get { return CADType.ThreeDXML; }
+        }
     }
 }

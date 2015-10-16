@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 using BasicLoader;
 
 namespace ThreeDXMLLoader.Implementation.Model
@@ -9,12 +6,12 @@ namespace ThreeDXMLLoader.Implementation.Model
     /// <summary>
     /// 
     /// </summary>
-    class ThreeDXML
+    class ThreeDXMLImplementation
     {
         private Header _header;
         private IDictionary<string, ThreeDRepFile> _representationFiles;
 
-        public ThreeDXML(Header header)
+        public ThreeDXMLImplementation(Header header)
         {
             Header = header;
         }

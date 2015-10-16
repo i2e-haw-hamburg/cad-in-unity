@@ -12,8 +12,22 @@ namespace BasicLoader.Implementation.Model
     {
         private IList<Facet> _facets;
         private string _name;
+        private IList<IModel> _models;
 
-        public IList<IModel> Models => new List<IModel> {this};
+        //TODO dont understand, dont compile
+        //public IList<IModel> Models => new List<IModel> {this};
+
+        //new Implementation from the the line above.
+        public IList<IModel> Models {
+            get { return _models; }
+            private set { _models = value; }
+        }
+
+        public Model()
+        {
+            _models = new List<IModel>(){this};
+        }
+
 
         public IConstraint GetConstraint(IModel a, IModel b)
         {
@@ -38,11 +52,14 @@ namespace BasicLoader.Implementation.Model
             get { return Facets.SelectMany(x => x.Verticies.ToArray()).ToList(); }
         }
 
-        public IList<int> Triangles => Enumerable.Range(0, Facets.Count() * 3).ToList();
+        public IList<int> Triangles
+        {
+            get { return Enumerable.Range(0, Facets.Count()*3).ToList(); }
+        }
 
         public override string ToString()
         {
-            return $"Model with {_facets.Count} facets";
+            return @"Model with {_facets.Count} facets";
         }
 
         public string Name

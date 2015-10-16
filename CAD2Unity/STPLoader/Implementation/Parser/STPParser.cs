@@ -54,8 +54,11 @@ namespace STPLoader.Implementation.Parser
             throw new NotImplementedException();
         }
 
-        public CADType CAD => CADType.STP;
-        
+        public CADType CAD
+        {
+            get { return CADType.STP; }
+        }
+
         /// <summary>
         /// 
         /// </summary>
