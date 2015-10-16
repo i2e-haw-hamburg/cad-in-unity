@@ -5,26 +5,24 @@ using System.Xml.Linq;
 using BasicLoader;
 using BasicLoader.Implementation.Model;
 using CADLoader;
+using ThreeDXMLLoader.Implementation.Model;
 
 namespace ThreeDXMLLoader.Implementation.Parser
 {
-    internal class ThreeDXMLParser : IParser
+    /// <summary>
+    /// 
+    /// </summary>
+    class ThreeDXMLParser : IParser
     {
         public IModel Parse(Stream stream)
         {
             var reader = XmlReader.Create(stream);
             reader.MoveToContent();
             var xml = XDocument.Load(reader);
-            
-            var name = ParseHelper.GetName(xml);
+            var internalModel = new ThreeDXML(ParseHelper.GetHeader(xml));
             //var facets = ParseHelper.Facets(stream);
 
-
-            return new Model
-            {
-                //Facets = facets.ToList(),
-                Name = name
-            };
+            return internalModel.ToModel();
         }
 
         public CADType CAD => CADType.ThreeDXML;
