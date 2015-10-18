@@ -13,7 +13,7 @@ namespace ThreeDXMLLoader.Implementation.Model
 
         public ThreeDXMLImplementation(Header header)
         {
-            Header = header;
+            _header = header;
         }
 
         /// <summary>
@@ -21,19 +21,12 @@ namespace ThreeDXMLLoader.Implementation.Model
         /// </summary>
         public Header Header
         {
-            get
-            {
-                return _header;
-            }
-
-            set
-            {
-                _header = value;
-            }
+            get{return _header;}
+            set{_header = value;}
         }
 
         /// <summary>
-        /// 
+        /// Parses the 3DXML discription and translate its to the internal IModel representation
         /// </summary>
         /// <returns></returns>
         public IModel ToModel()
@@ -41,6 +34,11 @@ namespace ThreeDXMLLoader.Implementation.Model
             var model = new BasicLoader.Implementation.Model.Model {Name = Header.Name};
             
             return model;
+        }
+
+        private void ParseHeader()
+        {
+            
         }
     }
 }

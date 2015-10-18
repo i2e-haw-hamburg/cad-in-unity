@@ -8,7 +8,7 @@ namespace Example
         static void Main(string[] args)
         {
             var parser = ThreeDXMLLoader.ParserFactory.Create();
-            parser.Parse(LoaderFactory.CreateFileLoader(@"C:\Users\squad\Downloads\CAD_Daten_Lagertraeger\ZUSAMMENBAU_Deckel_Gehaeuse_text.3dxml").Load());
+            parser.Parse(LoaderFactory.CreateFileLoader(@"C:\HAW\cad-in-unity\3D XML Example\CATRepImage.3dxml").Load());
         }
     }
 }
