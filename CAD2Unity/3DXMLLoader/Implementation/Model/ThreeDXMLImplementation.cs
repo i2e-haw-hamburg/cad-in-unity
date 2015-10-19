@@ -44,9 +44,9 @@ namespace ThreeDXMLLoader.Implementation.Model
         }
 
         //sortes the ThreeDRepFiles into the Models internal representation;
-        public void Fill3DRepresentation(IList<ThreeDXMLFile> faces)
+        public void Fill3DRepresentation(IList<ReferenceRep> faces)
         {
-            
+             //TODO implement
         }
 
 

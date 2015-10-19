@@ -19,33 +19,26 @@ namespace ThreeDXMLLoader.Implementation.Parser
         
         public IModel Parse(Stream stream)
         {
-            IThreeDArchive fileArchive = null;
-            
-            
-            var reader = XmlReader.Create(stream);
-            reader.MoveToContent();
-            var xml = XDocument.Load(reader);
-            reader.Close();
-
-
-            xml = ReadManifest(xml, fileArchive);
+            var fileArchive = ThreeDXMLFile.Create(stream);
+         
+           var xmlManifest = ReadManifest(fileArchive);
                       
 
-            var internalModel = new ThreeDXMLImplementation(ParseHelper.GetHeader(xml));
-            internalModel.Fill3DRepresentation(ParseAssetRepresentation(xml, fileArchive));
+            var internalModel = new ThreeDXMLImplementation(ParseHelper.GetHeader(xmlManifest));
+            internalModel.Fill3DRepresentation(ParseAssetRepresentation(xmlManifest, fileArchive));
 
 
             return internalModel.ToModel();
         }
 
-        private IList<ReferenceRep> ParseAssetRepresentation(XDocument xml, IThreeDArchive archive)
+        private IList<ReferenceRep> ParseAssetRepresentation(XDocument xml, IThreeDXMLArchive archive)
         {
            return  ParseHelper.Parse3DRepresentation(xml, archive);
         }
 
-        private XDocument ReadManifest(XDocument manifest, IThreeDArchive fileArchive)
+        private XDocument ReadManifest(IThreeDXMLArchive fileArchive)
         {
-            return ParseHelper.ReadManifest(manifest, fileArchive);
+            return ParseHelper.ReadManifest(fileArchive);
         }
 
         public CADType CAD

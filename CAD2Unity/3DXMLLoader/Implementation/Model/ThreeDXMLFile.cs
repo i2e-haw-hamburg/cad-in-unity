@@ -64,7 +64,10 @@ namespace ThreeDXMLLoader.Implementation.Model
             return XDocument.Load(reader);
         }
 
-        public IList<string> ContainedFiles => _files.Keys.ToList();
+        public IList<string> ContainedFiles
+        {
+            get { return _files.Keys.ToList(); }
+        }
     }
 
     

@@ -72,23 +72,23 @@ namespace ThreeDXMLLoader.Implementation.Parser
         }
 
 
-        public static XDocument ReadManifest(XDocument manifest, IThreeDArchive archiv)
+        public static XDocument ReadManifest(IThreeDXMLArchive archiv)
         {
 
-            var mainfile = manifest;
+            var manifest = archiv.GetManifest();
             //check if the manifest contains the asset information, if the root element is not the manifest then load and return it.
             var rootElement = manifest.Root.Element("Root");
 
             if (rootElement != null && !rootElement.IsEmpty)
             {
-              mainfile =  archiv.GetNextDocument(rootElement.Value);
+                manifest = archiv.GetNextDocument(rootElement.Value);
             }
 
-            return mainfile;
+            return manifest;
 
         }
 
-        public static IList<ReferenceRep> Parse3DRepresentation(XDocument xml, IThreeDArchive archive)
+        public static IList<ReferenceRep> Parse3DRepresentation(XDocument xml, IThreeDXMLArchive archive)
         {
             IList<ReferenceRep> threeDRepresentations = new List<ReferenceRep>();
 
@@ -107,7 +107,7 @@ namespace ThreeDXMLLoader.Implementation.Parser
 
         }
 
-        private static ReferenceRep Parse3DTessellatedRepresentation(XElement xmlElement, IThreeDArchive archive)
+        private static ReferenceRep Parse3DTessellatedRepresentation(XElement xmlElement, IThreeDXMLArchive archive)
         {
             string nameOfExternalRepFileDiscription = "";
             var referenceRep = new ReferenceRep();
@@ -139,7 +139,7 @@ namespace ThreeDXMLLoader.Implementation.Parser
             return referenceRep;
         }
 
-        private static IList<XElement> GetFacesInXMLFormat(XElement xmlElemt, string externalRepFileName, IThreeDArchive archive)
+        private static IList<XElement> GetFacesInXMLFormat(XElement xmlElemt, string externalRepFileName, IThreeDXMLArchive archive)
         {
             if (xmlElemt.Descendants("Faces").LongCount() > 0)
             {
