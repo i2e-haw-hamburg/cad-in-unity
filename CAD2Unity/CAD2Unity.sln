@@ -17,6 +17,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ThreeDXMLLoader", "3DXMLLoa
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Example", "Example\Example.csproj", "{087DE0A5-B38C-4721-9A14-191DDFF2ACA4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ThreeDXMLLoaderTest", "ThreeDLoaderTest\ThreeDXMLLoaderTest.csproj", "{D89A1F76-36EB-4C24-B68C-3E90846E6B42}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{1BE62978-D330-4982-AF96-45F9226E552F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,8 +55,16 @@ Global
 		{087DE0A5-B38C-4721-9A14-191DDFF2ACA4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{087DE0A5-B38C-4721-9A14-191DDFF2ACA4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{087DE0A5-B38C-4721-9A14-191DDFF2ACA4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D89A1F76-36EB-4C24-B68C-3E90846E6B42}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D89A1F76-36EB-4C24-B68C-3E90846E6B42}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D89A1F76-36EB-4C24-B68C-3E90846E6B42}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D89A1F76-36EB-4C24-B68C-3E90846E6B42}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{05334EB8-C8D6-41C6-BA09-C001B094A1E9} = {1BE62978-D330-4982-AF96-45F9226E552F}
+		{D89A1F76-36EB-4C24-B68C-3E90846E6B42} = {1BE62978-D330-4982-AF96-45F9226E552F}
 	EndGlobalSection
 EndGlobal

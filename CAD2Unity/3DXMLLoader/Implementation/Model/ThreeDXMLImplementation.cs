@@ -9,7 +9,7 @@ namespace ThreeDXMLLoader.Implementation.Model
     class ThreeDXMLImplementation
     {
         private Header _header;
-        private IDictionary<string, ThreeDRepFile> _representationFiles;
+        private IDictionary<string, ThreeDXMLFile> _representationFiles;
         private IDictionary<string, ReferenceRep> _internalReferenceRepresentation;
         private IDictionary<string, InstanceRep> _internalInstanceRepresentation;
 
@@ -44,7 +44,7 @@ namespace ThreeDXMLLoader.Implementation.Model
         }
 
         //sortes the ThreeDRepFiles into the Models internal representation;
-        public void Fill3DRepresentation(IList<ReferenceRep> faces)
+        public void Fill3DRepresentation(IList<ThreeDXMLFile> faces)
         {
             
         }
