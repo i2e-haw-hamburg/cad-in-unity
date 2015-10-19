@@ -1,7 +1,8 @@
 ﻿using System.Collections.Generic;
 using BasicLoader;
+using ThreeDXMLLoader.Implementation.Model;
 
-namespace ThreeDXMLLoader.Implementation.Model
+namespace ThreeDXMLLoader.Implementation
 {
     /// <summary>
     /// 
@@ -10,10 +11,21 @@ namespace ThreeDXMLLoader.Implementation.Model
     {
         private Header _header;
         private IDictionary<string, ThreeDRepFile> _representationFiles;
+        private IDictionary<int, CatMaterialReference> _materials;
+
+        /// <summary>
+        /// maps the id of an material to an CatMaterialReference instance
+        /// </summary>
+        public IDictionary<int, CatMaterialReference> Materials
+        {
+            get { return _materials; }
+            set { _materials = value; }
+        }
 
         public ThreeDXMLImplementation(Header header)
         {
             _header = header;
+            _materials = new Dictionary<int, CatMaterialReference>();
         }
 
         /// <summary>
@@ -31,23 +43,14 @@ namespace ThreeDXMLLoader.Implementation.Model
         /// <returns></returns>
         public IModel ToModel()
         {
-
-
-
             var model = new BasicLoader.Implementation.Model.Model {Name = Header.Name};
-
-          
-
+            
             return model;
         }
 
-        //sortes the ThreeDRepFiles into the Models internal representation;
-        public void Fill3DRepresentation(IList<ThreeDRepFile> faces)
+        private void ParseHeader()
         {
             
         }
-
-
-
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Xml;
 using System.Xml.Linq;
@@ -14,20 +15,52 @@ namespace ThreeDXMLLoader.Implementation.Parser
     /// </summary>
     class ThreeDXMLParser : IParser
     {
+
+        
         public IModel Parse(Stream stream)
         {
+            IThreeDArchiv fileArchive = null;
+            
+            
             var reader = XmlReader.Create(stream);
             reader.MoveToContent();
             var xml = XDocument.Load(reader);
+            reader.Close();
+
+
+            xml = ReadManifest(xml, fileArchive);
+            
+            //todo for testing purpose only remove later
+            stream = new FileStream("C:\\HAW\\cad-in-unity\\3D xml example\\Quad.3dxml", FileMode.Open, FileAccess.Read);
+            reader = XmlReader.Create(stream);
+            reader.MoveToContent();
+            xml = XDocument.Load(reader);
+
+
+
             var internalModel = new ThreeDXMLImplementation(ParseHelper.GetHeader(xml));
-            //var facets = ParseHelper.Facets(stream);
+            internalModel.Fill3DRepresentation = ParseAssetRepresentation(xml, fileArchive);
+
 
             return internalModel.ToModel();
+        }
+
+        private IList<ThreeDRepFile> ParseAssetRepresentation(XDocument xml, IThreeDArchiv fileArchive)
+        {
+           return  ParseHelper.Parse3DRepresentation(xml);
+        }
+
+        private XDocument ReadManifest(XDocument manifest, IThreeDArchiv fileArchive)
+        {
+            return ParseHelper.ReadManifest(manifest, fileArchive);
         }
 
         public CADType CAD
         {
             get { return CADType.ThreeDXML; }
         }
+
+      
+
     }
 }

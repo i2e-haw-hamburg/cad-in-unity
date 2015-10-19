@@ -50,6 +50,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Implementation\Model\Header.cs" />
+    <Compile Include="Implementation\Model\IThreeDArchive.cs" />
+    <Compile Include="Implementation\Model\ModelInterna\Supported3DRepFormats.cs" />
     <Compile Include="Implementation\Model\ThreeDRepFile.cs" />
     <Compile Include="Implementation\Model\ThreeDXMLImplementation.cs" />
     <Compile Include="Implementation\Parser\ParseHelper.cs" />
