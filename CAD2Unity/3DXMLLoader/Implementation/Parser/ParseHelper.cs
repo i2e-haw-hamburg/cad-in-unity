@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Xml;
 using System.Xml.Linq;
@@ -35,14 +36,25 @@ namespace ThreeDXMLLoader.Implementation.Parser
             Header header = new Header();
 
             var xmlHeader = xml.Root.Element("{http://www.3ds.com/xsd/3DXML}Header").Elements().ToList();
-
-
+            
             foreach (var elem in xmlHeader)
             {
-                if (elem.Name.LocalName == "Title") header.Name = elem.Value;
-                if (elem.Name.LocalName == "Author") header.Author = elem.Value;
-                if (elem.Name.LocalName == "Schema" || elem.Name.LocalName == "SchemaVersion") header.Schema = elem.Value;
-                try
+                switch (elem.Value.ToLower())
+                {
+                    case "title":
+                        header.Name = elem.Value;
+                        break;
+                    case "author":
+                        header.Author = elem.Value;
+                        break;
+                    case "schema":
+                        header.Schema = elem.Value;
+                        break;
+                    case "schemaversion":
+                        header.Schema = elem.Value;
+                        break;
+                    case "created":
+                         try
                 {
                     if (elem.Name.LocalName == "Created") header.Created = DateTime.Parse(elem.Value);
                 }
@@ -51,7 +63,9 @@ namespace ThreeDXMLLoader.Implementation.Parser
                     //TODO better handling for parsing exception
                     Console.Error.WriteLine(string.Format("Was not able to translate the creation date {0} into a valid DateTime. Please check if the creation date is valid.", elem.Value));
                 }
-            
+                        break;
+                }
+                
             }
 
             return header;
@@ -74,24 +88,79 @@ namespace ThreeDXMLLoader.Implementation.Parser
 
         }
 
-        public static IList<ThreeDRepFile> Parse3DRepresentation(XDocument xml)
+        public static IList<ReferenceRep> Parse3DRepresentation(XDocument xml, IThreeDArchive archive)
         {
-            IList<ThreeDRepFile> threeDrepresentations = new List<ThreeDRepFile>();
+            IList<ReferenceRep> threeDRepresentations = new List<ReferenceRep>();
 
-            var xmlReferenceReps = xml.Root.Elements("{http://www.3ds.com/xsd/3DXML}ReferenceRep");
-
-            if (xmlReferenceReps.All(x => x.Attribute("format").Name.LocalName == Supported3DRepFormats.Tessellated.ToString()))
+            var xmlReferenceReps = xml.Root.Descendants("{http://www.3ds.com/xsd/3DXML}ReferenceRep");
+        
+            if (xmlReferenceReps.All(x => x.Attribute("format").Value.ToLower() == Supported3DRepFormats.Tessellated.ToString().ToLower()))
             {
-                threeDrepresentations.Add(Parse3DTessellatedRepresentation(xml));
+                foreach (var rep in xmlReferenceReps)
+                {
+                    threeDRepresentations.Add(Parse3DTessellatedRepresentation(rep, archive));
+                }
+                
             }
 
-            return threeDrepresentations;
+            return threeDRepresentations;
 
         }
 
-        private static ThreeDRepFile Parse3DTessellatedRepresentation(XDocument xml)
+        private static ReferenceRep Parse3DTessellatedRepresentation(XElement xmlElement, IThreeDArchive archive)
         {
-            throw new NotImplementedException();
+            string nameOfExternalRepFileDiscription = "";
+            var referenceRep = new ReferenceRep();
+            foreach (var attribut in xmlElement.Attributes())
+            {              
+                switch (attribut.Name.LocalName.ToLower())
+                {
+                    case "id":
+                         referenceRep.Id = attribut.Value; 
+                        break;
+                    case "name":   
+                         referenceRep.Name = attribut.Value;
+                        break;
+                    case "type":
+                         referenceRep.ReferenceType = attribut.Value;
+                        break;
+                    case "version":
+                        referenceRep.Version = attribut.Value;
+                        break;
+                    case "associatedfile":
+                        nameOfExternalRepFileDiscription = attribut.Value;
+                        break;
+                    default:
+                        break;
+                }
+            }
+            IList<XElement> xmlFaces = GetFacesInXMLFormat(xmlElement ,nameOfExternalRepFileDiscription, archive);
+
+            return referenceRep;
+        }
+
+        private static IList<XElement> GetFacesInXMLFormat(XElement xmlElemt, string externalRepFileName, IThreeDArchive archive)
+        {
+            if (xmlElemt.Descendants("Faces").LongCount() > 0)
+            {
+                //TODO write internal case soon
+                throw new NotImplementedException("cant handle all the faces in internal file right now!!!");
+            }
+            
+            if (externalRepFileName.Length > 0)
+            {
+                var externalRepFile = archive.GetNextDocument(externalRepFileName);
+               
+             
+                //todo hier weiter implementieren
+                var faces = externalRepFile.Root.Elements("Faces");
+                return faces.ToList();
+
+
+            }
+
+            return new List<XElement>();
+
         }
     }
 }

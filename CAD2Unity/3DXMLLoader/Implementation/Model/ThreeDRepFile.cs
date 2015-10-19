@@ -17,7 +17,7 @@ namespace ThreeDXMLLoader.Implementation.Model
         private IDictionary<string, Stream> _files;
         private const string ManifestName = "Manifest.xml";
 
-        private ThreeDRepFile(IDictionary<string, Stream> files)
+        public ThreeDRepFile(IDictionary<string, Stream> files)
         {
             _files = files;
         }

@@ -29,14 +29,7 @@ namespace ThreeDXMLLoader.Implementation.Parser
 
 
             xml = ReadManifest(xml, fileArchive);
-            
-            //todo for testing purpose only remove later
-            stream = new FileStream("C:\\HAW\\cad-in-unity\\3D xml example\\Quad.3dxml", FileMode.Open, FileAccess.Read);
-            reader = XmlReader.Create(stream);
-            reader.MoveToContent();
-            xml = XDocument.Load(reader);
-
-
+                      
 
             var internalModel = new ThreeDXMLImplementation(ParseHelper.GetHeader(xml));
             internalModel.Fill3DRepresentation(ParseAssetRepresentation(xml, fileArchive));
@@ -45,9 +38,9 @@ namespace ThreeDXMLLoader.Implementation.Parser
             return internalModel.ToModel();
         }
 
-        private IList<ThreeDRepFile> ParseAssetRepresentation(XDocument xml, IThreeDArchive fileArchive)
+        private IList<ReferenceRep> ParseAssetRepresentation(XDocument xml, IThreeDArchive archive)
         {
-           return  ParseHelper.Parse3DRepresentation(xml);
+           return  ParseHelper.Parse3DRepresentation(xml, archive);
         }
 
         private XDocument ReadManifest(XDocument manifest, IThreeDArchive fileArchive)
