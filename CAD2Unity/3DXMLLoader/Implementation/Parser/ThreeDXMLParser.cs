@@ -19,7 +19,7 @@ namespace ThreeDXMLLoader.Implementation.Parser
         
         public IModel Parse(Stream stream)
         {
-            IThreeDArchiv fileArchive = null;
+            IThreeDArchive fileArchive = null;
             
             
             var reader = XmlReader.Create(stream);
@@ -39,18 +39,18 @@ namespace ThreeDXMLLoader.Implementation.Parser
 
 
             var internalModel = new ThreeDXMLImplementation(ParseHelper.GetHeader(xml));
-            internalModel.Fill3DRepresentation = ParseAssetRepresentation(xml, fileArchive);
+            internalModel.Fill3DRepresentation(ParseAssetRepresentation(xml, fileArchive));
 
 
             return internalModel.ToModel();
         }
 
-        private IList<ThreeDRepFile> ParseAssetRepresentation(XDocument xml, IThreeDArchiv fileArchive)
+        private IList<ThreeDRepFile> ParseAssetRepresentation(XDocument xml, IThreeDArchive fileArchive)
         {
            return  ParseHelper.Parse3DRepresentation(xml);
         }
 
-        private XDocument ReadManifest(XDocument manifest, IThreeDArchiv fileArchive)
+        private XDocument ReadManifest(XDocument manifest, IThreeDArchive fileArchive)
         {
             return ParseHelper.ReadManifest(manifest, fileArchive);
         }

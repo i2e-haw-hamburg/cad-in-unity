@@ -55,7 +55,7 @@ namespace ThreeDXMLLoader.Implementation.Model
             name = name.ToLower();
             if (!_files.ContainsKey(name))
             {
-                throw new Exception($"File {name} not found in archive.");
+                throw new Exception(@"File {name} not found in archive.");
             }
             var fileStream = _files[name];
             var reader = XmlReader.Create(fileStream);

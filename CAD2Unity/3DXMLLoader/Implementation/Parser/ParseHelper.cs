@@ -58,7 +58,7 @@ namespace ThreeDXMLLoader.Implementation.Parser
         }
 
 
-        public static XDocument ReadManifest(XDocument manifest, IThreeDArchiv archiv)
+        public static XDocument ReadManifest(XDocument manifest, IThreeDArchive archiv)
         {
 
             var mainfile = manifest;
@@ -84,7 +84,6 @@ namespace ThreeDXMLLoader.Implementation.Parser
             {
                 threeDrepresentations.Add(Parse3DTessellatedRepresentation(xml));
             }
-
 
             return threeDrepresentations;
 
