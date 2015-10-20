@@ -16,19 +16,21 @@ namespace ThreeDXMLLoader.Implementation.Parser
     class ThreeDXMLParser : IParser
     {
 
-        
         public IModel Parse(Stream stream)
         {
             var fileArchive = ThreeDXMLFile.Create(stream);
-         
-           var xmlManifest = ReadManifest(fileArchive);
-                      
-
+            var xmlManifest = ReadManifest(fileArchive);
+            // create 3dxml model and fill it with data
             var internalModel = new ThreeDXMLImplementation(ParseHelper.GetHeader(xmlManifest));
             internalModel.Fill3DRepresentation(ParseAssetRepresentation(xmlManifest, fileArchive));
-
-
+            internalModel.ThreeDReferences = ParseReference3D(xmlManifest);
+            // return the model definition
             return internalModel.ToModel();
+        }
+
+        private IList<Reference3D> ParseReference3D(XDocument xmlManifest)
+        {
+            return xmlManifest.Root.Descendants("{http://www.3ds.com/xsd/3DXML}Reference3D").Select(Reference3D.FromXDocument).ToList();
         }
 
         private IList<ReferenceRep> ParseAssetRepresentation(XDocument xml, IThreeDXMLArchive archive)

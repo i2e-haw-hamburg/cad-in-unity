@@ -27,6 +27,8 @@ namespace ThreeDXMLLoader.Implementation.Model
             set{_header = value;}
         }
 
+        public IList<Reference3D> ThreeDReferences { get; set; }
+
         /// <summary>
         /// Parses the 3DXML discription and translate its to the internal IModel representation
         /// </summary>
