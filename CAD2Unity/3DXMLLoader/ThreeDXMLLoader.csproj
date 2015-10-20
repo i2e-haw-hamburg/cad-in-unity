@@ -58,6 +58,7 @@
     <Compile Include="Implementation\Model\IThreeDXMLArchive.cs" />
     <Compile Include="Implementation\Model\ModelInterna\Face.cs" />
     <Compile Include="Implementation\Model\ModelInterna\Supported3DRepFormats.cs" />
+    <Compile Include="Implementation\Model\ModelInterna\Vertex.cs" />
     <Compile Include="Implementation\Model\ReferenceRep.cs" />
     <Compile Include="Implementation\Model\ThreeDXMLFile.cs" />
     <Compile Include="Implementation\Model\ThreeDXMLImplementation.cs" />

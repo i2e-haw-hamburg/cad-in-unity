@@ -18,6 +18,6 @@ namespace ThreeDXMLLoader.Implementation.Model
 
         public string Usage { get; set; }
 
-        public IList<Face> Faces { get; set; }
+        public IList<Vertex> Vertices { get; set; }
     }
 }
