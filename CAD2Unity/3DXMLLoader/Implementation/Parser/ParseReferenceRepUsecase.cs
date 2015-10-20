@@ -1,14 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Xml.Linq;
 using ThreeDXMLLoader.Implementation.Model;
 using ThreeDXMLLoader.Implementation.Model.ModelInterna;
 
 namespace ThreeDXMLLoader.Implementation.Parser
 {
-    class ParseReferenceRepUsecase
+    internal class ParseReferenceRepUsecase
     {
         public static IList<ReferenceRep> Parse3DRepresentation(XDocument xml, IThreeDXMLArchive archive)
         {
@@ -56,12 +54,40 @@ namespace ThreeDXMLLoader.Implementation.Parser
                         break;
                 }
             }
-            var xmlVertices = GetVerticesInXmlFormat(xmlElement, nameOfExternalRepFileDiscription, archive);
+            
 
-            referenceRep.Vertices = ParseVerticesFromXml(xmlVertices);
 
+            referenceRep.Shell = GetShell(xmlElement, nameOfExternalRepFileDiscription, archive);
 
             return referenceRep;
+        }
+
+        private static Shell GetShell(XElement xmlElement, string nameOfExternalRepFileDiscription,
+            IThreeDXMLArchive archive)
+        {
+            XDocument xmlReferenceRep;
+
+            if (nameOfExternalRepFileDiscription != null && nameOfExternalRepFileDiscription.Any())
+            {
+                xmlReferenceRep = archive.GetNextDocument(ParseUtility.CleanUpFileName(nameOfExternalRepFileDiscription));
+            }
+            else
+            {
+                xmlReferenceRep = xmlElement.Document;
+            }
+            
+            var verticies =
+                ParseVerticesFromXml(GetVerticesInXmlFormat(xmlReferenceRep));
+
+            IList<Triangle> triangles = GetTrinalgesFromXml(xmlReferenceRep, verticies);
+
+            return new Shell(triangles);
+
+        }
+
+        private static IList<Triangle> GetTrinalgesFromXml(XDocument xmlReferenceRep, IList<Vertex> verticies)
+        {
+            throw new System.NotImplementedException();
         }
 
         private static IList<Vertex> ParseVerticesFromXml(IList<XElement> xmlVertices)
@@ -70,46 +96,29 @@ namespace ThreeDXMLLoader.Implementation.Parser
 
             foreach (var xmlVertex in xmlVertices)
             {
-                var positions = xmlVertex.Elements("{http://www.3ds.com/xsd/3DXML}Postion");
-                
-                //todo threaden for each position
-                foreach (XElement position in positions)
+                var positionXmlNode = xmlVertex.Element("{http://www.3ds.com/xsd/3DXML}Positions");
+
+                //todo threaden 
+                foreach (var cordinates in positionXmlNode.Value.Split(','))
                 {
-                    foreach (var VARIABLE in position.Value.Split(new Char[]{','}))
-                    {
-                        
-                    }
-                    //var coordinates = position.Split(new Char[]{' '});
-                    //var x = double.Parse(coordinates[0]);
-                    //var y = double.Parse(coordinates[1]);
-                    //var z = double.Parse(coordinates[2]);
-                       
-                    //vertices.Add(new Vertex(x, y, z));
+                    var coordinateAry = cordinates.Split(' ');
+                    var x = double.Parse(coordinateAry[0]);
+                    var y = double.Parse(coordinateAry[1]);
+                    var z = double.Parse(coordinateAry[2]);
+
+                    vertices.Add(new Vertex(x, y, z));
                 }
             }
-           
+
             return vertices;
         }
 
-        private static IList<XElement> GetVerticesInXmlFormat(XElement xmlElemt, string externalRepFileName,
-            IThreeDXMLArchive archive)
+        private static IList<XElement> GetVerticesInXmlFormat(XDocument xmlElemt)
         {
             var vertices = new List<XElement>();
-            if (xmlElemt.Descendants("VertexBuffer").Count() > 0)
-            {
-                vertices.AddRange(xmlElemt.Elements("{http://www.3ds.com/xsd/3DXML}VertexBuffer"));
-            }
 
-            if (externalRepFileName.Length > 0)
-            {
-                var externalRepFile = archive.GetNextDocument(ParseUtility.CleanUpFileNames(externalRepFileName));
-
-
-                vertices.AddRange(externalRepFile.Root.Descendants("{http://www.3ds.com/xsd/3DXML}VertexBuffer"));
-                return vertices;
-            }
-
-            return new List<XElement>();
+            vertices.AddRange(xmlElemt.Elements("{http://www.3ds.com/xsd/3DXML}VertexBuffer"));
+            return vertices;
         }
     }
 }

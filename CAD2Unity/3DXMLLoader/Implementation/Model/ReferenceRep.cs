@@ -17,7 +17,10 @@ namespace ThreeDXMLLoader.Implementation.Model
         public string Version { get; set; }
 
         public string Usage { get; set; }
-
-        public IList<Vertex> Vertices { get; set; }
+       
+        /// <summary>
+        /// maps 3dxmls ids to a shell
+        /// </summary>
+        public Shell Shell{ get; set; }
     }
 }

@@ -80,13 +80,13 @@ namespace ThreeDXMLLoader.Implementation.Parser
 
             if (rootElement != null && !rootElement.IsEmpty)
             {
-                manifest = archiv.GetNextDocument(CleanUpFileNames(rootElement.Value));
+                manifest = archiv.GetNextDocument(CleanUpFileName(rootElement.Value));
             }
 
             return manifest;
         }
 
-        public static string CleanUpFileNames(string filename)
+        public static string CleanUpFileName(string filename)
         {
             return filename.Split(":".ToCharArray()).Last();
         }
