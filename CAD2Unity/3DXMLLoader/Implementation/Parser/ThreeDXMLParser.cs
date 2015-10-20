@@ -24,13 +24,23 @@ namespace ThreeDXMLLoader.Implementation.Parser
             var internalModel = new ThreeDXMLImplementation(ParseUtility.GetHeader(xmlManifest));
             internalModel.Fill3DRepresentation(ParseAssetRepresentation(xmlManifest, fileArchive));
             internalModel.ThreeDReferences = ParseReference3D(xmlManifest);
+            internalModel.ThreeDInstances = ParseInstance3D(xmlManifest);
+            internalModel.InstanceReps = ParseInstanceRep(xmlManifest);
             // return the model definition
             return internalModel.ToModel();
         }
 
-        private IList<Reference3D> ParseReference3D(XDocument xmlManifest)
+        private IList<Reference3D> ParseReference3D(XDocument document)
         {
-            return xmlManifest.Root.Descendants("{http://www.3ds.com/xsd/3DXML}Reference3D").Select(Reference3D.FromXDocument).ToList();
+            return ParseUtility.RootDescendants(document, "Reference3D").Select(ParseReference3DUsecase.FromXDocument).ToList();
+        }
+        private IList<Instance3D> ParseInstance3D(XDocument document)
+        {
+            return ParseUtility.RootDescendants(document, "Instance3D").Select(ParseInstance3DUsecase.FromXDocument).ToList();
+        }
+        private IList<InstanceRep> ParseInstanceRep(XDocument document)
+        {
+            return ParseUtility.RootDescendants(document, "InstanceRep").Select(ParseInstanceRepUsecase.FromXDocument).ToList();
         }
 
         private IList<ReferenceRep> ParseAssetRepresentation(XDocument xml, IThreeDXMLArchive archive)

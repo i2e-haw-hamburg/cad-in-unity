@@ -90,5 +90,38 @@ namespace ThreeDXMLLoader.Implementation.Parser
         {
             return filename.Split(":".ToCharArray()).Last();
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="document"></param>
+        /// <param name="name"></param>
+        /// <returns></returns>
+        public static IEnumerable<XElement> RootDescendants(XDocument document, string name)
+        {
+            return document.Root.Descendants("{http://www.3ds.com/xsd/3DXML}" + name);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="xElement"></param>
+        /// <param name="name"></param>
+        /// <param name="mapping"></param>
+        /// <param name="defaultValue"></param>
+        /// <returns></returns>
+        public static T ValueOfDescendant<T>(XElement xElement, string name, Func<string, T> mapping, T defaultValue) 
+        {
+            var element = xElement.Descendants().FirstOrDefault(x => x.Name.LocalName == name);
+            if (element != null)
+            {
+                return mapping(element.Value);
+            }
+            else
+            {
+                return defaultValue;
+            }
+        }
     }
 }
