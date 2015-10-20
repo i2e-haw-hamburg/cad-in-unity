@@ -54,6 +54,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Implementation\Model\Header.cs" />
+    <Compile Include="Implementation\Model\Instance3D.cs" />
     <Compile Include="Implementation\Model\InstanceRep.cs" />
     <Compile Include="Implementation\Model\IThreeDXMLArchive.cs" />
     <Compile Include="Implementation\Model\ModelInterna\Face.cs" />
@@ -63,8 +64,11 @@
     <Compile Include="Implementation\Model\ReferenceRep.cs" />
     <Compile Include="Implementation\Model\ThreeDXMLFile.cs" />
     <Compile Include="Implementation\Model\ThreeDXMLImplementation.cs" />
-    <Compile Include="Implementation\Parser\ParseUtility.cs" />
+    <Compile Include="Implementation\Parser\ParseInstanceRepUsecase.cs" />
+    <Compile Include="Implementation\Parser\ParseInstance3DUsecase.cs" />
     <Compile Include="Implementation\Parser\ParseManifestUsecase.cs" />
+    <Compile Include="Implementation\Parser\ParseUtility.cs" />
+    <Compile Include="Implementation\Parser\ParseReference3DUsecase.cs" />
     <Compile Include="Implementation\Parser\ParseReferenceRepUsecase.cs" />
     <Compile Include="Implementation\Parser\ThreeDXMLParser.cs" />
     <Compile Include="Interface\ParserFactory.cs" />
