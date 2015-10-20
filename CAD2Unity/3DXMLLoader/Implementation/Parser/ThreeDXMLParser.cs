@@ -21,7 +21,7 @@ namespace ThreeDXMLLoader.Implementation.Parser
             var fileArchive = ThreeDXMLFile.Create(stream);
             var xmlManifest = ReadManifest(fileArchive);
             // create 3dxml model and fill it with data
-            var internalModel = new ThreeDXMLImplementation(ParseHelper.GetHeader(xmlManifest));
+            var internalModel = new ThreeDXMLImplementation(ParseUtility.GetHeader(xmlManifest));
             internalModel.Fill3DRepresentation(ParseAssetRepresentation(xmlManifest, fileArchive));
             internalModel.ThreeDReferences = ParseReference3D(xmlManifest);
             // return the model definition
@@ -35,12 +35,12 @@ namespace ThreeDXMLLoader.Implementation.Parser
 
         private IList<ReferenceRep> ParseAssetRepresentation(XDocument xml, IThreeDXMLArchive archive)
         {
-           return  ParseHelper.Parse3DRepresentation(xml, archive);
+           return  ParseReferenceRepUsecase.Parse3DRepresentation(xml, archive);
         }
 
         private XDocument ReadManifest(IThreeDXMLArchive fileArchive)
         {
-            return ParseHelper.ReadManifest(fileArchive);
+            return ParseUtility.ReadManifest(fileArchive);
         }
 
         public CADType CAD

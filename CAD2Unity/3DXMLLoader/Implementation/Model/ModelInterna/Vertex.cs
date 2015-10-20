@@ -10,5 +10,12 @@ namespace ThreeDXMLLoader.Implementation.Model.ModelInterna
         public double X;
         public double Y;
         public double Z;
+
+        public Vertex(double x, double y, double z)
+        {
+            X = x;
+            Y = y;
+            Z = z;
+        }
     }
 }
