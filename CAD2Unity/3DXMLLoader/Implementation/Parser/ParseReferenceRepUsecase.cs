@@ -78,7 +78,7 @@ namespace ThreeDXMLLoader.Implementation.Parser
             }
 
             var verticies =
-                ParseVerticesFromXml(GetVerticesInXmlFormat(xmlReferenceRep));
+                GetVerticesFromXml(xmlReferenceRep);
 
             var triangles = GetTrinalgesFromXml(xmlReferenceRep, verticies);
 
@@ -87,10 +87,17 @@ namespace ThreeDXMLLoader.Implementation.Parser
 
         private static IList<Triangle> GetTrinalgesFromXml(XDocument xmlReferenceRep, IList<Vertex> verticies)
         {
-            var mostAccurateFaceXmlElement = GetMostAccurateFaceXmlElement(xmlReferenceRep);
+            var trinagles = new List<Triangle>();
 
-            // hier weiter!!!
-            return new List<Triangle>();
+            var mostAccurateFaceXmlElement = GetMostAccurateFaceXmlElement(xmlReferenceRep);
+            var triangleStringAry = mostAccurateFaceXmlElement.Attribute("triangles").Value.Split(' ');
+
+            for (var i = 0; i < triangleStringAry.Length; i += 3)
+            {
+                trinagles.Add(new Triangle(verticies[i], verticies[i + 1], verticies[i + 2]));
+            }
+
+            return trinagles;
         }
 
         private static XElement GetMostAccurateFaceXmlElement(XDocument xmlReferenceRep)
@@ -110,55 +117,58 @@ namespace ThreeDXMLLoader.Implementation.Parser
 
             foreach (var pologonalLOD in xmlReferenceRep.Descendants("{http://www.3ds.com/xsd/3DXML}PolygonalLOD"))
             {
-                //try
-               // {
-                var polyLODAccuracy = double.Parse(pologonalLOD.Attribute("accuracy").Value, CultureInfo.CreateSpecificCulture("en-US"));
+                try
+                {
+                    var polyLODAccuracy = double.Parse(pologonalLOD.Attribute("accuracy").Value,
+                        CultureInfo.CreateSpecificCulture("en-US"));
                     if (polyLODAccuracy < smallestAccuracy)
                     {
-                        smallestAccuracy = polyLODAccuracy; 
-                        xmlFace = pologonalLOD.Descendants("{http://www.3ds.com/xsd/3DXML}Faces").Descendants("{http://www.3ds.com/xsd/3DXML}Face").First();
-                       }
-               // }
-                //catch (FormatException ex)
-               // {
+                        smallestAccuracy = polyLODAccuracy;
+                        xmlFace =
+                            pologonalLOD.Descendants("{http://www.3ds.com/xsd/3DXML}Faces")
+                                .Descendants("{http://www.3ds.com/xsd/3DXML}Face")
+                                .First();
+                    }
+                }
+                catch (FormatException ex)
+                {
                     //TODO log
-                   // Console.Error.WriteLine(
-                   //     "Something went wrong by parsing the PolygonalLOD accuracy attribut. Original exception: " +
-                    //    ex);
-             //   }
+                    Console.Error.WriteLine(
+                        "Something went wrong by parsing the PolygonalLOD accuracy attribut. Original exception: " +
+                        ex);
+                }
             }
 
             return xmlFace;
         }
 
-        private static IList<Vertex> ParseVerticesFromXml(IList<XElement> xmlVertices)
+        private static IList<Vertex> GetVerticesFromXml(XDocument xmlReferenceRep)
         {
+            var vertexPositionsXml = xmlReferenceRep.Descendants("{http://www.3ds.com/xsd/3DXML}Positions");
+            var vertexPostionXml = vertexPositionsXml.OrderBy(x => x.Value.Length).First();
+
             IList<Vertex> vertices = new List<Vertex>();
 
-            foreach (var xmlVertex in xmlVertices)
+            foreach (var cordinates in vertexPostionXml.Value.Split(','))
             {
-                var positionXmlNode = xmlVertex.Element("{http://www.3ds.com/xsd/3DXML}Positions");
+                var coordinateAry = cordinates.Split(' ');
+                var x = double.Parse(coordinateAry[0]);
+                var y = double.Parse(coordinateAry[1]);
+                var z = double.Parse(coordinateAry[2]);
 
-                //todo threaden 
-                foreach (var cordinates in positionXmlNode.Value.Split(','))
-                {
-                    var coordinateAry = cordinates.Split(' ');
-                    var x = double.Parse(coordinateAry[0]);
-                    var y = double.Parse(coordinateAry[1]);
-                    var z = double.Parse(coordinateAry[2]);
-
-                    vertices.Add(new Vertex(x, y, z));
-                }
+                vertices.Add(new Vertex(x, y, z));
             }
 
-            return vertices;
-        }
+            if (vertices.Count == 0)
+            {
+                throw new FormatException(
+                    @"No Positions where found in the given XML document. 
+                    Please make sure the given document discribes a ReferenceRep in 
+                     the tessellated format. The docment is holding the following context" +
+                    xmlReferenceRep);
+            }
 
-        private static IList<XElement> GetVerticesInXmlFormat(XDocument xmlElemt)
-        {
-            var vertices = new List<XElement>();
 
-            vertices.AddRange(xmlElemt.Elements("{http://www.3ds.com/xsd/3DXML}VertexBuffer"));
             return vertices;
         }
     }

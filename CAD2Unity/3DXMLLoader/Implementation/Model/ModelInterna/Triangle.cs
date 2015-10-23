@@ -17,5 +17,7 @@ namespace ThreeDXMLLoader.Implementation.Model.ModelInterna
             V2 = v2;
             V3 = v3;
         }
+
+        
     }
 }
