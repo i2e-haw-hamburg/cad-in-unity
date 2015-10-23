@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Xml.Linq;
 using ThreeDXMLLoader.Implementation.Model;
@@ -54,7 +56,6 @@ namespace ThreeDXMLLoader.Implementation.Parser
                         break;
                 }
             }
-            
 
 
             referenceRep.Shell = GetShell(xmlElement, nameOfExternalRepFileDiscription, archive);
@@ -75,19 +76,59 @@ namespace ThreeDXMLLoader.Implementation.Parser
             {
                 xmlReferenceRep = xmlElement.Document;
             }
-            
+
             var verticies =
                 ParseVerticesFromXml(GetVerticesInXmlFormat(xmlReferenceRep));
 
-            IList<Triangle> triangles = GetTrinalgesFromXml(xmlReferenceRep, verticies);
+            var triangles = GetTrinalgesFromXml(xmlReferenceRep, verticies);
 
             return new Shell(triangles);
-
         }
 
         private static IList<Triangle> GetTrinalgesFromXml(XDocument xmlReferenceRep, IList<Vertex> verticies)
         {
-            throw new System.NotImplementedException();
+            var mostAccurateFaceXmlElement = GetMostAccurateFaceXmlElement(xmlReferenceRep);
+
+            // hier weiter!!!
+            return new List<Triangle>();
+        }
+
+        private static XElement GetMostAccurateFaceXmlElement(XDocument xmlReferenceRep)
+        {
+            var xmlfaces = xmlReferenceRep.Descendants("{http://www.3ds.com/xsd/3DXML}Face");
+            if (xmlfaces.ToList().Count == 0)
+            {
+                throw new ArgumentException("The given xml Document has no face tags, can not find any triangles.");
+            }
+            if (xmlfaces.ToList().Count == 1)
+            {
+                return xmlfaces.First();
+            }
+            XElement xmlFace = null;
+            var smallestAccuracy = double.MaxValue;
+
+
+            foreach (var pologonalLOD in xmlReferenceRep.Descendants("{http://www.3ds.com/xsd/3DXML}PolygonalLOD"))
+            {
+                //try
+               // {
+                var polyLODAccuracy = double.Parse(pologonalLOD.Attribute("accuracy").Value, CultureInfo.CreateSpecificCulture("en-US"));
+                    if (polyLODAccuracy < smallestAccuracy)
+                    {
+                        smallestAccuracy = polyLODAccuracy; 
+                        xmlFace = pologonalLOD.Descendants("{http://www.3ds.com/xsd/3DXML}Faces").Descendants("{http://www.3ds.com/xsd/3DXML}Face").First();
+                       }
+               // }
+                //catch (FormatException ex)
+               // {
+                    //TODO log
+                   // Console.Error.WriteLine(
+                   //     "Something went wrong by parsing the PolygonalLOD accuracy attribut. Original exception: " +
+                    //    ex);
+             //   }
+            }
+
+            return xmlFace;
         }
 
         private static IList<Vertex> ParseVerticesFromXml(IList<XElement> xmlVertices)

@@ -7,8 +7,8 @@ namespace ThreeDXMLLoader.Implementation.Model
 {
     class InstanceRep
     {
-        public int Id { get; }
-        public string Name { get; }
+        public int Id { get; private set; }
+        public string Name { get; private set; }
         public int AggregatedBy { get; set; }
         public int InstanceOf { get; set; }
 
