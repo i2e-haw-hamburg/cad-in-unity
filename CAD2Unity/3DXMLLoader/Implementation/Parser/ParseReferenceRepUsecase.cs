@@ -5,11 +5,29 @@ using System.Linq;
 using System.Xml.Linq;
 using ThreeDXMLLoader.Implementation.Model;
 using ThreeDXMLLoader.Implementation.Model.ModelInterna;
+using ThreeDXMLLoader.Interface.Exception;
 
 namespace ThreeDXMLLoader.Implementation.Parser
 {
     internal class ParseReferenceRepUsecase
     {
+        /// <summary>
+        ///     The main entrance point for parsing a 3Dreferencerep. The current supported representation is "Tessellated".
+        /// </summary>
+        /// <param name="xml">the xml manifest of the 3dxml model</param>
+        /// <param name="archive">The unziped file archive of the 3dxml model</param>
+        /// <throw name="FormatNotSupportedException">
+        ///     If the 3DReferenceRep is in a not supported representation this Eception will
+        ///     be thrown.
+        /// </throw>
+        /// <throw name="ArgumentException">
+        ///     If the given XDocument does not hold any information about 3DReferenceReps this
+        ///     exception will be thrown.
+        /// </throw>
+        /// <returns>
+        ///     A list of ReferenceRep objects, with shell informaton, Id, Referencetype and other fields: Name, Version, Usage.
+        ///     Note that the other fields can be empty or null.
+        /// </returns>
         public static IList<ReferenceRep> Parse3DRepresentation(XDocument xml, IThreeDXMLArchive archive)
         {
             IList<ReferenceRep> threeDRepresentations = new List<ReferenceRep>();
@@ -25,15 +43,39 @@ namespace ThreeDXMLLoader.Implementation.Parser
                     threeDRepresentations.Add(Parse3DTessellatedRepresentation(rep, archive));
                 }
             }
+            else
+            {
+                var format = xmlReferenceReps.Descendants("ReferenceRep").First().Attribute("format").Value;
+                if (format.Length <= 0)
+                    throw new ArgumentException(
+                        "The given file does not hold any information about Reference3DReps, please make sure the file archive is valid.");
+
+                throw new FormatNotSupportedException(string.Format(
+                    @"The importer cant understand the given 3DReferenceRep format {0}.
+                                                    Try using a representation with a supported format or contact the developers."
+                    , format));
+            }
 
             return threeDRepresentations;
         }
 
-        private static ReferenceRep Parse3DTessellatedRepresentation(XElement xmlElement, IThreeDXMLArchive archive)
+
+        /// <summary>
+        ///     This methods is the main entry point for 3DReferenceReps in the Tessellated format.
+        ///     If the Rep has LOD information the most accurate mesh will be parsed the rest will be droped.
+        /// </summary>
+        /// <param name="threeDReferenceRepXmlElement">The 3DReferenceRep xml representation with all attributes and sup nodes</param>
+        /// <param name="archive">The unziped file archive of the 3dxml model</param>
+        /// <returns>
+        ///     A ReferenceRep objects, with shell informaton, Id, Referencetype and other fields: Name, Version, Usage.
+        ///     Note that the other fields can be empty or null.
+        /// </returns>
+        private static ReferenceRep Parse3DTessellatedRepresentation(XElement threeDReferenceRepXmlElement,
+            IThreeDXMLArchive archive)
         {
             var nameOfExternalRepFileDiscription = "";
             var referenceRep = new ReferenceRep();
-            foreach (var attribut in xmlElement.Attributes())
+            foreach (var attribut in threeDReferenceRepXmlElement.Attributes())
             {
                 switch (attribut.Name.LocalName.ToLower())
                 {
@@ -58,12 +100,23 @@ namespace ThreeDXMLLoader.Implementation.Parser
             }
 
 
-            referenceRep.Shell = GetShell(xmlElement, nameOfExternalRepFileDiscription, archive);
+            referenceRep.Shell = GetShell(threeDReferenceRepXmlElement, nameOfExternalRepFileDiscription, archive);
 
             return referenceRep;
         }
 
-        private static Shell GetShell(XElement xmlElement, string nameOfExternalRepFileDiscription,
+        /// <summary>
+        ///     Parses the shell information for a 3DReferenceRep out of the xml document into the internal representation.
+        ///     the methods opens external 3DReferenceRep files automatically.
+        /// </summary>
+        /// <param name="threeDReferenceRepXmlElement">The 3DReferenceRep xml representation with all attributes and sup nodes</param>
+        /// <param name="nameOfExternalRepFileDiscription">
+        ///     name of the external 3DReferenceRep xml file, is empty if the
+        ///     representation is in the same file.
+        /// </param>
+        /// <param name="archive">The unziped file archive of the 3dxml model</param>
+        /// <returns>A Shell of a Mesh, which is holding the trinagular information.</returns>
+        private static Shell GetShell(XElement threeDReferenceRepXmlElement, string nameOfExternalRepFileDiscription,
             IThreeDXMLArchive archive)
         {
             XDocument xmlReferenceRep;
@@ -74,7 +127,7 @@ namespace ThreeDXMLLoader.Implementation.Parser
             }
             else
             {
-                xmlReferenceRep = xmlElement.Document;
+                xmlReferenceRep = threeDReferenceRepXmlElement.Document;
             }
 
             var verticies =
@@ -85,11 +138,20 @@ namespace ThreeDXMLLoader.Implementation.Parser
             return new Shell(triangles);
         }
 
-        private static IList<Triangle> GetTrinalgesFromXml(XDocument xmlReferenceRep, IList<Vertex> verticies)
+        /// <summary>
+        ///     Parsing each triangle of the 3DReferenceRep Shell. The triangles, in the xml document, are consistent of vertice
+        ///     references,
+        ///     which are describing a dot in a counterclockwise coordination system.
+        /// </summary>
+        /// <param name="threeDReferenceRepXmlElement">The 3DReferenceRep xml representation with all attributes and sup nodes</param>
+        /// <param name="verticies">List of dots in a 3D counterclockwise coordination system.</param>
+        /// <returns>List of tringales. A trinagle has 3 vertex references, which represents the edges.</returns>
+        private static IList<Triangle> GetTrinalgesFromXml(XDocument threeDReferenceRepXmlElement,
+            IList<Vertex> verticies)
         {
             var trinagles = new List<Triangle>();
 
-            var mostAccurateFaceXmlElement = GetMostAccurateFaceXmlElement(xmlReferenceRep);
+            var mostAccurateFaceXmlElement = GetMostAccurateFaceXmlElement(threeDReferenceRepXmlElement);
             var triangleStringAry = mostAccurateFaceXmlElement.Attribute("triangles").Value.Split(' ');
 
             for (var i = 0; i < triangleStringAry.Length; i += 3)
@@ -100,9 +162,16 @@ namespace ThreeDXMLLoader.Implementation.Parser
             return trinagles;
         }
 
-        private static XElement GetMostAccurateFaceXmlElement(XDocument xmlReferenceRep)
+        /// <summary>
+        ///     Searches the 3DReferenceRep xml document for the face tag. The face-xml-tag connects the edge of a triangle with a
+        ///     vertex point.
+        ///     If the face supports LOD the most accurate face will be parsed. The other LOD information are dropped.
+        /// </summary>
+        /// <param name="threeDReferenceRepXmlElement">The 3DReferenceRep xml representation with all attributes and sup nodes</param>
+        /// <returns>Xml Representation of the most accurate face tag</returns>
+        private static XElement GetMostAccurateFaceXmlElement(XDocument threeDReferenceRepXmlElement)
         {
-            var xmlfaces = xmlReferenceRep.Descendants("{http://www.3ds.com/xsd/3DXML}Face");
+            var xmlfaces = threeDReferenceRepXmlElement.Descendants("{http://www.3ds.com/xsd/3DXML}Face");
             if (xmlfaces.ToList().Count == 0)
             {
                 throw new ArgumentException("The given xml Document has no face tags, can not find any triangles.");
@@ -111,19 +180,23 @@ namespace ThreeDXMLLoader.Implementation.Parser
             {
                 return xmlfaces.First();
             }
+
+
             XElement xmlFace = null;
-            var smallestAccuracy = double.MaxValue;
+            var largestAccuracy = double.MinValue;
 
 
-            foreach (var pologonalLOD in xmlReferenceRep.Descendants("{http://www.3ds.com/xsd/3DXML}PolygonalLOD"))
+            foreach (
+                var pologonalLOD in
+                    threeDReferenceRepXmlElement.Descendants("{http://www.3ds.com/xsd/3DXML}PolygonalLOD"))
             {
                 try
                 {
                     var polyLODAccuracy = double.Parse(pologonalLOD.Attribute("accuracy").Value,
                         CultureInfo.CreateSpecificCulture("en-US"));
-                    if (polyLODAccuracy < smallestAccuracy)
+                    if (polyLODAccuracy > largestAccuracy)
                     {
-                        smallestAccuracy = polyLODAccuracy;
+                        largestAccuracy = polyLODAccuracy;
                         xmlFace =
                             pologonalLOD.Descendants("{http://www.3ds.com/xsd/3DXML}Faces")
                                 .Descendants("{http://www.3ds.com/xsd/3DXML}Face")
@@ -142,6 +215,14 @@ namespace ThreeDXMLLoader.Implementation.Parser
             return xmlFace;
         }
 
+
+        /// <summary>
+        /// Parses vertices from the xmmlReference xml document. In order to do that the vertexBuffer will ne parsed. 
+        /// If the document has more than one vertexBuffer the biggest one will be parsed. In case LOD Information are stored in the
+        /// xml referenceRep this case is important. 
+        /// </summary>
+        /// <param name="xmlReferenceRep"></param>
+        /// <returns>List of Verticies </returns>
         private static IList<Vertex> GetVerticesFromXml(XDocument xmlReferenceRep)
         {
             var vertexPositionsXml = xmlReferenceRep.Descendants("{http://www.3ds.com/xsd/3DXML}Positions");

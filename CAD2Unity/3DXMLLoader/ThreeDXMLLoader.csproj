@@ -72,6 +72,7 @@
     <Compile Include="Implementation\Parser\ParseReference3DUsecase.cs" />
     <Compile Include="Implementation\Parser\ParseReferenceRepUsecase.cs" />
     <Compile Include="Implementation\Parser\ThreeDXMLParser.cs" />
+    <Compile Include="Interface\Exception\FormatNotSupportedException.cs" />
     <Compile Include="Interface\ParserFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
