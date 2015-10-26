@@ -2,16 +2,17 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using AForge.Math;
 
 namespace ThreeDXMLLoader.Implementation.Model.ModelInterna
 {
     class Triangle
     {
-        public Vertex V1;
-        public Vertex V2;
-        public Vertex V3;
+        public Vector3 V1;
+        public Vector3 V2;
+        public Vector3 V3;
 
-        public Triangle(Vertex v1, Vertex v2, Vertex v3)
+        public Triangle(Vector3 v1, Vector3 v2, Vector3 v3)
         {
             V1 = v1;
             V2 = v2;

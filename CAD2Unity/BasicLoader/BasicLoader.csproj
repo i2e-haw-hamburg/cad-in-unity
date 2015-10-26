@@ -57,6 +57,7 @@
     <Compile Include="Interface\ILoader.cs" />
     <Compile Include="Interface\IModel.cs" />
     <Compile Include="Interface\IParser.cs" />
+    <Compile Include="Interface\IPart.cs" />
     <Compile Include="Interface\LoaderFactory.cs" />
     <Compile Include="Interface\ParsingException.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
