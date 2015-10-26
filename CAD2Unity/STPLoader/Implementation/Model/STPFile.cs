@@ -25,7 +25,7 @@ namespace STPLoader.Implementation.Model
         private readonly IList<Facet> _facets;
         private readonly IList<Vector3> _vertices;
         private readonly IList<int> _triangles;
-        private readonly IList<IModel> _models;
+        private readonly IList<IPart> _parts;
 
         /// <summary>
         /// 
@@ -70,9 +70,9 @@ namespace STPLoader.Implementation.Model
             return _data.Get<T>(id);
         }
 
-        public IList<IModel> Models
+        public IList<IPart> Parts
         {
-            get { return _models; }
+            get { return _parts; }
         }
 
         public IConstraint GetConstraint(IModel a, IModel b)

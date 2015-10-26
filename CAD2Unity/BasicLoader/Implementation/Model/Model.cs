@@ -3,7 +3,6 @@ using System.Linq;
 using AForge.Math;
 using BasicLoader.Implementation.Model.Constraint;
 using BasicLoader.Interface;
-using CADLoader;
 using CADLoader.Implementation.Parser;
 
 namespace BasicLoader.Implementation.Model
@@ -12,20 +11,16 @@ namespace BasicLoader.Implementation.Model
     {
         private IList<Facet> _facets;
         private string _name;
-        private IList<IModel> _models;
-
-        //TODO dont understand, dont compile
-        //public IList<IModel> Models => new List<IModel> {this};
-
-        //new Implementation from the the line above.
-        public IList<IModel> Models {
-            get { return _models; }
-            private set { _models = value; }
+        private IList<IPart> _parts;
+        
+        public IList<IPart> Parts {
+            get { return _parts; }
+            set { _parts = value; }
         }
 
         public Model()
         {
-            _models = new List<IModel>(){this};
+            _parts = new List<IPart>();
         }
 
 
@@ -67,5 +62,7 @@ namespace BasicLoader.Implementation.Model
             get { return _name; }
             set { _name = value; }
         }
+
+        public string Author { get; set; }
     }
 }

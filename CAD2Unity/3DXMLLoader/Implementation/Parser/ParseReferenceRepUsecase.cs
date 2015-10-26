@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Xml.Linq;
+using AForge.Math;
 using ThreeDXMLLoader.Implementation.Model;
 using ThreeDXMLLoader.Implementation.Model.ModelInterna;
 
@@ -38,7 +39,7 @@ namespace ThreeDXMLLoader.Implementation.Parser
                 switch (attribut.Name.LocalName.ToLower())
                 {
                     case "id":
-                        referenceRep.Id = attribut.Value;
+                        referenceRep.Id = Convert.ToInt32(attribut.Value);
                         break;
                     case "name":
                         referenceRep.Name = attribut.Value;
@@ -85,19 +86,19 @@ namespace ThreeDXMLLoader.Implementation.Parser
             return new Shell(triangles);
         }
 
-        private static IList<Triangle> GetTrinalgesFromXml(XDocument xmlReferenceRep, IList<Vertex> verticies)
+        private static IList<Triangle> GetTrinalgesFromXml(XDocument xmlReferenceRep, IList<Vector3> verticies)
         {
-            var trinagles = new List<Triangle>();
+            var triangles = new List<Triangle>();
 
             var mostAccurateFaceXmlElement = GetMostAccurateFaceXmlElement(xmlReferenceRep);
             var triangleStringAry = mostAccurateFaceXmlElement.Attribute("triangles").Value.Split(' ');
 
             for (var i = 0; i < triangleStringAry.Length; i += 3)
             {
-                trinagles.Add(new Triangle(verticies[i], verticies[i + 1], verticies[i + 2]));
+                triangles.Add(new Triangle(verticies[i], verticies[i + 1], verticies[i + 2]));
             }
 
-            return trinagles;
+            return triangles;
         }
 
         private static XElement GetMostAccurateFaceXmlElement(XDocument xmlReferenceRep)
@@ -142,21 +143,21 @@ namespace ThreeDXMLLoader.Implementation.Parser
             return xmlFace;
         }
 
-        private static IList<Vertex> GetVerticesFromXml(XDocument xmlReferenceRep)
+        private static IList<Vector3> GetVerticesFromXml(XDocument xmlReferenceRep)
         {
             var vertexPositionsXml = xmlReferenceRep.Descendants("{http://www.3ds.com/xsd/3DXML}Positions");
             var vertexPostionXml = vertexPositionsXml.OrderBy(x => x.Value.Length).First();
 
-            IList<Vertex> vertices = new List<Vertex>();
+            var vertices = new List<Vector3>();
 
             foreach (var cordinates in vertexPostionXml.Value.Split(','))
             {
                 var coordinateAry = cordinates.Split(' ');
-                var x = double.Parse(coordinateAry[0]);
-                var y = double.Parse(coordinateAry[1]);
-                var z = double.Parse(coordinateAry[2]);
+                var x = float.Parse(coordinateAry[0]);
+                var y = float.Parse(coordinateAry[1]);
+                var z = float.Parse(coordinateAry[2]);
 
-                vertices.Add(new Vertex(x, y, z));
+                vertices.Add(new Vector3(x, y, z));
             }
 
             if (vertices.Count == 0)

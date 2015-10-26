@@ -14,7 +14,7 @@ namespace BasicLoader
         /// <summary>
         /// 
         /// </summary>
-        IList<IModel> Models { get; }
+        IList<IPart> Parts { get; }
         /// <summary>
         /// 
         /// </summary>

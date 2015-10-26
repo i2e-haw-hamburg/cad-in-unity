@@ -60,7 +60,7 @@
     <Compile Include="Implementation\Model\ModelInterna\Shell.cs" />
     <Compile Include="Implementation\Model\ModelInterna\Supported3DRepFormats.cs" />
     <Compile Include="Implementation\Model\ModelInterna\Triangle.cs" />
-    <Compile Include="Implementation\Model\ModelInterna\Vertex.cs" />
+    <Compile Include="Implementation\Model\Part.cs" />
     <Compile Include="Implementation\Model\Reference3D.cs" />
     <Compile Include="Implementation\Model\ReferenceRep.cs" />
     <Compile Include="Implementation\Model\ThreeDXMLFile.cs" />
