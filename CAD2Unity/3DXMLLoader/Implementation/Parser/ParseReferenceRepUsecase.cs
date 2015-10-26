@@ -148,16 +148,24 @@ namespace ThreeDXMLLoader.Implementation.Parser
         /// <param name="verticies">List of dots in a 3D counterclockwise coordination system.</param>
         /// <returns>List of tringales. A trinagle has 3 vertex references, which represents the edges.</returns>
         private static IList<Triangle> GetTrinalgesFromXml(XDocument threeDReferenceRepXmlElement,
-            IList<Vertex> verticies)
+            IList<Vector3> verticies)
         {
             var triangles = new List<Triangle>();
 
             var mostAccurateFaceXmlElement = GetMostAccurateFaceXmlElement(threeDReferenceRepXmlElement);
-            var triangleStringAry = mostAccurateFaceXmlElement.Attribute("triangles").Value.Split(' ');
-
+            String[] triangleStringAry = mostAccurateFaceXmlElement.Attribute("triangles").Value.Trim().Split(' ');
+          
             for (var i = 0; i < triangleStringAry.Length; i += 3)
             {
-                triangles.Add(new Triangle(verticies[i], verticies[i + 1], verticies[i + 2]));
+                var xIndex = int.Parse(triangleStringAry[i]);
+                var yIndex = int.Parse(triangleStringAry[i+1]);
+                var zIndex = int.Parse(triangleStringAry[i+2]);
+
+                var xDot = verticies[xIndex];
+                var yDot = verticies[yIndex];
+                var zDot = verticies[zIndex];
+
+                triangles.Add(new Triangle(xDot, yDot, zDot));
             }
 
             return triangles;
@@ -184,7 +192,7 @@ namespace ThreeDXMLLoader.Implementation.Parser
 
 
             XElement xmlFace = null;
-            var largestAccuracy = double.MinValue;
+            var smallestAccuracy = double.MaxValue;
 
 
             foreach (
@@ -195,9 +203,9 @@ namespace ThreeDXMLLoader.Implementation.Parser
                 {
                     var polyLODAccuracy = double.Parse(pologonalLOD.Attribute("accuracy").Value,
                         CultureInfo.CreateSpecificCulture("en-US"));
-                    if (polyLODAccuracy > largestAccuracy)
+                    if (polyLODAccuracy < smallestAccuracy)
                     {
-                        largestAccuracy = polyLODAccuracy;
+                        smallestAccuracy = polyLODAccuracy;
                         xmlFace =
                             pologonalLOD.Descendants("{http://www.3ds.com/xsd/3DXML}Faces")
                                 .Descendants("{http://www.3ds.com/xsd/3DXML}Face")
@@ -224,7 +232,7 @@ namespace ThreeDXMLLoader.Implementation.Parser
         /// </summary>
         /// <param name="xmlReferenceRep"></param>
         /// <returns>List of Verticies </returns>
-        private static IList<Vertex> GetVerticesFromXml(XDocument xmlReferenceRep)
+        private static IList<Vector3> GetVerticesFromXml(XDocument xmlReferenceRep)
         {
             var vertexPositionsXml = xmlReferenceRep.Descendants("{http://www.3ds.com/xsd/3DXML}Positions");
             var vertexPostionXml = vertexPositionsXml.OrderBy(x => x.Value.Length).First();
