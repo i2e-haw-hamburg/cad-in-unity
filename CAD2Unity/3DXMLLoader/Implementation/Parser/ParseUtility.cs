@@ -5,7 +5,6 @@ using System.Xml;
 using System.Xml.Linq;
 using System.Xml.XPath;
 using ThreeDXMLLoader.Implementation.Model;
-using ThreeDXMLLoader.Implementation.Model.ModelInterna;
 
 namespace ThreeDXMLLoader.Implementation.Parser
 {
@@ -24,19 +23,35 @@ namespace ThreeDXMLLoader.Implementation.Parser
         }
 
         /// <summary>
+        ///     Searches the given XDocument for header information and returns a Header object.
+        ///     A Header object is holding the following information:
+        ///     title(nullable),
+        ///     author(nullable),
+        ///     schema(nullable),
+        ///     schemaversion,
+        ///     created(nullable).
         /// </summary>
-        /// <param name="xml"></param>
+        /// <param name="xmlDocument">A xmlDocument document with a valid header.</param>
+        /// <throws name="ArgumentException">if no header tag is found in the given document
+        ///  a ArgumentException will be thrown.
+        /// </throws>
         /// <returns></returns>
-        public static Header GetHeader(XDocument xml)
+        public static Header GetHeader(XDocument xmlDocument)
         {
             var nsmgr = new XmlNamespaceManager(new NameTable());
             nsmgr.AddNamespace("3dxml", "http://www.3ds.com/xsd/3DXML");
 
             var header = new Header();
 
-            var xmlHeader = xml.Root.Element("{http://www.3ds.com/xsd/3DXML}Header").Elements().ToList();
+            var xmlHeader = xmlDocument.Root.Element("{http://www.3ds.com/xsd/3DXML}Header").Elements();
 
-            foreach (var elem in xmlHeader)
+            if (xmlHeader == null)
+            {
+                throw new ArgumentException(@"The given XML file seems to hold no header information.
+                                              Please make sure that you are using the correct XDocument.");
+            }
+
+            foreach (var elem in xmlHeader.ToList())
             {
                 switch (elem.Value.ToLower())
                 {
@@ -71,7 +86,11 @@ namespace ThreeDXMLLoader.Implementation.Parser
             return header;
         }
 
-
+        /// <summary>
+        /// Reads the manifest(the entry point for the 3Dxml parsing) and datamines where to start. 
+        /// </summary>
+        /// <param name="archive">The unziped file archive of the 3dxml model</param>
+        /// <returns></returns>
         public static XDocument ReadManifest(IThreeDXMLArchive archiv)
         {
             var manifest = archiv.GetManifest();
@@ -92,7 +111,6 @@ namespace ThreeDXMLLoader.Implementation.Parser
         }
 
         /// <summary>
-        /// 
         /// </summary>
         /// <param name="document"></param>
         /// <param name="name"></param>
@@ -103,7 +121,6 @@ namespace ThreeDXMLLoader.Implementation.Parser
         }
 
         /// <summary>
-        /// 
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="xElement"></param>
@@ -111,17 +128,14 @@ namespace ThreeDXMLLoader.Implementation.Parser
         /// <param name="mapping"></param>
         /// <param name="defaultValue"></param>
         /// <returns></returns>
-        public static T ValueOfDescendant<T>(XElement xElement, string name, Func<string, T> mapping, T defaultValue) 
+        public static T ValueOfDescendant<T>(XElement xElement, string name, Func<string, T> mapping, T defaultValue)
         {
             var element = xElement.Descendants().FirstOrDefault(x => x.Name.LocalName == name);
             if (element != null)
             {
                 return mapping(element.Value);
             }
-            else
-            {
-                return defaultValue;
-            }
+            return defaultValue;
         }
     }
 }
