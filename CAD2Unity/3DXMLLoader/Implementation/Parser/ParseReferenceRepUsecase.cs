@@ -189,12 +189,10 @@ namespace ThreeDXMLLoader.Implementation.Parser
             {
                 return xmlfaces.First();
             }
-
-
+            
             XElement xmlFace = null;
             var smallestAccuracy = double.MaxValue;
-
-
+            
             foreach (
                 var pologonalLOD in
                     threeDReferenceRepXmlElement.Descendants("{http://www.3ds.com/xsd/3DXML}PolygonalLOD"))
@@ -220,11 +218,9 @@ namespace ThreeDXMLLoader.Implementation.Parser
                         ex);
                 }
             }
-
             return xmlFace;
         }
-
-
+        
         /// <summary>
         /// Parses vertices from the xmmlReference xml document. In order to do that the vertexBuffer will ne parsed. 
         /// If the document has more than one vertexBuffer the biggest one will be parsed. In case LOD Information are stored in the
