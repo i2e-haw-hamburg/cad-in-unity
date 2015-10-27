@@ -223,7 +223,8 @@ namespace ThreeDXMLLoader.Implementation.Parser
             var list = new List<Triangle>();
             for (var i = 1; i < indices.Count - 1; i++)
             {
-                list.Add(new Triangle(verticies[indices[i-1]], verticies[indices[i]], verticies[indices[i + 1]]));
+                var even = i%2 == 0;
+                list.Add(new Triangle(verticies[indices[i]], verticies[indices[even ? i-1 : i+1]], verticies[indices[even ? i+1 : i-1]]));
             }
             return list;
         }
