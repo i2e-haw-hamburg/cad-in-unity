@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
 using System.Xml.Linq;
 using AForge.Math;
@@ -121,6 +120,7 @@ namespace ThreeDXMLLoader.Implementation.Parser
             IThreeDXMLArchive archive)
         {
             XDocument xmlReferenceRep;
+            IList<Triangle> triangles = new List<Triangle>();
 
             if (nameOfExternalRepFileDiscription != null && nameOfExternalRepFileDiscription.Any())
             {
@@ -130,52 +130,64 @@ namespace ThreeDXMLLoader.Implementation.Parser
             {
                 xmlReferenceRep = threeDReferenceRepXmlElement.Document;
             }
+            var bagReps = GetBagRepXmlElements(xmlReferenceRep);
+            foreach (var bagRep in bagReps)
+            {
+                IList<XElement> faces =
+                    bagRep.Descendants("{http://www.3ds.com/xsd/3DXML}Faces")
+                        .Where(x => x.Parent.Name.LocalName.ToLower() != "polygonallod")
+                        .ToList();
+                var verticies = GetVerticesFromXml(bagRep);
 
-            var verticies =
-                GetVerticesFromXml(xmlReferenceRep);
+                foreach (var face in faces.Elements("{http://www.3ds.com/xsd/3DXML}Face"))
+                {
+                    triangles = triangles.Concat(GetTrianglesFromXml(face, verticies)).ToList();
+                    triangles = triangles.Concat(GetFansFromXml(face, verticies)).ToList();
+                    triangles = triangles.Concat(GetStripsFromXml(face, verticies)).ToList();
+                }
+            }
 
-            var triangles = GetTrianglesFromXml(xmlReferenceRep, verticies)
-                .Concat(GetFansFromXml(xmlReferenceRep, verticies))
-                .Concat(GetStripsFromXml(xmlReferenceRep, verticies));
-
-            return new Shell(triangles.ToList());
+            return new Shell(triangles);
         }
 
         /// <summary>
-        ///     Parsing each triangle of the 3DReferenceRep Shell. The triangles, in the xml document, are consistent of vertice
-        ///     references,
+        ///     Parsing each triangle of the 3DReferenceRep Shell. The triangles, in the xml document,
+        ///     are consistent of vertice references,
         ///     which are describing a dot in a counterclockwise coordination system.
         /// </summary>
         /// <param name="threeDReferenceRepXmlElement">The 3DReferenceRep xml representation with all attributes and sup nodes</param>
         /// <param name="verticies">List of dots in a 3D counterclockwise coordination system.</param>
         /// <returns>List of tringales. A trinagle has 3 vertex references, which represents the edges.</returns>
-        private static IList<Triangle> GetTrianglesFromXml(XDocument threeDReferenceRepXmlElement,
-            IList<Vector3> verticies)
+        private static IList<Triangle> GetTrianglesFromXml(XElement face, IList<Vector3> verticies)
         {
-            var mostAccurateFaceXmlElement = GetMostAccurateFaceXmlElement(threeDReferenceRepXmlElement);
-            var xAttribute = mostAccurateFaceXmlElement.Attribute("triangles");
+            IList<Triangle> triangles = new List<Triangle>();
+            var xAttribute = face.Attribute("triangles");
             if (xAttribute == null)
             {
-                return new List<Triangle>();
+                return triangles;
             }
-            return xAttribute.Value.Trim().Split(' ').Chunk(3)
-                .Select(x => x.Select(y => Convert.ToInt32(y)))
-                .Select(x => x.ToList())
-                .Select(x => new Triangle(verticies[x[0]], verticies[x[1]], verticies[x[2]]))
-                .ToList();
+            var faceStringAry = face.Attribute("triangles").Value.Trim().Split(' ').ToArray();
+            for (int i = 0; i < faceStringAry.Length; i+=3)
+            {
+
+                var x = verticies[int.Parse(faceStringAry[i])];
+                var y = verticies[int.Parse(faceStringAry[i+1])];
+                var z = verticies[int.Parse(faceStringAry[i+2])];
+                triangles.Add(new Triangle(x, y, z));
+            }
+
+
+            return triangles;
         }
 
         /// <summary>
-        ///     
         /// </summary>
-        /// <param name="threeDReferenceRepXmlElement">The 3DReferenceRep xml representation with all attributes and sup nodes</param>
+        /// <param name="face">The 3DReferenceRep xml representation with all attributes and sup nodes</param>
         /// <param name="verticies">List of dots in a 3D counterclockwise coordination system.</param>
         /// <returns>List of triangles. A triangle has 3 vertex references, which represents the edges.</returns>
-        private static IList<Triangle> GetFansFromXml(XDocument threeDReferenceRepXmlElement,
-            IList<Vector3> verticies)
+        private static IList<Triangle> GetFansFromXml(XElement face, IList<Vector3> verticies)
         {
-            var mostAccurateFaceXmlElement = GetMostAccurateFaceXmlElement(threeDReferenceRepXmlElement);
-            var xAttribute = mostAccurateFaceXmlElement.Attribute("fans");
+            var xAttribute = face.Attribute("fans");
             if (xAttribute == null)
             {
                 return new List<Triangle>();
@@ -187,16 +199,14 @@ namespace ThreeDXMLLoader.Implementation.Parser
         }
 
         /// <summary>
-        ///     
         /// </summary>
-        /// <param name="threeDReferenceRepXmlElement">The 3DReferenceRep xml representation with all attributes and sup nodes</param>
+        /// <param name="face">The 3DReferenceRep xml representation with all attributes and sup nodes</param>
         /// <param name="verticies">List of dots in a 3D counterclockwise coordination system.</param>
         /// <returns>List of triangles. A triangle has 3 vertex references, which represents the edges.</returns>
-        private static IList<Triangle> GetStripsFromXml(XDocument threeDReferenceRepXmlElement,
+        private static IList<Triangle> GetStripsFromXml(XElement face,
             IList<Vector3> verticies)
         {
-            var mostAccurateFaceXmlElement = GetMostAccurateFaceXmlElement(threeDReferenceRepXmlElement);
-            var xAttribute = mostAccurateFaceXmlElement.Attribute("strips");
+            var xAttribute = face.Attribute("strips");
             if (xAttribute == null)
             {
                 return new List<Triangle>();
@@ -213,7 +223,7 @@ namespace ThreeDXMLLoader.Implementation.Parser
             var list = new List<Triangle>();
             for (var i = 1; i < indices.Count - 1; i++)
             {
-                list.Add(new Triangle(verticies[center], verticies[indices[i]], verticies[indices[i+1]]));
+                list.Add(new Triangle(verticies[center], verticies[indices[i]], verticies[indices[i + 1]]));
             }
             return list;
         }
@@ -223,7 +233,7 @@ namespace ThreeDXMLLoader.Implementation.Parser
             var list = new List<Triangle>();
             for (var i = 1; i < indices.Count - 1; i++)
             {
-                list.Add(new Triangle(verticies[indices[i-1]], verticies[indices[i]], verticies[indices[i + 1]]));
+                list.Add(new Triangle(verticies[indices[i - 1]], verticies[indices[i]], verticies[indices[i + 1]]));
             }
             return list;
         }
@@ -235,7 +245,7 @@ namespace ThreeDXMLLoader.Implementation.Parser
         /// </summary>
         /// <param name="threeDReferenceRepXmlElement">The 3DReferenceRep xml representation with all attributes and sup nodes</param>
         /// <returns>Xml Representation of the most accurate face tag</returns>
-        private static XElement GetMostAccurateFaceXmlElement(XDocument threeDReferenceRepXmlElement)
+        private static IList<XElement> GetBagRepXmlElements(XDocument threeDReferenceRepXmlElement)
         {
             var xmlfaces = threeDReferenceRepXmlElement.Descendants("{http://www.3ds.com/xsd/3DXML}Face");
             if (xmlfaces.ToList().Count == 0)
@@ -244,51 +254,52 @@ namespace ThreeDXMLLoader.Implementation.Parser
             }
             if (xmlfaces.ToList().Count == 1)
             {
-                return xmlfaces.First();
+                return xmlfaces.ToList();
             }
-            
-            XElement xmlFace = null;
-            var smallestAccuracy = double.MaxValue;
-            
-            foreach (
-                var pologonalLOD in
-                    threeDReferenceRepXmlElement.Descendants("{http://www.3ds.com/xsd/3DXML}PolygonalLOD"))
-            {
-                try
-                {
-                    var polyLODAccuracy = double.Parse(pologonalLOD.Attribute("accuracy").Value,
-                        CultureInfo.CreateSpecificCulture("en-US"));
-                    if (polyLODAccuracy < smallestAccuracy)
-                    {
-                        smallestAccuracy = polyLODAccuracy;
-                        xmlFace =
-                            pologonalLOD.Descendants("{http://www.3ds.com/xsd/3DXML}Faces")
-                                .Descendants("{http://www.3ds.com/xsd/3DXML}Face")
-                                .First();
-                    }
-                }
-                catch (FormatException ex)
-                {
-                    //TODO log
-                    Console.Error.WriteLine(
-                        "Something went wrong by parsing the PolygonalLOD accuracy attribut. Original exception: " +
-                        ex);
-                }
-            }
-            return xmlFace;
+
+            //if the ReferenceRep has LOD more then one face is present in the file.
+            //We have to find the face without accuracy to get the most detailed mesh.
+
+            return threeDReferenceRepXmlElement.Descendants("{http://www.3ds.com/xsd/3DXML}Rep")
+                .Where(FlattenBagReps).Where(FacesWithoutPolyLod)
+                .ToList();
         }
-        
-        /// <summary>
-        /// Parses vertices from the xmmlReference xml document. In order to do that the vertexBuffer will ne parsed. 
-        /// If the document has more than one vertexBuffer the biggest one will be parsed. In case LOD Information are stored in the
-        /// xml referenceRep this case is important. 
-        /// </summary>
-        /// <param name="xmlReferenceRep"></param>
-        /// <returns>List of Verticies </returns>
-        private static IList<Vector3> GetVerticesFromXml(XDocument xmlReferenceRep)
+
+        private static bool FlattenBagReps(XElement arg)
         {
-            var vertexPositionsXml = xmlReferenceRep.Descendants("{http://www.3ds.com/xsd/3DXML}Positions");
-            var vertexPostionXml = vertexPositionsXml.OrderBy(x => x.Value.Length).First();
+            return arg.Elements().All(x => x.Name.LocalName != "Rep");
+        }
+
+        private static bool FacesWithoutPolyLod(XElement arg)
+        {
+            return
+                arg.Descendants("{http://www.3ds.com/xsd/3DXML}Faces")
+                    .Any(x => x.Parent.Name.LocalName != "PolygonalLOD");
+        }
+
+        /// <summary>
+        ///     Parses vertices from the xmmlReference xml document. In order to do that the vertexBuffer will ne parsed.
+        ///     If the document has more than one vertexBuffer the biggest one will be parsed. In case LOD Information are stored
+        ///     in the
+        ///     xml referenceRep this case is important.
+        /// </summary>
+        /// <param name="bagRep"></param>
+        /// <returns>List of Verticies </returns>
+        private static IList<Vector3> GetVerticesFromXml(XElement bagRep)
+        {
+            var vertexPositionsXml =
+                bagRep.Descendants("{http://www.3ds.com/xsd/3DXML}Positions")
+                    .Where(x => x.Parent.Name.LocalName == "VertexBuffer");
+
+            if (vertexPositionsXml.Count() > 1)
+            {
+                throw new ArgumentException(
+                    string.Format(@"Something is wrong with your BagRep in your referenceRepFile. Root name is {0}, 
+                                    there should not be more then one <Position> tag.",
+                        bagRep.Document.Root.Name.LocalName));
+            }
+
+            var vertexPostionXml = vertexPositionsXml.First();
 
             var vertices = new List<Vector3>();
 
@@ -308,7 +319,7 @@ namespace ThreeDXMLLoader.Implementation.Parser
                     @"No Positions where found in the given XML document. 
                     Please make sure the given document discribes a ReferenceRep in 
                      the tessellated format. The docment is holding the following context" +
-                    xmlReferenceRep);
+                    bagRep);
             }
 
 
