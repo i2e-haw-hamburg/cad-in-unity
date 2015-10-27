@@ -134,9 +134,11 @@ namespace ThreeDXMLLoader.Implementation.Parser
             var verticies =
                 GetVerticesFromXml(xmlReferenceRep);
 
-            var triangles = GetTrinalgesFromXml(xmlReferenceRep, verticies);
+            var triangles = GetTrianglesFromXml(xmlReferenceRep, verticies)
+                .Concat(GetFansFromXml(xmlReferenceRep, verticies))
+                .Concat(GetStripsFromXml(xmlReferenceRep, verticies));
 
-            return new Shell(triangles);
+            return new Shell(triangles.ToList());
         }
 
         /// <summary>
@@ -147,28 +149,83 @@ namespace ThreeDXMLLoader.Implementation.Parser
         /// <param name="threeDReferenceRepXmlElement">The 3DReferenceRep xml representation with all attributes and sup nodes</param>
         /// <param name="verticies">List of dots in a 3D counterclockwise coordination system.</param>
         /// <returns>List of tringales. A trinagle has 3 vertex references, which represents the edges.</returns>
-        private static IList<Triangle> GetTrinalgesFromXml(XDocument threeDReferenceRepXmlElement,
+        private static IList<Triangle> GetTrianglesFromXml(XDocument threeDReferenceRepXmlElement,
             IList<Vector3> verticies)
         {
-            var triangles = new List<Triangle>();
-
             var mostAccurateFaceXmlElement = GetMostAccurateFaceXmlElement(threeDReferenceRepXmlElement);
-            String[] triangleStringAry = mostAccurateFaceXmlElement.Attribute("triangles").Value.Trim().Split(' ');
-          
-            for (var i = 0; i < triangleStringAry.Length; i += 3)
+            var xAttribute = mostAccurateFaceXmlElement.Attribute("triangles");
+            if (xAttribute == null)
             {
-                var xIndex = int.Parse(triangleStringAry[i]);
-                var yIndex = int.Parse(triangleStringAry[i+1]);
-                var zIndex = int.Parse(triangleStringAry[i+2]);
-
-                var xDot = verticies[xIndex];
-                var yDot = verticies[yIndex];
-                var zDot = verticies[zIndex];
-
-                triangles.Add(new Triangle(xDot, yDot, zDot));
+                return new List<Triangle>();
             }
+            return xAttribute.Value.Trim().Split(' ').Chunk(3)
+                .Select(x => x.Select(y => Convert.ToInt32(y)))
+                .Select(x => x.ToList())
+                .Select(x => new Triangle(verticies[x[0]], verticies[x[1]], verticies[x[2]]))
+                .ToList();
+        }
 
-            return triangles;
+        /// <summary>
+        ///     
+        /// </summary>
+        /// <param name="threeDReferenceRepXmlElement">The 3DReferenceRep xml representation with all attributes and sup nodes</param>
+        /// <param name="verticies">List of dots in a 3D counterclockwise coordination system.</param>
+        /// <returns>List of triangles. A triangle has 3 vertex references, which represents the edges.</returns>
+        private static IList<Triangle> GetFansFromXml(XDocument threeDReferenceRepXmlElement,
+            IList<Vector3> verticies)
+        {
+            var mostAccurateFaceXmlElement = GetMostAccurateFaceXmlElement(threeDReferenceRepXmlElement);
+            var xAttribute = mostAccurateFaceXmlElement.Attribute("fans");
+            if (xAttribute == null)
+            {
+                return new List<Triangle>();
+            }
+            return xAttribute.Value.Trim().Split(',')
+                .Select(x => x.Split(' ').Select(y => Convert.ToInt32(y)).ToList())
+                .SelectMany(x => FanToTriangles(x, verticies))
+                .ToList();
+        }
+
+        /// <summary>
+        ///     
+        /// </summary>
+        /// <param name="threeDReferenceRepXmlElement">The 3DReferenceRep xml representation with all attributes and sup nodes</param>
+        /// <param name="verticies">List of dots in a 3D counterclockwise coordination system.</param>
+        /// <returns>List of triangles. A triangle has 3 vertex references, which represents the edges.</returns>
+        private static IList<Triangle> GetStripsFromXml(XDocument threeDReferenceRepXmlElement,
+            IList<Vector3> verticies)
+        {
+            var mostAccurateFaceXmlElement = GetMostAccurateFaceXmlElement(threeDReferenceRepXmlElement);
+            var xAttribute = mostAccurateFaceXmlElement.Attribute("strips");
+            if (xAttribute == null)
+            {
+                return new List<Triangle>();
+            }
+            return xAttribute.Value.Trim().Split(',')
+                .Select(x => x.Split(' ').Select(y => Convert.ToInt32(y)).ToList())
+                .SelectMany(x => StripToTriangles(x, verticies))
+                .ToList();
+        }
+
+        private static IList<Triangle> FanToTriangles(IList<int> indices, IList<Vector3> verticies)
+        {
+            var center = indices[0];
+            var list = new List<Triangle>();
+            for (var i = 1; i < indices.Count - 1; i++)
+            {
+                list.Add(new Triangle(verticies[center], verticies[indices[i]], verticies[indices[i+1]]));
+            }
+            return list;
+        }
+
+        private static IList<Triangle> StripToTriangles(IList<int> indices, IList<Vector3> verticies)
+        {
+            var list = new List<Triangle>();
+            for (var i = 1; i < indices.Count - 1; i++)
+            {
+                list.Add(new Triangle(verticies[indices[i-1]], verticies[indices[i]], verticies[indices[i + 1]]));
+            }
+            return list;
         }
 
         /// <summary>
@@ -260,6 +317,18 @@ namespace ThreeDXMLLoader.Implementation.Parser
 
 
             return vertices;
+        }
+    }
+
+    public static class Extension
+    {
+        public static IEnumerable<IEnumerable<T>> Chunk<T>(this IEnumerable<T> source, int chunksize)
+        {
+            while (source.Any())
+            {
+                yield return source.Take(chunksize);
+                source = source.Skip(chunksize);
+            }
         }
     }
 }
