@@ -6,12 +6,30 @@ using BasicLoader;
 namespace ThreeDXMLLoader.Implementation.Model
 {
     /// <summary>
-    /// An implementation for a 3DXML model.
+    /// An implementation for a 3DXml model.
     /// </summary>
     class ThreeDXMLImplementation
     {
-        private Header _header;
+        /// <summary>
+        /// the header of the 3DXml, with all mandatory and some optional fields
+        /// </summary>
+        public Header Header
+        {
+            get { return _header; }
+            set { _header = value; }
+        }
 
+        public IList<Reference3D> ThreeDReferences { get; set; }
+        public IList<Instance3D> ThreeDInstances { get; set; }
+        public IList<InstanceRep> InstanceReps { get; set; }
+        public IList<ReferenceRep> ReferenceReps { get; set; }
+
+        private Header _header;
+        /// <summary>
+        /// creates a new 3DXmlImplementation instance, except the header all other fields
+        /// are empty and will be initialized via setter injection.
+        /// </summary>
+        /// <param name="header"></param>
         public ThreeDXMLImplementation(Header header)
         {
             _header = header;
@@ -20,18 +38,7 @@ namespace ThreeDXMLLoader.Implementation.Model
         /// <summary>
         /// 
         /// </summary>
-        public Header Header
-        {
-            get{return _header;}
-            set{_header = value;}
-        }
-
-        public IList<Reference3D> ThreeDReferences { get; set; }
-        public IList<Instance3D> ThreeDInstances { get; set; }
-        public IList<InstanceRep> InstanceReps { get; set; }
-        public IList<ReferenceRep> ReferenceReps { get; set; }
-
-        public T Get<T>(int id)
+       public T Get<T>(int id)
         {
             var type = typeof (T);
             if (type == typeof (Reference3D))
@@ -56,7 +63,7 @@ namespace ThreeDXMLLoader.Implementation.Model
         /// <summary>
         /// Parses the 3DXML discription and translate its to the internal IModel representation
         /// </summary>
-        /// <returns></returns>
+        /// <returns>A model implementation</returns>
         public IModel ToModel()
         {
             var model = new BasicLoader.Implementation.Model.Model
