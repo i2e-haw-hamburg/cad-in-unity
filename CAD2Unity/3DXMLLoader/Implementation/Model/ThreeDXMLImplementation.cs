@@ -64,7 +64,10 @@ namespace ThreeDXMLLoader.Implementation.Model
                 Name = Header.Name,
                 Author = Header.Author,
                 Parts =
-                    InstanceReps.Select(x => x.InstanceOf)
+                    ThreeDInstances.Select(x => x.InstanceOf)
+                        .Select(Aggregated<InstanceRep>)
+                        .Where(x => x != null)
+                        .Select(x => x.InstanceOf)
                         .Select(Get<ReferenceRep>)
                         .Select(Part.FromReferenceRep)
                         .ToList()
@@ -72,7 +75,22 @@ namespace ThreeDXMLLoader.Implementation.Model
 
             return model;
         }
-        
+
+        private T Aggregated<T>(int aggregatedBy)
+        {
+            var type = typeof(T);
+            if (type == typeof(Instance3D))
+            {
+                var el = ThreeDInstances.FirstOrDefault(x => x.AggregatedBy == aggregatedBy);
+                return el == null ? default(T) : (T)Convert.ChangeType(el, type);
+            }
+            else if (type == typeof(InstanceRep))
+            {
+                var el = InstanceReps.FirstOrDefault(x => x.AggregatedBy == aggregatedBy);
+                return el == null ? default(T) : (T) Convert.ChangeType(el, type);
+            }
+            throw new Exception("Type for R not found.");
+        }
 
     }
 }
