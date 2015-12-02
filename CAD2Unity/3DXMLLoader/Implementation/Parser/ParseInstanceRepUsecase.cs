@@ -13,9 +13,11 @@ namespace ThreeDXMLLoader.Implementation.Parser
         {
             var id = int.Parse(xElement.Attribute(XName.Get("id")).Value);
             var name = xElement.Attribute(XName.Get("name")).Value;
-            var instance = new InstanceRep(id, name);
-            instance.AggregatedBy = ParseUtility.ValueOfDescendant(xElement, "IsAggregatedBy", Convert.ToInt32, 0);
-            instance.InstanceOf = ParseUtility.ValueOfDescendant(xElement, "IsInstanceOf", Convert.ToInt32, 0);
+            var instance = new InstanceRep(id, name)
+            {
+                AggregatedBy = ParseUtility.ValueOfDescendant(xElement, "IsAggregatedBy", Convert.ToInt32, 0),
+                InstanceOf = ParseUtility.ValueOfDescendant(xElement, "IsInstanceOf", Convert.ToInt32, 0)
+            };
             return instance;
         }
     }

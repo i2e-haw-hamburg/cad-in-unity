@@ -66,37 +66,62 @@ namespace ThreeDXMLLoader.Implementation.Model
         /// <returns>A model implementation</returns>
         public IModel ToModel()
         {
+            var product = Get<Reference3D>(1);
+            var mainParts = Aggregated<Instance3D>(product.Id)
+                .Select(x => x.InstanceOf)
+                .Select(Get<Reference3D>);
+            var mainPartShells = mainParts.Select(x => Aggregated<InstanceRep>(x.Id))
+                .SelectMany(x => x)
+                .Select(x => Get<ReferenceRep>(x.InstanceOf))
+                .Select(Part.FromReferenceRep).ToList();
+            var others = mainParts.Select(x => Aggregated<Instance3D>(x.Id))
+                .SelectMany(x => x).ToList();
+            var subPartShells = others
+                .Select(x => Get<Reference3D>(x.InstanceOf))
+                .Select(x => Aggregated<InstanceRep>(x.Id))
+                .SelectMany(x => x)
+                .Select(x => Get<ReferenceRep>(x.InstanceOf))
+                .Select(Part.FromReferenceRep).ToList();
             var model = new BasicLoader.Implementation.Model.Model
             {
                 Name = Header.Name,
                 Author = Header.Author,
-                Parts =
-                    ThreeDInstances.Select(x => x.InstanceOf)
-                        .Select(Aggregated<InstanceRep>)
-                        .Where(x => x != null)
-                        .Select(x => x.InstanceOf)
-                        .Select(Get<ReferenceRep>)
-                        .Select(Part.FromReferenceRep)
-                        .ToList()
+                Parts = mainPartShells.Concat(subPartShells).ToList()
             };
 
             return model;
         }
 
-        private T Aggregated<T>(int aggregatedBy)
+        private IList<T> InstanceOf<T>(int instanceOf)
         {
             var type = typeof(T);
             if (type == typeof(Instance3D))
             {
-                var el = ThreeDInstances.FirstOrDefault(x => x.AggregatedBy == aggregatedBy);
-                return el == null ? default(T) : (T)Convert.ChangeType(el, type);
+                var el = ThreeDInstances.Where(x => x.InstanceOf == instanceOf);
+                return el.Select(x => (T)Convert.ChangeType(x, type)).ToList();
             }
             else if (type == typeof(InstanceRep))
             {
-                var el = InstanceReps.FirstOrDefault(x => x.AggregatedBy == aggregatedBy);
-                return el == null ? default(T) : (T) Convert.ChangeType(el, type);
+                var el = InstanceReps.Where(x => x.InstanceOf == instanceOf);
+                return el.Select(x => (T)Convert.ChangeType(x, type)).ToList();
             }
-            throw new Exception("Type for R not found.");
+            throw new Exception("Type for T not found.");
+        }
+
+        private IList<T> Aggregated<T>(int aggregatedBy)
+        {
+            var type = typeof(T);
+            if (type == typeof(Instance3D))
+            {
+                var el = ThreeDInstances.Where(x => x.AggregatedBy == aggregatedBy);
+                return el.Select(x => (T)Convert.ChangeType(x, type)).ToList();
+            }
+            else if (type == typeof(InstanceRep))
+            {
+                var el = InstanceReps.Where(x => x.AggregatedBy == aggregatedBy);
+                return el.Select(x => (T)Convert.ChangeType(x, type)).ToList();
+            }
+            throw new Exception("Type for T not found.");
         }
 
     }

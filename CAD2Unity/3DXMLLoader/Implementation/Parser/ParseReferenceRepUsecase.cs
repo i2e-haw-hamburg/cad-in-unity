@@ -170,9 +170,9 @@ namespace ThreeDXMLLoader.Implementation.Parser
             for (int i = 0; i < faceStringAry.Length; i+=3)
             {
 
-                var x = verticies[int.Parse(faceStringAry[i])];
-                var y = verticies[int.Parse(faceStringAry[i+1])];
-                var z = verticies[int.Parse(faceStringAry[i+2])];
+                var x = verticies[int.Parse(faceStringAry[i + 1])];
+                var y = verticies[int.Parse(faceStringAry[i])];
+                var z = verticies[int.Parse(faceStringAry[i + 2])];
                 triangles.Add(new Triangle(x, y, z));
             }
 
@@ -223,7 +223,7 @@ namespace ThreeDXMLLoader.Implementation.Parser
             var list = new List<Triangle>();
             for (var i = 1; i < indices.Count - 1; i++)
             {
-                list.Add(new Triangle(verticies[center], verticies[indices[i]], verticies[indices[i + 1]]));
+                list.Add(new Triangle(verticies[center], verticies[indices[i+1]], verticies[indices[i]]));
             }
             return list;
         }
@@ -231,9 +231,13 @@ namespace ThreeDXMLLoader.Implementation.Parser
         private static IList<Triangle> StripToTriangles(IList<int> indices, IList<Vector3> verticies)
         {
             var list = new List<Triangle>();
+            var op = true;
             for (var i = 1; i < indices.Count - 1; i++)
             {
-                list.Add(new Triangle(verticies[indices[i - 1]], verticies[indices[i]], verticies[indices[i + 1]]));
+                var prev = i - 1;
+                var next = i + 1;
+                list.Add(new Triangle(verticies[indices[i]], verticies[indices[op ? prev : next]], verticies[indices[op ? next : prev]]));
+                op = !op;
             }
             return list;
         }

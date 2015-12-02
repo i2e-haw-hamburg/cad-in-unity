@@ -21,11 +21,13 @@ namespace ThreeDXMLLoader.Implementation.Parser
             var fileArchive = ThreeDXMLFile.Create(stream);
             var xmlManifest = ReadManifest(fileArchive);
             // create 3dxml model and fill it with data
-            var internalModel = new ThreeDXMLImplementation(ParseUtility.GetHeader(xmlManifest));
-            internalModel.ReferenceReps = ParseAssetRepresentation(xmlManifest, fileArchive);
-            internalModel.ThreeDReferences = ParseReference3D(xmlManifest);
-            internalModel.ThreeDInstances = ParseInstance3D(xmlManifest);
-            internalModel.InstanceReps = ParseInstanceRep(xmlManifest);
+            var internalModel = new ThreeDXMLImplementation(ParseUtility.GetHeader(xmlManifest))
+            {
+                ReferenceReps = ParseAssetRepresentation(xmlManifest, fileArchive),
+                ThreeDReferences = ParseReference3D(xmlManifest),
+                ThreeDInstances = ParseInstance3D(xmlManifest),
+                InstanceReps = ParseInstanceRep(xmlManifest)
+            };
             // return the model definition
             return internalModel.ToModel();
         }
