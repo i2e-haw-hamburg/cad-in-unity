@@ -22,6 +22,11 @@ namespace STPLoader.Implementation.Parser
         {
             return new StpFile { Header = ParseHeader(FindHeader(stream)), Data = ParseData(FindData(stream)) };
         }
+   
+        public IModel Parse(ILoader loader)
+        {
+            return Parse(loader.Load());
+        }
 
         /// <summary>
         /// 
@@ -54,8 +59,11 @@ namespace STPLoader.Implementation.Parser
             throw new NotImplementedException();
         }
 
-        public CADType CAD => CADType.STP;
-        
+        public CADType CAD
+        {
+            get { return CADType.STP; }
+        }
+
         /// <summary>
         /// 
         /// </summary>

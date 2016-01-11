@@ -4,18 +4,17 @@ using AForge.Math;
 using BasicLoader.Interface;
 using CADLoader.Implementation.Parser;
 
-namespace CADLoader
+namespace BasicLoader
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public interface IModel
     {
         /// <summary>
         /// 
         /// </summary>
-        string Name { get; }
-        /// <summary>
-        /// 
-        /// </summary>
-        IList<IModel> Models { get; }
+        IList<IPart> Parts { get; }
         /// <summary>
         /// 
         /// </summary>
@@ -35,5 +34,9 @@ namespace CADLoader
         /// 
         /// </summary>
         IList<int> Triangles { get; }
+        /// <summary>
+        /// 
+        /// </summary>
+        string Name { get; }
     }
 }

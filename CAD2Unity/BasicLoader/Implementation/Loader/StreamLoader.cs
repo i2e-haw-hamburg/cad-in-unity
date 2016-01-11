@@ -1,8 +1,7 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
 using CADLoader;
 
-namespace STLLoader.Implementation.Loader
+namespace BasicLoader.Implementation.Loader
 {
     /// <summary>
     /// Stream loader.

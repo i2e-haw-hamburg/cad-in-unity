@@ -20,6 +20,14 @@ namespace STLLoader
             return new Model {Facets = facets.ToList()};
         }
 
-        public CADType CAD => CADType.STL;
+        public IModel Parse(ILoader loader)
+        {
+            return Parse(loader.Load());
+        }
+
+        public CADType CAD
+        {
+            get { return CADType.STL; }
+        }
     }
 }

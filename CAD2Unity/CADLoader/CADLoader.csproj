@@ -43,6 +43,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\3DXMLLoader\ThreeDXMLLoader.csproj">
+      <Project>{ef6d97a4-60bc-4e28-8999-0f38b08cfd1f}</Project>
+      <Name>ThreeDXMLLoader</Name>
+    </ProjectReference>
     <ProjectReference Include="..\BasicLoader\BasicLoader.csproj">
       <Project>{03158c5f-56f3-4abc-ac2c-3315aae66cd8}</Project>
       <Name>BasicLoader</Name>
@@ -58,7 +62,7 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>xcopy /i /e /s /y /f "$(TargetDir)*" "C:\Users\squad\git\simple_view\Simple View\Assets\Libraries"</PostBuildEvent>
+    <PostBuildEvent>xcopy /i /e /s /y /f "$(TargetDir)*" "C:\simple-view\Simple View\Assets\Libraries"</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -3,7 +3,6 @@ using System.Linq;
 using AForge.Math;
 using BasicLoader.Implementation.Model.Constraint;
 using BasicLoader.Interface;
-using CADLoader;
 using CADLoader.Implementation.Parser;
 
 namespace BasicLoader.Implementation.Model
@@ -12,13 +11,18 @@ namespace BasicLoader.Implementation.Model
     {
         private IList<Facet> _facets;
         private string _name;
-
-        public Model(string name="Model")
-        {
-            _name = name;
+        private IList<IPart> _parts;
+        
+        public IList<IPart> Parts {
+            get { return _parts; }
+            set { _parts = value; }
         }
 
-        public IList<IModel> Models => new List<IModel> {this};
+        public Model()
+        {
+            _parts = new List<IPart>();
+        }
+
 
         public IConstraint GetConstraint(IModel a, IModel b)
         {
@@ -43,13 +47,22 @@ namespace BasicLoader.Implementation.Model
             get { return Facets.SelectMany(x => x.Verticies.ToArray()).ToList(); }
         }
 
-        public IList<int> Triangles => Enumerable.Range(0, Facets.Count() * 3).ToList();
+        public IList<int> Triangles
+        {
+            get { return Enumerable.Range(0, Facets.Count()*3).ToList(); }
+        }
 
         public override string ToString()
         {
-            return $"Model with {_facets.Count} facets";
+            return @"Model with {_facets.Count} facets";
+        }
+        
+        public string Name
+        {
+            get { return _name; }
+            set { _name = value; }
         }
 
-        public string Name => _name;
+        public string Author { get; set; }
     }
 }
