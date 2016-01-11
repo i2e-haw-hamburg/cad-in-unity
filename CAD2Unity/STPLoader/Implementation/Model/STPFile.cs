@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using AForge.Math;
+using BasicLoader;
 using BasicLoader.Interface;
 using CADLoader;
 using CADLoader.Implementation.Parser;
@@ -20,6 +21,11 @@ namespace STPLoader.Implementation.Model
         /// 
         /// </summary>
 		private StpData _data;
+
+        private readonly IList<Facet> _facets;
+        private readonly IList<Vector3> _vertices;
+        private readonly IList<int> _triangles;
+        private readonly IList<IPart> _parts;
 
         /// <summary>
         /// 
@@ -64,15 +70,35 @@ namespace STPLoader.Implementation.Model
             return _data.Get<T>(id);
         }
 
-        public IList<IModel> Models { get; }
+        public IList<IPart> Parts
+        {
+            get { return _parts; }
+        }
+
         public IConstraint GetConstraint(IModel a, IModel b)
         {
             throw new NotImplementedException();
         }
 
-        public IList<Facet> Facets { get; }
-        public IList<Vector3> Vertices { get; }
-        public IList<int> Triangles { get; }
+        public IList<Facet> Facets
+        {
+            get { return _facets; }
+        }
+
+        public IList<Vector3> Vertices
+        {
+            get { return _vertices; }
+        }
+
+        public IList<int> Triangles
+        {
+            get { return _triangles; }
+        }
+
+        public string Name
+        {
+            get { return Header.Name.Name; }
+        }
 	}
 
 }

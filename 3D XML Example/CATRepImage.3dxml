@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Model_3dxml xmlns="http://www.3ds.com/xsd/3DXML" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xlink="http://www.w3.org/1999/xlink">
+	<Header>
+		<SchemaVersion>4.3</SchemaVersion>
+		<Title>3D XML File</Title>
+		<Author>PVO</Author>
+		<Generator>CATIA V5</Generator>
+		<Created>2009-05-20</Created>
+	</Header>
+	<CATRepImage>
+		<CATRepresentationImage id="13" associatedFile="urn:3DXML:concrete.jpg" xsi:type="CATRepresentationImageType" name="concrete" format="jpg">
+			<PLM_ExternalID>concrete</PLM_ExternalID>
+			<V_PrimaryMimeType>jpg</V_PrimaryMimeType>
+			<V_PrimaryFileName>concrete.jpg</V_PrimaryFileName>
+		</CATRepresentationImage>
+		<CATRepresentationImage id="41" associatedFile="urn:3DXML:dashboard.jpg" xsi:type="CATRepresentationImageType" name="dashboard" format="jpg">
+			<PLM_ExternalID>dashboard</PLM_ExternalID>
+			<V_PrimaryMimeType>jpg</V_PrimaryMimeType>
+			<V_PrimaryFileName>dashboard.jpg</V_PrimaryFileName>
+		</CATRepresentationImage>
+	</CATRepImage>
+</Model_3dxml>

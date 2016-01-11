@@ -11,7 +11,7 @@
     <AssemblyName>BasicLoader</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <TargetFrameworkProfile />
+    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -57,7 +57,9 @@
     <Compile Include="Interface\ILoader.cs" />
     <Compile Include="Interface\IModel.cs" />
     <Compile Include="Interface\IParser.cs" />
+    <Compile Include="Interface\IPart.cs" />
     <Compile Include="Interface\LoaderFactory.cs" />
+    <Compile Include="Interface\ParsingException.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

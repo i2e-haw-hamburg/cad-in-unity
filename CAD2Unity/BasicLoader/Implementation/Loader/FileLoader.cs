@@ -1,9 +1,7 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
 using CADLoader;
-using Microsoft.Win32.SafeHandles;
 
-namespace CADLoader.Implementation.Loader
+namespace BasicLoader.Implementation.Loader
 {
     /// <summary>
     /// File loader.
