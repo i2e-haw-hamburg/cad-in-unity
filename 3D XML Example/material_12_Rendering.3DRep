@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Osm xmlns="http://www.3ds.com/xsd/osm.xsd">
+	<Feature Alias="RenderingRootFeature" Id="1" StartUp="RenderingRootFeature"/>
+	<Feature Alias="RenderingFeature" Id="2" StartUp="RenderingFeature" Aggregating="1">
+		<Attr Name="AmbientCoef" Type="double" Value="0.4"/>
+		<Attr Name="AmbientColor" Type="double" Value="[0.804167,0.804167,0.804167]"/>
+		<Attr Name="DiffuseCoef" Type="double" Value="0.8"/>
+		<Attr Name="DiffuseColor" Type="double" Value="[0.804167,0.804167,0.804167]"/>
+		<Attr Name="SpecularCoef" Type="double" Value="0"/>
+		<Attr Name="SpecularColor" Type="double" Value="[0.804167,0.804167,0.804167]"/>
+		<Attr Name="EmissiveCoef" Type="double" Value="0"/>
+		<Attr Name="EmissiveColor" Type="double" Value="[1,1,1]"/>
+		<Attr Name="BlendColor" Type="double" Value="[1,1,1]"/>
+		<Attr Name="SpecularExponent" Type="double" Value="0"/>
+		<Attr Name="Transparency" Type="double" Value="0"/>
+		<Attr Name="Reflectivity" Type="double" Value="0"/>
+		<Attr Name="Refraction" Type="double" Value="1"/>
+		<Attr Name="MappingType" Type="int" Value="1"/>
+		<Attr Name="PreviewType" Type="int" Value="0"/>
+		<Attr Name="TranslationU" Type="double" Value="0"/>
+		<Attr Name="TranslationV" Type="double" Value="0"/>
+		<Attr Name="Rotation" Type="double" Value="0"/>
+		<Attr Name="ScaleU" Type="double" Value="1"/>
+		<Attr Name="ScaleV" Type="double" Value="1"/>
+		<Attr Name="FlipU" Type="boolean" Value="false"/>
+		<Attr Name="FlipV" Type="boolean" Value="false"/>
+		<Attr Name="TextureDimension" Type="int" Value="2"/>
+		<Attr Name="TextureFunction" Type="int" Value="1"/>
+		<Attr Name="AlphaTest" Type="boolean" Value="false"/>
+		<Attr Name="Filtering" Type="int" Value="1"/>
+		<Attr Name="WrappingModeU" Type="int" Value="1"/>
+		<Attr Name="WrappingModeV" Type="int" Value="1"/>
+		<Attr Name="TextureImage" Type="external" Value="urn:3DXML:CATRepImage.3dxml#13"/>
+	</Feature>
+</Osm>

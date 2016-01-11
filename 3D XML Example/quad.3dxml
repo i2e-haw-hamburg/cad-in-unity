@@ -1,0 +1,300 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Model_3dxml xmlns="http://www.3ds.com/xsd/3DXML" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xlink="http://www.w3.org/1999/xlink">
+	<Header>
+		<SchemaVersion>4.3</SchemaVersion>
+		<Title>Quad 3D XML File</Title>
+		<Author>PVO</Author>
+		<Generator>CATIA V5</Generator>
+		<Created>2009-05-20</Created>
+	</Header>
+	<ProductStructure root="1">
+		<Reference3D xsi:type="Reference3DType" id="1" name="Quad"/>
+		<Instance3D xsi:type="Instance3DType" id="2" name="Chassis.1">
+			<IsAggregatedBy>1</IsAggregatedBy>
+			<IsInstanceOf>3</IsInstanceOf>
+			<RelativeMatrix>-0.999998758094916 -0.000925691206832413 0.0012755016513907 0.000925144187916242 -0.999999479866544 -0.000429388996252629 0.00127589846957742 -0.000428208440052808 0.999999094359933 514.150667388203 229.237978545785 -0.68033621320667</RelativeMatrix>
+		</Instance3D>
+		<Reference3D xsi:type="Reference3DType" id="3" name="Chassis"/>
+		<InstanceRep xsi:type="InstanceRepType" id="5" name="Chassis_InstanceRep">
+			<IsAggregatedBy>3</IsAggregatedBy>
+			<IsInstanceOf>4</IsInstanceOf>
+		</InstanceRep>
+		<ReferenceRep xsi:type="ReferenceRepType" id="4" name="Chassis_ReferenceRep" format="TESSELLATED" version="1.2" associatedFile="urn:3DXML:Chassis.3DRep">
+			<PLM_ExternalID>Chassis_ReferenceRep_ReferenceRep</PLM_ExternalID>
+			<V_discipline>Design</V_discipline>
+			<V_usage>3DShape</V_usage>
+			<V_nature>1</V_nature>
+		</ReferenceRep>
+		<Instance3D xsi:type="Instance3DType" id="6" name="Axle Assembly.2">
+			<IsAggregatedBy>1</IsAggregatedBy>
+			<IsInstanceOf>7</IsInstanceOf>
+			<RelativeMatrix>-0.999727308394535 0.00599923048831989 -0.0225680766530022 -0.00596384174772193 -0.999980879390697 -0.0016350671704951 -0.0225774542824454 -0.00150002886369454 0.999743971460487 50.4442023383658 420.198951706047 -27.7739307759604</RelativeMatrix>
+		</Instance3D>
+		<Reference3D xsi:type="Reference3DType" id="7" name="Axle Assembly"/>
+		<Instance3D xsi:type="Instance3DType" id="8" name="Wheel.1">
+			<IsAggregatedBy>7</IsAggregatedBy>
+			<IsInstanceOf>9</IsInstanceOf>
+			<RelativeMatrix>1 0 0 0 1 0 0 0 1 -0.000299999999999301 -137.788525156015 0.00119999999999365</RelativeMatrix>
+		</Instance3D>
+		<Reference3D xsi:type="Reference3DType" id="9" name="Wheel"/>
+		<InstanceRep xsi:type="InstanceRepType" id="11" name="Wheel_InstanceRep">
+			<IsAggregatedBy>9</IsAggregatedBy>
+			<IsInstanceOf>10</IsInstanceOf>
+		</InstanceRep>
+		<ReferenceRep xsi:type="ReferenceRepType" id="10" name="Wheel_ReferenceRep" format="TESSELLATED" version="1.2" associatedFile="urn:3DXML:Wheel.3DRep">
+			<PLM_ExternalID>Wheel_ReferenceRep_ReferenceRep</PLM_ExternalID>
+			<V_discipline>Design</V_discipline>
+			<V_usage>3DShape</V_usage>
+			<V_nature>1</V_nature>
+		</ReferenceRep>
+		<Instance3D xsi:type="Instance3DType" id="16" name="Wheel.2">
+			<IsAggregatedBy>7</IsAggregatedBy>
+			<IsInstanceOf>9</IsInstanceOf>
+			<RelativeMatrix>1 0 0 0 1 0 0 0 1 -0.000299999999999301 182.211474831485 -0.00040000000000262</RelativeMatrix>
+		</Instance3D>
+		<Instance3D xsi:type="Instance3DType" id="17" name="Axle.1">
+			<IsAggregatedBy>7</IsAggregatedBy>
+			<IsInstanceOf>18</IsInstanceOf>
+			<RelativeMatrix>1 0 0 0 1 0 0 0 1 0.000299999999999301 192.211474837735 0.000400000000002621</RelativeMatrix>
+		</Instance3D>
+		<Reference3D xsi:type="Reference3DType" id="18" name="Axle"/>
+		<InstanceRep xsi:type="InstanceRepType" id="20" name="Axle_InstanceRep">
+			<IsAggregatedBy>18</IsAggregatedBy>
+			<IsInstanceOf>19</IsInstanceOf>
+		</InstanceRep>
+		<ReferenceRep xsi:type="ReferenceRepType" id="19" name="Axle_ReferenceRep" format="TESSELLATED" version="1.2" associatedFile="urn:3DXML:Axle.3DRep">
+			<PLM_ExternalID>Axle_ReferenceRep_ReferenceRep</PLM_ExternalID>
+			<V_discipline>Design</V_discipline>
+			<V_usage>3DShape</V_usage>
+			<V_nature>1</V_nature>
+		</ReferenceRep>
+		<Instance3D xsi:type="Instance3DType" id="21" name="Steer Axle.1">
+			<IsAggregatedBy>1</IsAggregatedBy>
+			<IsInstanceOf>22</IsInstanceOf>
+			<RelativeMatrix>-0.999998758094917 -0.000925691206831668 0.00127550165139075 0.000925144187916353 -0.999999479866544 -0.000429388996252588 0.00127589846957742 -0.000428208440052808 0.999999094359933 139.442819262992 428.070215302209 -59.9028522205273</RelativeMatrix>
+		</Instance3D>
+		<Reference3D xsi:type="Reference3DType" id="22" name="Steer Axle"/>
+		<Instance3D xsi:type="Instance3DType" id="23" name="Axle Assembly.1">
+			<IsAggregatedBy>22</IsAggregatedBy>
+			<IsInstanceOf>7</IsInstanceOf>
+			<RelativeMatrix>0.595836252691761 -0.00312842317081944 0.803099852413572 0.00688723564512438 0.99997554525915 -0.00121444177735138 -0.803076413527011 0.00625474636786796 0.595843227858188 -380.708753425902 6.94658670273057 32.0186435628737</RelativeMatrix>
+		</Instance3D>
+		<Instance3D xsi:type="Instance3DType" id="24" name="Steer Wheel.1">
+			<IsAggregatedBy>22</IsAggregatedBy>
+			<IsInstanceOf>25</IsInstanceOf>
+			<RelativeMatrix>0.999976282702582 -0.0068872356451857 4.18212442991818e-006 0.00688723564518346 0.999975545259153 -0.00121444177743552 4.18212454184191e-006 0.00121444177743528 0.999999262556567 -372.786268083245 199.153362628273 69.208354058766</RelativeMatrix>
+		</Instance3D>
+		<Reference3D xsi:type="Reference3DType" id="25" name="Steer Wheel"/>
+		<InstanceRep xsi:type="InstanceRepType" id="27" name="NonAscii_208_InstanceRep">
+			<IsAggregatedBy>25</IsAggregatedBy>
+			<IsInstanceOf>26</IsInstanceOf>
+		</InstanceRep>
+		<ReferenceRep xsi:type="ReferenceRepType" id="26" name="NonAscii_208_ReferenceRep" format="TESSELLATED" version="1.2" associatedFile="urn:3DXML:NonAscii_208.3DRep">
+			<PLM_ExternalID>NonAscii_208_ReferenceRep_ReferenceRep</PLM_ExternalID>
+			<V_discipline>Design</V_discipline>
+			<V_usage>3DShape</V_usage>
+			<V_nature>1</V_nature>
+		</ReferenceRep>
+	</ProductStructure>
+	<DefaultView>
+		<Viewpoint xsi:type="ParallelViewpointType" visualizedHeight="316.254966" targetDistance="1317.296875" nearPlaneDistance="702.0828247" farPlaneDistance="1932.510986">
+			<Position>1372.695557 712.8010254 636.7887573</Position>
+			<Sight>-0.8230034709 -0.3678907752 -0.4328067303</Sight>
+			<Right>-0.408762157 0.9126396775 0.001527176239</Right>
+			<Up>-0.3944347501 -0.178171888 0.9014854431</Up>
+		</Viewpoint>
+		<DefaultViewProperty>
+			<OccurenceId>
+				<id>urn:3DXML:Quad.3dxml#6</id>
+				<id>urn:3DXML:Quad.3dxml#8</id>
+			</OccurenceId>
+			<RelativePosition>1.00000000000005 -5.89805981832114e-017 2.62905474300579e-016 -5.89805981832114e-017 1.00000000000004 1.88271707252108e-016 2.62905474300579e-016 1.88217497143484e-016 1.00000000000005 -0.000299999999995748 -137.78852515602 0.00119999999996878</RelativePosition>
+		</DefaultViewProperty>
+		<DefaultViewProperty>
+			<OccurenceId>
+				<id>urn:3DXML:Quad.3dxml#6</id>
+				<id>urn:3DXML:Quad.3dxml#16</id>
+			</OccurenceId>
+			<RelativePosition>1.00000000000005 -5.89805981832114e-017 2.62905474300579e-016 -5.89805981832114e-017 1.00000000000004 1.88271707252108e-016 2.62905474300579e-016 1.88217497143484e-016 1.00000000000005 -0.000300000000017064 182.211474831492 -0.000399999999967093</RelativePosition>
+		</DefaultViewProperty>
+		<DefaultViewProperty>
+			<OccurenceId>
+				<id>urn:3DXML:Quad.3dxml#6</id>
+				<id>urn:3DXML:Quad.3dxml#17</id>
+			</OccurenceId>
+			<RelativePosition>1.00000000000005 -5.89805981832114e-017 2.62905474300579e-016 -5.89805981832114e-017 1.00000000000004 1.88271707252108e-016 2.62905474300579e-016 1.88217497143484e-016 1.00000000000005 0.000299999999981537 192.211474837742 0.0004000000000417</RelativePosition>
+		</DefaultViewProperty>
+		<DefaultViewProperty>
+			<OccurenceId>
+				<id>urn:3DXML:Quad.3dxml#21</id>
+				<id>urn:3DXML:Quad.3dxml#23</id>
+			</OccurenceId>
+			<RelativePosition>0.59583625269179 -0.00312842317081962 0.803099852413619 0.00688723564512453 0.999975545259188 -0.00121444177735138 -0.803076413527051 0.00625474636786838 0.595843227858222 -380.708753425921 6.94658670273088 32.0186435628755</RelativePosition>
+		</DefaultViewProperty>
+		<DefaultViewProperty>
+			<OccurenceId>
+				<id>urn:3DXML:Quad.3dxml#21</id>
+				<id>urn:3DXML:Quad.3dxml#23</id>
+				<id>urn:3DXML:Quad.3dxml#8</id>
+			</OccurenceId>
+			<RelativePosition>1.00000000000005 -1.29193530873373e-015 2.95814906587071e-015 -1.29236898960272e-015 1.00000000000003 1.80064296806393e-015 2.95814906587071e-015 1.80075138828117e-015 1.00000000000005 -0.000299999999811007 -137.788525156019 0.00119999999969878</RelativePosition>
+		</DefaultViewProperty>
+		<DefaultViewProperty>
+			<OccurenceId>
+				<id>urn:3DXML:Quad.3dxml#21</id>
+				<id>urn:3DXML:Quad.3dxml#23</id>
+				<id>urn:3DXML:Quad.3dxml#16</id>
+			</OccurenceId>
+			<RelativePosition>1.00000000000005 -1.29193530873373e-015 2.95814906587071e-015 -1.29236898960272e-015 1.00000000000003 1.80064296806393e-015 2.95814906587071e-015 1.80075138828117e-015 1.00000000000005 -0.000300000000265754 182.211474831492 -0.000399999999672218</RelativePosition>
+		</DefaultViewProperty>
+		<DefaultViewProperty>
+			<OccurenceId>
+				<id>urn:3DXML:Quad.3dxml#21</id>
+				<id>urn:3DXML:Quad.3dxml#23</id>
+				<id>urn:3DXML:Quad.3dxml#17</id>
+			</OccurenceId>
+			<RelativePosition>1.00000000000005 -1.29193530873373e-015 2.95814906587071e-015 -1.29236898960272e-015 1.00000000000003 1.80064296806393e-015 2.95814906587071e-015 1.80075138828117e-015 1.00000000000005 0.000299999999811007 192.211474837742 0.000400000000297496</RelativePosition>
+		</DefaultViewProperty>
+		<DefaultViewProperty>
+			<OccurenceId>
+				<id>urn:3DXML:Quad.3dxml#21</id>
+				<id>urn:3DXML:Quad.3dxml#24</id>
+			</OccurenceId>
+			<RelativePosition>0.999976282702631 -0.00688723564518615 4.18212443028972e-006 0.00688723564518361 0.99997554525919 -0.00121444177743553 4.18212454221387e-006 0.00121444177743539 0.999999262556626 -372.786268083264 199.153362628281 69.2083540587699</RelativePosition>
+		</DefaultViewProperty>
+	</DefaultView>
+	<CATMaterial>
+		<CATMatConnection id="31" xsi:type="CATMatConnectionType" name="Fire Red_Material Library_CATMaterial1">
+			<PLM_ExternalID>Fire Red_Material Library_CATMaterial1</PLM_ExternalID>
+			<IsAggregatedBy>1</IsAggregatedBy>
+			<PLMRelation>
+				<C_Semantics>Reference3</C_Semantics>
+				<C_Role>CATMaterialToReferenceLink</C_Role>
+				<Ids>
+					<id>urn:3DXML:CATMaterialRef.3dxml#28</id>
+				</Ids>
+			</PLMRelation>
+			<PLMRelation>
+				<C_Semantics>Reference5</C_Semantics>
+				<C_Role>CATMaterialDressByLink</C_Role>
+				<Ids>
+					<id>urn:3DXML:Quad.3dxml#2</id>
+				</Ids>
+			</PLMRelation>
+			<V_Layer>1</V_Layer>
+			<V_Applied>2</V_Applied>
+			<V_Matrix_1>1</V_Matrix_1>
+			<V_Matrix_2>0</V_Matrix_2>
+			<V_Matrix_3>0</V_Matrix_3>
+			<V_Matrix_4>0</V_Matrix_4>
+			<V_Matrix_5>1</V_Matrix_5>
+			<V_Matrix_6>0</V_Matrix_6>
+			<V_Matrix_7>0</V_Matrix_7>
+			<V_Matrix_8>0</V_Matrix_8>
+			<V_Matrix_9>1</V_Matrix_9>
+			<V_Matrix_10>0</V_Matrix_10>
+			<V_Matrix_11>0</V_Matrix_11>
+			<V_Matrix_12>0</V_Matrix_12>
+		</CATMatConnection>
+		<CATMatConnection id="35" xsi:type="CATMatConnectionType" name="Gold Metal_Material Library_CATMaterial1">
+			<PLM_ExternalID>Gold Metal_Material Library_CATMaterial1</PLM_ExternalID>
+			<IsAggregatedBy>1</IsAggregatedBy>
+			<PLMRelation>
+				<C_Semantics>Reference3</C_Semantics>
+				<C_Role>CATMaterialToReferenceLink</C_Role>
+				<Ids>
+					<id>urn:3DXML:CATMaterialRef.3dxml#32</id>
+				</Ids>
+			</PLMRelation>
+			<PLMRelation>
+				<C_Semantics>Reference5</C_Semantics>
+				<C_Role>CATMaterialDressByLink</C_Role>
+				<Ids>
+					<id>urn:3DXML:Quad.3dxml#6</id>
+					<id>urn:3DXML:Quad.3dxml#17</id>
+				</Ids>
+			</PLMRelation>
+			<V_Layer>1</V_Layer>
+			<V_Applied>2</V_Applied>
+			<V_Matrix_1>1</V_Matrix_1>
+			<V_Matrix_2>0</V_Matrix_2>
+			<V_Matrix_3>0</V_Matrix_3>
+			<V_Matrix_4>0</V_Matrix_4>
+			<V_Matrix_5>1</V_Matrix_5>
+			<V_Matrix_6>0</V_Matrix_6>
+			<V_Matrix_7>0</V_Matrix_7>
+			<V_Matrix_8>0</V_Matrix_8>
+			<V_Matrix_9>1</V_Matrix_9>
+			<V_Matrix_10>0</V_Matrix_10>
+			<V_Matrix_11>0</V_Matrix_11>
+			<V_Matrix_12>0</V_Matrix_12>
+		</CATMatConnection>
+		<CATMatConnection id="39" xsi:type="CATMatConnectionType" name="Chroma_Material Library_CATMaterial1">
+			<PLM_ExternalID>Chroma_Material Library_CATMaterial1</PLM_ExternalID>
+			<IsAggregatedBy>1</IsAggregatedBy>
+			<PLMRelation>
+				<C_Semantics>Reference3</C_Semantics>
+				<C_Role>CATMaterialToReferenceLink</C_Role>
+				<Ids>
+					<id>urn:3DXML:CATMaterialRef.3dxml#36</id>
+				</Ids>
+			</PLMRelation>
+			<PLMRelation>
+				<C_Semantics>Reference5</C_Semantics>
+				<C_Role>CATMaterialDressByLink</C_Role>
+				<Ids>
+					<id>urn:3DXML:Quad.3dxml#21</id>
+					<id>urn:3DXML:Quad.3dxml#23</id>
+					<id>urn:3DXML:Quad.3dxml#17</id>
+				</Ids>
+			</PLMRelation>
+			<V_Layer>1</V_Layer>
+			<V_Applied>2</V_Applied>
+			<V_Matrix_1>1</V_Matrix_1>
+			<V_Matrix_2>0</V_Matrix_2>
+			<V_Matrix_3>0</V_Matrix_3>
+			<V_Matrix_4>0</V_Matrix_4>
+			<V_Matrix_5>1</V_Matrix_5>
+			<V_Matrix_6>0</V_Matrix_6>
+			<V_Matrix_7>0</V_Matrix_7>
+			<V_Matrix_8>0</V_Matrix_8>
+			<V_Matrix_9>1</V_Matrix_9>
+			<V_Matrix_10>0</V_Matrix_10>
+			<V_Matrix_11>0</V_Matrix_11>
+			<V_Matrix_12>0</V_Matrix_12>
+		</CATMatConnection>
+		<CATMatConnection id="44" xsi:type="CATMatConnectionType" name="Dashboard_Material Library_CATMaterial1">
+			<PLM_ExternalID>Dashboard_Material Library_CATMaterial1</PLM_ExternalID>
+			<IsAggregatedBy>1</IsAggregatedBy>
+			<PLMRelation>
+				<C_Semantics>Reference3</C_Semantics>
+				<C_Role>CATMaterialToReferenceLink</C_Role>
+				<Ids>
+					<id>urn:3DXML:CATMaterialRef.3dxml#40</id>
+				</Ids>
+			</PLMRelation>
+			<PLMRelation>
+				<C_Semantics>Reference5</C_Semantics>
+				<C_Role>CATMaterialDressByLink</C_Role>
+				<Ids>
+					<id>urn:3DXML:Quad.3dxml#21</id>
+					<id>urn:3DXML:Quad.3dxml#24</id>
+				</Ids>
+			</PLMRelation>
+			<V_Layer>1</V_Layer>
+			<V_Applied>2</V_Applied>
+			<V_Matrix_1>-0.497642</V_Matrix_1>
+			<V_Matrix_2>0.856758</V_Matrix_2>
+			<V_Matrix_3>0.135346</V_Matrix_3>
+			<V_Matrix_4>-0.854438</V_Matrix_4>
+			<V_Matrix_5>-0.511068</V_Matrix_5>
+			<V_Matrix_6>0.0935163</V_Matrix_6>
+			<V_Matrix_7>0.149292</V_Matrix_7>
+			<V_Matrix_8>-0.0691068</V_Matrix_8>
+			<V_Matrix_9>0.986375</V_Matrix_9>
+			<V_Matrix_10>196.266</V_Matrix_10>
+			<V_Matrix_11>-16.144</V_Matrix_11>
+			<V_Matrix_12>299.64</V_Matrix_12>
+		</CATMatConnection>
+	</CATMaterial>
+</Model_3dxml>
