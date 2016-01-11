@@ -15,6 +15,8 @@ namespace BasicLoader
         /// <param name="stream">Stream.</param>
         IModel Parse(Stream stream);
 
+        IModel Parse(ILoader loader);
+
         CADType CAD { get; }
     }
 }

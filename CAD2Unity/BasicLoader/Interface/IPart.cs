@@ -21,5 +21,8 @@ namespace BasicLoader.Interface
         /// A displayable name of the part.
         /// </summary>
         string Name { get; }
+
+        Matrix3x3 Rotation { get; set; }
+        Vector3 Position { get; set; }
     }
 }

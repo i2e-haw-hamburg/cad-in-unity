@@ -22,6 +22,11 @@ namespace STPLoader.Implementation.Parser
         {
             return new StpFile { Header = ParseHeader(FindHeader(stream)), Data = ParseData(FindData(stream)) };
         }
+   
+        public IModel Parse(ILoader loader)
+        {
+            return Parse(loader.Load());
+        }
 
         /// <summary>
         /// 

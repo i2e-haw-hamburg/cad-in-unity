@@ -15,6 +15,10 @@ namespace ThreeDXMLLoader.Implementation.Parser
     /// </summary>
     class ThreeDXMLParser : IParser
     {
+        public IModel Parse(ILoader loader)
+        {
+            return Parse(loader.Load());
+        }
 
         public IModel Parse(Stream stream)
         {

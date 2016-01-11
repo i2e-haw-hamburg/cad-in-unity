@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Xml;
 using System.Xml.Linq;
@@ -19,9 +20,17 @@ namespace ThreeDXMLLoader.Implementation.Parser
                 InstanceOf = ParseUtility.ValueOfDescendant(xElement, "IsInstanceOf", Convert.ToInt32, 0),
                 RelativeMatrix =
                     ParseUtility.ValueOfDescendant<IList<double>>(xElement, "RelativeMatrix",
-                        s => s.Split().Select(Convert.ToDouble).ToList(), new List<double>())
+                        ParseList, new List<double>())
             };
             return instance;
         }
+
+        public static IList<double> ParseList(string s)
+        {
+            var elements = s.Split();
+            var list = elements.Select(x => Convert.ToDouble(x, CultureInfo.InvariantCulture))
+                .ToList();
+            return list;
+        }  
     }
 }
