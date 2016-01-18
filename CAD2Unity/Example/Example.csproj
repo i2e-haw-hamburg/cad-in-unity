@@ -53,13 +53,13 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\3DXMLLoader\ThreeDXMLLoader.csproj">
-      <Project>{ef6d97a4-60bc-4e28-8999-0f38b08cfd1f}</Project>
-      <Name>ThreeDXMLLoader</Name>
-    </ProjectReference>
     <ProjectReference Include="..\BasicLoader\BasicLoader.csproj">
       <Project>{03158c5f-56f3-4abc-ac2c-3315aae66cd8}</Project>
       <Name>BasicLoader</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\STLLoader\STLLoader.csproj">
+      <Project>{40AECD08-568E-413F-BBE3-C8A49EDF16C3}</Project>
+      <Name>STLLoader</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

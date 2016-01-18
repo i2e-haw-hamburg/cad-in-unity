@@ -14,7 +14,7 @@ namespace ThreeDXMLLoader.Implementation.Model
         public IList<Vector3> Vertices { get; private set; }
         public IList<int> Triangles { get; private set; }
         public string Name { get; set; }
-        public Matrix3x3 Rotation { get; set; }
+        public Vector4 Rotation { get; set; }
         public Vector3 Position { get; set; }
 
         /// <summary>

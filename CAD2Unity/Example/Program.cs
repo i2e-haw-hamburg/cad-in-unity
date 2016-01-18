@@ -1,5 +1,7 @@
-﻿using BasicLoader;
+﻿using System;
+using BasicLoader;
 using CADLoader;
+using STLLoader;
 
 namespace Example
 {
@@ -7,8 +9,10 @@ namespace Example
     {
         static void Main(string[] args)
         {
-            var parser = ThreeDXMLLoader.ParserFactory.Create();
-            parser.Parse(LoaderFactory.CreateFileLoader("quad.3dxml").Load());
+            var parser = ParserFactory.Create();
+            var result = parser.Parse(LoaderFactory.CreateFileLoader("C:\\Users\\squad\\Downloads\\Gehaeuserumpf.stl").Load());
+            Console.Write(result);
+            Console.ReadKey();
         }
     }
 }

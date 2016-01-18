@@ -22,7 +22,7 @@ namespace BasicLoader.Interface
         /// </summary>
         string Name { get; }
 
-        Matrix3x3 Rotation { get; set; }
+        Vector4 Rotation { get; set; }
         Vector3 Position { get; set; }
     }
 }

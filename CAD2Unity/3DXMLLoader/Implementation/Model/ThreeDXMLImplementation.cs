@@ -84,6 +84,14 @@ namespace ThreeDXMLLoader.Implementation.Model
         private IEnumerable<IPart> Traverse(Reference3D ref3D, Instance3D instance3D)
         {
             var instance3Ds = Aggregated<Instance3D>(ref3D.Id);
+            if (instance3D != null)
+            {
+                instance3Ds = instance3Ds.Select((inst) => {
+                    inst.Position += instance3D.Position;
+                    inst.Rotation += instance3D.Rotation;
+                    return inst;
+                }).ToList();
+            }
             var instanceReps = Aggregated<InstanceRep>(ref3D.Id);
             var refReps = instanceReps.Select(x => Get<ReferenceRep>(x.InstanceOf));
             return refReps.Select(x => Part.FromReferenceRep(x, instance3D))

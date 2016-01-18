@@ -9,7 +9,6 @@ namespace BasicLoader.Implementation.Model
 {
     public class Model : IModel
     {
-        private IList<Facet> _facets;
         private string _name;
         private IList<IPart> _parts;
         
@@ -28,30 +27,7 @@ namespace BasicLoader.Implementation.Model
         {
             return new EmptyConstraint();
         }
-
-        public IList<Facet> Facets
-        {
-            get
-            {
-                return _facets;
-            }
-
-            set
-            {
-                _facets = value;
-            }
-        }
-
-        public IList<Vector3> Vertices
-        {
-            get { return Facets.SelectMany(x => x.Verticies.ToArray()).ToList(); }
-        }
-
-        public IList<int> Triangles
-        {
-            get { return Enumerable.Range(0, Facets.Count()*3).ToList(); }
-        }
-
+        
         public override string ToString()
         {
             return @"Model with {_facets.Count} facets";
